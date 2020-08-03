@@ -1,0 +1,207 @@
+{
+  "uid" : "d2ab6d22b9808223",
+  "name" : "test_main[post请求实现登录]",
+  "fullName" : "test.test_api.TestApiAuto#test_main",
+  "historyId" : "919b7d04f88d30572b93beb38f794577",
+  "time" : {
+    "start" : 1596442208564,
+    "stop" : 1596442208763,
+    "duration" : 199
+  },
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "passed",
+    "steps" : [ {
+      "name" : "处理相关数据依赖，header",
+      "time" : {
+        "start" : 1596442208564,
+        "stop" : 1596442208565,
+        "duration" : 1
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "发送请求，取得响应结果的json串",
+      "time" : {
+        "start" : 1596442208565,
+        "stop" : 1596442208751,
+        "duration" : 186
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "将响应结果的内容写入用例中的实际结果栏",
+      "time" : {
+        "start" : 1596442208751,
+        "stop" : 1596442208762,
+        "duration" : 11
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "从登录后的响应中提取token到header中",
+        "time" : {
+          "start" : 1596442208762,
+          "stop" : 1596442208762,
+          "duration" : 0
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 0,
+        "shouldDisplayMessage" : false,
+        "hasContent" : false
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 1,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "根据配置文件的提取响应规则提取实际数据",
+      "time" : {
+        "start" : 1596442208762,
+        "stop" : 1596442208762,
+        "duration" : 0
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "处理读取出来的预期结果响应",
+      "time" : {
+        "start" : 1596442208762,
+        "stop" : 1596442208762,
+        "duration" : 0
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "预期结果与实际响应进行断言操作",
+      "time" : {
+        "start" : 1596442208762,
+        "stop" : 1596442208763,
+        "duration" : 1
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    } ],
+    "attachments" : [ {
+      "uid" : "2cebc344f68a0f1a",
+      "name" : "stderr",
+      "source" : "2cebc344f68a0f1a.txt",
+      "type" : "text/plain",
+      "size" : 2376
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 7,
+    "attachmentsCount" : 1,
+    "shouldDisplayMessage" : false,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "parentSuite",
+    "value" : "test"
+  }, {
+    "name" : "suite",
+    "value" : "test_api"
+  }, {
+    "name" : "subSuite",
+    "value" : "TestApiAuto"
+  }, {
+    "name" : "host",
+    "value" : "bogon"
+  }, {
+    "name" : "thread",
+    "value" : "4035-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "package",
+    "value" : "test.test_api"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "actual",
+    "value" : "'{\"data\": {\"id\": 500, \"rid\": 0, \"username\": \"admin\", \"mobile\": \"18487984889\", \"email\": \"18401782588@qq.com\", \"token\": \"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjUwMCwicmlkIjowLCJpYXQiOjE1OTY0NDIwMjEsImV4cCI6MTU5NjUyODQyMX0._mk4pFaj8dTq-z1zoXh8XfqBbTLN8eHL84Wc1SsFVuc\"}, \"meta\": {\"msg\": \"登录成功\", \"status\": 200}}'"
+  }, {
+    "name" : "case_number",
+    "value" : "'case_002'"
+  }, {
+    "name" : "data",
+    "value" : "'{\"username\": \"admin\", \"password\": \"123456\"}'"
+  }, {
+    "name" : "dependent",
+    "value" : "''"
+  }, {
+    "name" : "expect",
+    "value" : "'{\n        \"msg\": \"登录成功\",\n        \"status\": 200\n    }'"
+  }, {
+    "name" : "file_path",
+    "value" : "''"
+  }, {
+    "name" : "file_var",
+    "value" : "''"
+  }, {
+    "name" : "is_token",
+    "value" : "'写'"
+  }, {
+    "name" : "method",
+    "value" : "'post'"
+  }, {
+    "name" : "path",
+    "value" : "'login'"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "d2ab6d22b9808223.json",
+  "parameterValues" : [ "'{\"data\": {\"id\": 500, \"rid\": 0, \"username\": \"admin\", \"mobile\": \"18487984889\", \"email\": \"18401782588@qq.com\", \"token\": \"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjUwMCwicmlkIjowLCJpYXQiOjE1OTY0NDIwMjEsImV4cCI6MTU5NjUyODQyMX0._mk4pFaj8dTq-z1zoXh8XfqBbTLN8eHL84Wc1SsFVuc\"}, \"meta\": {\"msg\": \"登录成功\", \"status\": 200}}'", "'case_002'", "'{\"username\": \"admin\", \"password\": \"123456\"}'", "''", "'{\n        \"msg\": \"登录成功\",\n        \"status\": 200\n    }'", "''", "''", "'写'", "'post'", "'login'" ]
+}

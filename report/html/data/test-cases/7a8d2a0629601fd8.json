@@ -1,0 +1,202 @@
+{
+  "uid" : "7a8d2a0629601fd8",
+  "name" : "test_main[get请求查询用户数据列表1]",
+  "fullName" : "test.test_api.TestApiAuto#test_main",
+  "historyId" : "be5b5f15fbb8955b34c81b37018d2e61",
+  "time" : {
+    "start" : 1596442208965,
+    "stop" : 1596442209063,
+    "duration" : 98
+  },
+  "status" : "failed",
+  "statusMessage" : "AssertionError: assert {'msg': '无效to...'status': 400} == {'msg': '获取管理...'status': 200}\n  Differing items:\n  {'status': 400} != {'status': 200}\n  {'msg': '无效token'} != {'msg': '获取管理员列表成功'}\n  Use -v to get the full diff",
+  "statusTrace" : "self = <test.test_api.TestApiAuto object at 0x103432f10>\ncase_number = 'case_004', path = 'users', is_token = '', method = 'get'\nfile_var = '', file_path = '', dependent = ''\ndata = {'pagenum': 1, 'pagesize': '12'}\nexpect = {'msg': '获取管理员列表成功', 'status': 200}\nactual = '{\"data\": null, \"meta\": {\"msg\": \"无效token\", \"status\": 400}}'\n\n    @pytest.mark.parametrize('case_number,path,is_token,method,file_var,'\n                             'file_path,dependent,data,expect,actual', data_list, ids=title_ids)\n    def test_main(self, case_number, path, is_token, method, file_var, file_path,\n                  dependent, data, expect, actual):\n    \n        with allure.step(\"处理相关数据依赖，header\"):\n            data, header = self.treating_data(is_token, dependent, data)\n        with allure.step(\"发送请求，取得响应结果的json串\"):\n            res = br.base_requests(method=method, url=base_url + path, file_var=file_var, file_path=file_path,\n                                   data=data, header=header)\n        with allure.step(\"将响应结果的内容写入用例中的实际结果栏\"):\n            ReadData(case_data_path).write_result(case_number, res)\n    \n            # 写token的接口必须是要正确无误能返回token的\n            if is_token == '写':\n                with allure.step(\"从登录后的响应中提取token到header中\"):\n                    token_header['Authorization'] = jsonpath.jsonpath(res, token_reg)[0]\n            logger.info(f'token_header: {token_header}, \\n no_token_header: {no_token_header}')\n        with allure.step(\"根据配置文件的提取响应规则提取实际数据\"):\n            really = jsonpath.jsonpath(res, res_reg)[0]\n        with allure.step(\"处理读取出来的预期结果响应\"):\n            expect = eval(expect)\n        with allure.step(\"预期结果与实际响应进行断言操作\"):\n>           assert really == expect\nE           AssertionError: assert {'msg': '无效to...'status': 400} == {'msg': '获取管理...'status': 200}\nE             Differing items:\nE             {'status': 400} != {'status': 200}\nE             {'msg': '无效token'} != {'msg': '获取管理员列表成功'}\nE             Use -v to get the full diff\n\ntest_api.py:104: AssertionError",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "failed",
+    "statusMessage" : "AssertionError: assert {'msg': '无效to...'status': 400} == {'msg': '获取管理...'status': 200}\n  Differing items:\n  {'status': 400} != {'status': 200}\n  {'msg': '无效token'} != {'msg': '获取管理员列表成功'}\n  Use -v to get the full diff",
+    "statusTrace" : "self = <test.test_api.TestApiAuto object at 0x103432f10>\ncase_number = 'case_004', path = 'users', is_token = '', method = 'get'\nfile_var = '', file_path = '', dependent = ''\ndata = {'pagenum': 1, 'pagesize': '12'}\nexpect = {'msg': '获取管理员列表成功', 'status': 200}\nactual = '{\"data\": null, \"meta\": {\"msg\": \"无效token\", \"status\": 400}}'\n\n    @pytest.mark.parametrize('case_number,path,is_token,method,file_var,'\n                             'file_path,dependent,data,expect,actual', data_list, ids=title_ids)\n    def test_main(self, case_number, path, is_token, method, file_var, file_path,\n                  dependent, data, expect, actual):\n    \n        with allure.step(\"处理相关数据依赖，header\"):\n            data, header = self.treating_data(is_token, dependent, data)\n        with allure.step(\"发送请求，取得响应结果的json串\"):\n            res = br.base_requests(method=method, url=base_url + path, file_var=file_var, file_path=file_path,\n                                   data=data, header=header)\n        with allure.step(\"将响应结果的内容写入用例中的实际结果栏\"):\n            ReadData(case_data_path).write_result(case_number, res)\n    \n            # 写token的接口必须是要正确无误能返回token的\n            if is_token == '写':\n                with allure.step(\"从登录后的响应中提取token到header中\"):\n                    token_header['Authorization'] = jsonpath.jsonpath(res, token_reg)[0]\n            logger.info(f'token_header: {token_header}, \\n no_token_header: {no_token_header}')\n        with allure.step(\"根据配置文件的提取响应规则提取实际数据\"):\n            really = jsonpath.jsonpath(res, res_reg)[0]\n        with allure.step(\"处理读取出来的预期结果响应\"):\n            expect = eval(expect)\n        with allure.step(\"预期结果与实际响应进行断言操作\"):\n>           assert really == expect\nE           AssertionError: assert {'msg': '无效to...'status': 400} == {'msg': '获取管理...'status': 200}\nE             Differing items:\nE             {'status': 400} != {'status': 200}\nE             {'msg': '无效token'} != {'msg': '获取管理员列表成功'}\nE             Use -v to get the full diff\n\ntest_api.py:104: AssertionError",
+    "steps" : [ {
+      "name" : "处理相关数据依赖，header",
+      "time" : {
+        "start" : 1596442208966,
+        "stop" : 1596442208966,
+        "duration" : 0
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "发送请求，取得响应结果的json串",
+      "time" : {
+        "start" : 1596442208966,
+        "stop" : 1596442209052,
+        "duration" : 86
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "将响应结果的内容写入用例中的实际结果栏",
+      "time" : {
+        "start" : 1596442209052,
+        "stop" : 1596442209062,
+        "duration" : 10
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "根据配置文件的提取响应规则提取实际数据",
+      "time" : {
+        "start" : 1596442209062,
+        "stop" : 1596442209062,
+        "duration" : 0
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "处理读取出来的预期结果响应",
+      "time" : {
+        "start" : 1596442209062,
+        "stop" : 1596442209062,
+        "duration" : 0
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "预期结果与实际响应进行断言操作",
+      "time" : {
+        "start" : 1596442209062,
+        "stop" : 1596442209062,
+        "duration" : 0
+      },
+      "status" : "failed",
+      "statusMessage" : "AssertionError: assert {'msg': '无效to...'status': 400} == {'msg': '获取管理...'status': 200}\n  Differing items:\n  {'status': 400} != {'status': 200}\n  {'msg': '无效token'} != {'msg': '获取管理员列表成功'}\n  Use -v to get the full diff\n",
+      "statusTrace" : "  File \"/Users/zy7y/PycharmProjects/apiAutoTest/test/test_api.py\", line 104, in test_main\n    assert really == expect\n",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : true,
+      "hasContent" : true
+    } ],
+    "attachments" : [ {
+      "uid" : "55be4d0987b02d21",
+      "name" : "stderr",
+      "source" : "55be4d0987b02d21.txt",
+      "type" : "text/plain",
+      "size" : 1448
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 6,
+    "attachmentsCount" : 1,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "parentSuite",
+    "value" : "test"
+  }, {
+    "name" : "suite",
+    "value" : "test_api"
+  }, {
+    "name" : "subSuite",
+    "value" : "TestApiAuto"
+  }, {
+    "name" : "host",
+    "value" : "bogon"
+  }, {
+    "name" : "thread",
+    "value" : "4035-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "package",
+    "value" : "test.test_api"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "actual",
+    "value" : "'{\"data\": null, \"meta\": {\"msg\": \"无效token\", \"status\": 400}}'"
+  }, {
+    "name" : "case_number",
+    "value" : "'case_004'"
+  }, {
+    "name" : "data",
+    "value" : "'{\"pagenum\": 1, \"pagesize\": \"12\"}'"
+  }, {
+    "name" : "dependent",
+    "value" : "''"
+  }, {
+    "name" : "expect",
+    "value" : "'{\n'msg': '获取管理员列表成功', 'status': 200\n}'"
+  }, {
+    "name" : "file_path",
+    "value" : "''"
+  }, {
+    "name" : "file_var",
+    "value" : "''"
+  }, {
+    "name" : "is_token",
+    "value" : "''"
+  }, {
+    "name" : "method",
+    "value" : "'get'"
+  }, {
+    "name" : "path",
+    "value" : "'users'"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Product defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ ]
+  },
+  "source" : "7a8d2a0629601fd8.json",
+  "parameterValues" : [ "'{\"data\": null, \"meta\": {\"msg\": \"无效token\", \"status\": 400}}'", "'case_004'", "'{\"pagenum\": 1, \"pagesize\": \"12\"}'", "''", "'{\n'msg': '获取管理员列表成功', 'status': 200\n}'", "''", "''", "''", "'get'", "'users'" ]
+}

@@ -1,0 +1,26 @@
+{
+  "uid" : "4b4757e66a1912dae1a509f688f20b0f",
+  "name" : "categories",
+  "children" : [ {
+    "name" : "Product defects",
+    "children" : [ {
+      "name" : "AssertionError: assert {'msg': '无效to...'status': 400} == {'msg': '获取管理...'status': 200}\n  Differing items:\n  {'status': 400} != {'status': 200}\n  {'msg': '无效token'} != {'msg': '获取管理员列表成功'}\n  Use -v to get the full diff",
+      "children" : [ {
+        "name" : "test_main[get请求查询用户数据列表1]",
+        "uid" : "7a8d2a0629601fd8",
+        "parentUid" : "553d07b8afcfc686182afc1f87b8ebf4",
+        "status" : "failed",
+        "time" : {
+          "start" : 1596442208965,
+          "stop" : 1596442209063,
+          "duration" : 98
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "'{\"data\": null, \"meta\": {\"msg\": \"无效token\", \"status\": 400}}'", "'case_004'", "'{\"pagenum\": 1, \"pagesize\": \"12\"}'", "''", "'{\n'msg': '获取管理员列表成功', 'status': 200\n}'", "''", "''", "''", "'get'", "'users'" ]
+      } ],
+      "uid" : "553d07b8afcfc686182afc1f87b8ebf4"
+    } ],
+    "uid" : "8fb3a91ba5aaf9de24cc8a92edc82b5d"
+  } ]
+}

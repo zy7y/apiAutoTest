@@ -1,0 +1,192 @@
+{
+  "uid" : "a936c6eea54552c9",
+  "name" : "test_main[get请求查询用户数据列表0]",
+  "fullName" : "test.test_api.TestApiAuto#test_main",
+  "historyId" : "0a0b8ae05f47f96cf01c48778be171e9",
+  "time" : {
+    "start" : 1596442208773,
+    "stop" : 1596442208946,
+    "duration" : 173
+  },
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "passed",
+    "steps" : [ {
+      "name" : "处理相关数据依赖，header",
+      "time" : {
+        "start" : 1596442208774,
+        "stop" : 1596442208782,
+        "duration" : 8
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "发送请求，取得响应结果的json串",
+      "time" : {
+        "start" : 1596442208782,
+        "stop" : 1596442208934,
+        "duration" : 152
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "将响应结果的内容写入用例中的实际结果栏",
+      "time" : {
+        "start" : 1596442208934,
+        "stop" : 1596442208945,
+        "duration" : 11
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "根据配置文件的提取响应规则提取实际数据",
+      "time" : {
+        "start" : 1596442208945,
+        "stop" : 1596442208945,
+        "duration" : 0
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "处理读取出来的预期结果响应",
+      "time" : {
+        "start" : 1596442208945,
+        "stop" : 1596442208945,
+        "duration" : 0
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "预期结果与实际响应进行断言操作",
+      "time" : {
+        "start" : 1596442208945,
+        "stop" : 1596442208946,
+        "duration" : 1
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    } ],
+    "attachments" : [ {
+      "uid" : "e5a0b40354949c4f",
+      "name" : "stderr",
+      "source" : "e5a0b40354949c4f.txt",
+      "type" : "text/plain",
+      "size" : 7238
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 6,
+    "attachmentsCount" : 1,
+    "shouldDisplayMessage" : false,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "parentSuite",
+    "value" : "test"
+  }, {
+    "name" : "suite",
+    "value" : "test_api"
+  }, {
+    "name" : "subSuite",
+    "value" : "TestApiAuto"
+  }, {
+    "name" : "host",
+    "value" : "bogon"
+  }, {
+    "name" : "thread",
+    "value" : "4035-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "package",
+    "value" : "test.test_api"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "actual",
+    "value" : "'{\"data\": {\"total\": 29, \"pagenum\": 1, \"users\": [{\"id\": 500, \"role_name\": \"超级管理员\", \"username\": \"admin\", \"create_time\": 1486720211, \"mobile\": \"18487984889\", \"email\": \"18401782588@qq.com\", \"mg_state\": true}, {\"id\": 929, \"role_name\": \"超级管理员\", \"username\": \"asff\", \"create_time\": 1595626624, \"mobile\": \"13888888888\", \"email\": \"fiji@qq.com\", \"mg_state\": true}, {\"id\": 933, \"role_name\": \"超级管理员\", \"username\": \"1111\", \"create_time\": 1595844905, \"mobile\": \"13871112234\", \"email\": \"1111@qq.com\", \"mg_state\": true}, {\"id\": 934, \"role_name\": \"超级管理员\", \"username\": \"111\", \"create_time\": 1595846015, \"mobile\": \"13871112256\", \"email\": \"111@qq.com\", \"mg_state\": true}, {\"id\": 935, \"role_name\": \"超级管理员\", \"username\": \"ces\", \"create_time\": 1595908009, \"mobile\": \"13478945612\", \"email\": \"123456@qq.com\", \"mg_state\": true}, {\"id\": 936, \"role_name\": \"超级管理员\", \"username\": \"ssc\", \"create_time\": 1595908072, \"mobile\": \"18370081345\", \"email\": \"12@qq.com\", \"mg_state\": true}, {\"id\": 937, \"role_name\": \"超级管理员\", \"username\": \"8888\", \"create_time\": 1595943977, \"mobile\": \"17399999999\", \"email\": \"123@qq.com\", \"mg_state\": false}, {\"id\": 938, \"role_name\": \"超级管理员\", \"username\": \"sam\", \"create_time\": 1596180213, \"mobile\": \"18959688888\", \"email\": \"ss@sss.aa\", \"mg_state\": true}, {\"id\": 939, \"role_name\": \"超级管理员\", \"username\": \"333\", \"create_time\": 1596206055, \"mobile\": \"18822222222\", \"email\": \"33333@qq.com\", \"mg_state\": false}, {\"id\": 940, \"role_name\": \"超级管理员\", \"username\": \"sds\", \"create_time\": 1596206150, \"mobile\": \"18822222222\", \"email\": \"ssss@qq.com\", \"mg_state\": false}, {\"id\": 942, \"role_name\": \"超级管理员\", \"username\": \"33344\", \"create_time\": 1596206379, \"mobile\": \"18866666666\", \"email\": \"dddd@qq.com\", \"mg_state\": false}, {\"id\": 943, \"role_name\": \"超级管理员\", \"username\": \"1231\", \"create_time\": 1596206608, \"mobile\": \"\", \"email\": \"\", \"mg_state\": false}]}, \"meta\": {\"msg\": \"获取管理员列表成功\", \"status\": 200}}'"
+  }, {
+    "name" : "case_number",
+    "value" : "'case_003'"
+  }, {
+    "name" : "data",
+    "value" : "'{\"pagenum\": 1, \"pagesize\": \"12\"}'"
+  }, {
+    "name" : "dependent",
+    "value" : "'{\"case_002\": [\"$.data.id\"],\n\"case_001\":[\"$.meta.msg\",\"$.meta.status\"]}'"
+  }, {
+    "name" : "expect",
+    "value" : "'{\n'msg': '获取管理员列表成功', 'status': 200\n}'"
+  }, {
+    "name" : "file_path",
+    "value" : "''"
+  }, {
+    "name" : "file_var",
+    "value" : "''"
+  }, {
+    "name" : "is_token",
+    "value" : "'读'"
+  }, {
+    "name" : "method",
+    "value" : "'get'"
+  }, {
+    "name" : "path",
+    "value" : "'users'"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "a936c6eea54552c9.json",
+  "parameterValues" : [ "'{\"data\": {\"total\": 29, \"pagenum\": 1, \"users\": [{\"id\": 500, \"role_name\": \"超级管理员\", \"username\": \"admin\", \"create_time\": 1486720211, \"mobile\": \"18487984889\", \"email\": \"18401782588@qq.com\", \"mg_state\": true}, {\"id\": 929, \"role_name\": \"超级管理员\", \"username\": \"asff\", \"create_time\": 1595626624, \"mobile\": \"13888888888\", \"email\": \"fiji@qq.com\", \"mg_state\": true}, {\"id\": 933, \"role_name\": \"超级管理员\", \"username\": \"1111\", \"create_time\": 1595844905, \"mobile\": \"13871112234\", \"email\": \"1111@qq.com\", \"mg_state\": true}, {\"id\": 934, \"role_name\": \"超级管理员\", \"username\": \"111\", \"create_time\": 1595846015, \"mobile\": \"13871112256\", \"email\": \"111@qq.com\", \"mg_state\": true}, {\"id\": 935, \"role_name\": \"超级管理员\", \"username\": \"ces\", \"create_time\": 1595908009, \"mobile\": \"13478945612\", \"email\": \"123456@qq.com\", \"mg_state\": true}, {\"id\": 936, \"role_name\": \"超级管理员\", \"username\": \"ssc\", \"create_time\": 1595908072, \"mobile\": \"18370081345\", \"email\": \"12@qq.com\", \"mg_state\": true}, {\"id\": 937, \"role_name\": \"超级管理员\", \"username\": \"8888\", \"create_time\": 1595943977, \"mobile\": \"17399999999\", \"email\": \"123@qq.com\", \"mg_state\": false}, {\"id\": 938, \"role_name\": \"超级管理员\", \"username\": \"sam\", \"create_time\": 1596180213, \"mobile\": \"18959688888\", \"email\": \"ss@sss.aa\", \"mg_state\": true}, {\"id\": 939, \"role_name\": \"超级管理员\", \"username\": \"333\", \"create_time\": 1596206055, \"mobile\": \"18822222222\", \"email\": \"33333@qq.com\", \"mg_state\": false}, {\"id\": 940, \"role_name\": \"超级管理员\", \"username\": \"sds\", \"create_time\": 1596206150, \"mobile\": \"18822222222\", \"email\": \"ssss@qq.com\", \"mg_state\": false}, {\"id\": 942, \"role_name\": \"超级管理员\", \"username\": \"33344\", \"create_time\": 1596206379, \"mobile\": \"18866666666\", \"email\": \"dddd@qq.com\", \"mg_state\": false}, {\"id\": 943, \"role_name\": \"超级管理员\", \"username\": \"1231\", \"create_time\": 1596206608, \"mobile\": \"\", \"email\": \"\", \"mg_state\": false}]}, \"meta\": {\"msg\": \"获取管理员列表成功\", \"status\": 200}}'", "'case_003'", "'{\"pagenum\": 1, \"pagesize\": \"12\"}'", "'{\"case_002\": [\"$.data.id\"],\n\"case_001\":[\"$.meta.msg\",\"$.meta.status\"]}'", "'{\n'msg': '获取管理员列表成功', 'status': 200\n}'", "''", "''", "'读'", "'get'", "'users'" ]
+}

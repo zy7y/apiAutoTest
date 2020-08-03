@@ -1,0 +1,5 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Mon Aug 03 16:10:08 CST 2020","Mon Aug 03 16:10:08 CST 2020","199","test","test_api","TestApiAuto","","","test_main[post请求实现登录]",""
+"failed","Mon Aug 03 16:10:08 CST 2020","Mon Aug 03 16:10:09 CST 2020","98","test","test_api","TestApiAuto","","","test_main[get请求查询用户数据列表1]",""
+"passed","Mon Aug 03 16:10:08 CST 2020","Mon Aug 03 16:10:08 CST 2020","110","test","test_api","TestApiAuto","","","test_main[get请求实现登录]",""
+"passed","Mon Aug 03 16:10:08 CST 2020","Mon Aug 03 16:10:08 CST 2020","173","test","test_api","TestApiAuto","","","test_main[get请求查询用户数据列表0]",""

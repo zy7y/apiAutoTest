@@ -1,0 +1,11 @@
+[32m2020-08-03 16:10:08.443[0m | [1mINFO    [0m | [36mtest.test_api[0m:[36mtreating_data[0m:[36m59[0m - [1m处理依赖时data的数据:{"username": "admin", "password": ""}[0m
+[32m2020-08-03 16:10:08.444[0m | [34m[1mDEBUG   [0m | [36mtest.test_api[0m:[36mtreating_data[0m:[36m78[0m - [34m[1mdata有数据，依赖无数据 {'username': 'admin', 'password': ''}[0m
+[32m2020-08-03 16:10:08.539[0m | [1mINFO    [0m | [36mapi.base_requests[0m:[36mbase_requests[0m:[36m41[0m - [1m请求方法:get，请求路径:http://47.115.124.102:8888/api/private/v1/login, 请求参数:{'username': 'admin', 'password': ''}, 请求文件:None, 请求头:{})[0m
+[32m2020-08-03 16:10:08.544[0m | [1mINFO    [0m | [36mtools.read_data[0m:[36mwrite_result[0m:[36m65[0m - [1m开始回写实际响应结果到用例数据中.[0m
+[32m2020-08-03 16:10:08.551[0m | [1mINFO    [0m | [36mtools.read_data[0m:[36mwrite_result[0m:[36m72[0m - [1m写入完毕:-写入文件: ../data/case_data.xlsx, 行号: 2, 列号: 11, 写入值: {"data": null, "meta": {"msg": "参数错误", "status": 400}}[0m
+[32m2020-08-03 16:10:08.551[0m | [1mINFO    [0m | [36mtest.test_api[0m:[36mtest_main[0m:[36m98[0m - [1mtoken_header: {}, 
+ no_token_header: {}[0m
+[32m2020-08-03 16:10:08.553[0m | [1mINFO    [0m | [36mtest.test_api[0m:[36mtest_main[0m:[36m105[0m - [1m完整的json响应: {'data': None, 'meta': {'msg': '参数错误', 'status': 400}}
+ 需要校验的数据字典: {'msg': '参数错误', 'status': 400}
+ 预期校验的数据字典: {'msg': '参数错误', 'status': 400}
+ 测试结果: True[0m
