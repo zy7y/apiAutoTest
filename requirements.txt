@@ -23,7 +23,6 @@ toml==0.10.1
 urllib3==1.25.10
 xlrd==1.2.0
 xlutils==2.0.0
-xlwings==0.20.0
 xlwt==1.3.0
 yagmail==0.11.224
 zipp==3.1.0
