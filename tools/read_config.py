@@ -25,8 +25,12 @@ class ReadConfig(object):
 
     @logger.catch
     def read_response_reg(self):
-        get_token = self.data.get("response_reg").get("token")
-        get_resp = self.data.get('response_reg').get('response')
+        # get_token = self.data.get("response_reg").get("token")
+        # get_resp = self.data.get('response_reg').get('response')
+        # 该写法与上面写法效果类似，随意选择
+        get_token = self.data["response_reg"]["token"]
+        get_resp = self.data['response_reg']['response']
+        
         logger.info(f'从响应中提取的token表达式: {get_token}')
         logger.info(f'从响应提取的需要校验的表达式: {get_resp}')
         return get_token, get_resp
