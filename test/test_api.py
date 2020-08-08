@@ -84,15 +84,15 @@ class TestApiAuto(object):
                 logger.debug(f'data有数据，依赖无数据 {data}')
         return data, header
 
-    @pytest.mark.parametrize('case_number,path,is_token,method,file_var,'
-                             'file_path,dependent,data,expect,actual', data_list, ids=title_ids)
-    def test_main(self, case_number, path, is_token, method, file_var, file_path,
+    @pytest.mark.parametrize('case_number,path,is_token,method,parametric_key,file_var,'
+                             'file_path, parameters, dependent,data,expect,actual', data_list, ids=title_ids)
+    def test_main(self, case_number, path, is_token, method, parametric_key, file_var, file_path, parameters,
                   dependent, data, expect, actual):
-
+        logger.warning(f"=========用例编号：{case_number}===========开始运行=====\n")
         with allure.step("处理相关数据依赖，header"):
             data, header = self.treating_data(is_token, dependent, data)
         with allure.step("发送请求，取得响应结果的json串"):
-            res = br.base_requests(method=method, url=base_url + path, file_var=file_var, file_path=file_path,
+            res = br.base_requests(method=method, url=base_url + path, parametric_key=parametric_key, file_var=file_var, file_path=file_path,
                                    data=data, header=header)
         with allure.step("将响应结果的内容写入实际响应字典/excel实际结果栏中"):
             # ReadData(case_data_path).write_result(case_number, res)   # 向excel对应case中写入实际响应
@@ -109,7 +109,7 @@ class TestApiAuto(object):
             expect = eval(expect)
         with allure.step("预期结果与实际响应进行断言操作"):
             assert really == expect
-            logger.info(f'完整的json响应: {res}\n 需要校验的数据字典: {really}\n 预期校验的数据字典: {expect}\n 测试结果: {really == expect}')
+            logger.info(f'完整的json响应: {res}\n 需要校验的数据字典: {really}\n 预期校验的数据字典: {expect}\n 测试结果: {really == expect}\n')
 
 
 if __name__ == '__main__':

@@ -23,7 +23,7 @@ class ReadData(object):
     def get_data(self):
         """
 
-        :return:
+        :return: data_list - pytest参数化可用的数据， title_list pytest参数化 ids关键字用到的标题数据
         """
         data_list = []
         title_list = []
@@ -41,13 +41,17 @@ class ReadData(object):
             path = table.cell_value(norw, 2)
             is_token = table.cell_value(norw, 4)
             method = table.cell_value(norw, 5)
-            file_var = table.cell_value(norw, 6)
-            file_path = table.cell_value(norw, 7)
-            dependent = table.cell_value(norw, 8)
-            data = table.cell_value(norw, 9)
-            expect = table.cell_value(norw, 10)
-            actual = table.cell_value(norw, 11)
-            value = [case_number, path, is_token, method, file_var, file_path, dependent, data, expect, actual]
+            # 入参关键字
+            parametric_key = table.cell_value(norw, 6)
+            file_var = table.cell_value(norw, 7)
+            file_path = table.cell_value(norw, 8)
+            # 路径参数
+            parameters = table.cell_value(norw, 9)
+            dependent = table.cell_value(norw, 10)
+            data = table.cell_value(norw, 11)
+            expect = table.cell_value(norw, 12)
+            actual = table.cell_value(norw, 13)
+            value = [case_number, path, is_token, method, parametric_key, file_var, file_path, parameters, dependent, data, expect, actual]
             logger.info(value)
             # 配合将每一行转换成元组存储，迎合 pytest的参数化操作，如不需要可以注释掉 value = tuple(value)
             value = tuple(value)
@@ -107,8 +111,8 @@ class ReadData(object):
 
 if __name__ == '__main__':
     rd = ReadData('../data/case_data.xlsx')
-    data, nlen, title = rd.get_data()
-    print(nlen)
+    data, title = rd.get_data()
+
 
     # value = "{'data': {'id': 500, 'rid': 0, 'username': 'admin', 'mobile': '18822222223', 'email': '12344@qq.com', 'token': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjUwMCwicmlkIjowLCJpYXQiOjE1OTYzNTgxODUsImV4cCI6MTU5NjQ0NDU4NX0.utWSoAxiWCbf9W1xCkGo2669g9VR5zGMgcsbgblShrs'}, 'meta': {'msg': '登录成功', 'status': 200}}"
     # rd.write_result(2,11,value)
