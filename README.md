@@ -36,6 +36,9 @@
 5.  该项目并没有考虑到url中传path参数的形式users/:id
 6.  本项目所要投入生产，请执行检查配置用例数据，config.yaml
 
+#### 更新
+2020/08/08 增加实际响应存储数据的方法，并在字典可以处理依赖见tools/svae_response.py
+
 #### 博客园首发
 https://www.cnblogs.com/zy7y/p/13426816.html
 
