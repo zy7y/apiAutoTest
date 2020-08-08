@@ -17,6 +17,7 @@ import allure
 from api.base_requests import BaseRequest
 from tools.read_config import ReadConfig
 from tools.read_data import ReadData
+from tools.save_response import SaveResponse
 
 rc = ReadConfig()
 base_url = rc.read_serve_config('dev')
@@ -27,6 +28,9 @@ report_generate = rc.read_file_path('report_generate')
 log_path = rc.read_file_path('log_path')
 report_zip = rc.read_file_path('report_zip')
 email_setting = rc.read_email_setting()
+# 实例化存响应的对象
+s_p = SaveResponse()
+
 
 
 data_list, title_ids = ReadData(case_data_path).get_data()
@@ -38,6 +42,7 @@ no_token_header = {}
 
 class TestApiAuto(object):
 
+    # 使用jenkins后可以不用zip压缩已经发送邮件的方法
     def start_run_test(self):
         import os
         if os.path.exists('../report') and os.path.exists('../log'):
@@ -47,7 +52,7 @@ class TestApiAuto(object):
 
         pytest.main(args=[f'--alluredir={report_data}'])
         # # 启动一个web服务的报告
-        # os.system('allure serve ./report/data')
+        # os.system(f'allure serve {report_data}')
         os.system(f'allure generate {report_data} -o {report_generate} --clean')
         logger.debug('报告已生成')
 
@@ -56,9 +61,10 @@ class TestApiAuto(object):
             header = no_token_header
         else:
             header = token_header
-        logger.info(f'处理依赖时data的数据:{data}')
+        logger.info(f'处理依赖前data的数据:{data} \n')
         if dependent != '':
-            dependent_data = ReadData(case_data_path).read_actual(dependent)
+            # dependent_data = ReadData(case_data_path).read_actual(dependent)  # 从对应case实际响应栏中读取数据并进行依赖处理
+            dependent_data = s_p.read_depend_data(dependent)
             logger.debug(f'依赖数据解析获得的字典{dependent_data}')
             if data != '':
                 # 合并组成一个新的data
@@ -88,8 +94,9 @@ class TestApiAuto(object):
         with allure.step("发送请求，取得响应结果的json串"):
             res = br.base_requests(method=method, url=base_url + path, file_var=file_var, file_path=file_path,
                                    data=data, header=header)
-        with allure.step("将响应结果的内容写入用例中的实际结果栏"):
-            ReadData(case_data_path).write_result(case_number, res)
+        with allure.step("将响应结果的内容写入实际响应字典/excel实际结果栏中"):
+            # ReadData(case_data_path).write_result(case_number, res)   # 向excel对应case中写入实际响应
+            s_p.save_actual_response(case_key=case_number, case_response=res)
 
             # 写token的接口必须是要正确无误能返回token的
             if is_token == '写':
@@ -106,12 +113,13 @@ class TestApiAuto(object):
 
 
 if __name__ == '__main__':
-    from tools.zip_file import zipDir
-    from tools.send_email import send_email
     t1 = TestApiAuto()
     t1.start_run_test()
-    zipDir(report_generate, report_zip)
-    send_email(email_setting)
+    # 使用jenkins集成将不会使用到这两个方法
+    # from tools.zip_file import zipDir
+    # from tools.send_email import send_email
+    # zipDir(report_generate, report_zip)
+    # send_email(email_setting)
 
 
 
