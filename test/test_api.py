@@ -9,6 +9,7 @@
 """
 import json
 import shutil
+from json import JSONDecodeError
 
 import jsonpath
 from loguru import logger
@@ -39,6 +40,8 @@ no_token_header = {}
 
 
 class TestApiAuto(object):
+    def setup(self):
+        logger.info('用例运行开始=====')
 
     # 使用jenkins后可以不用zip压缩已经发送邮件的方法
     def start_run_test(self):
@@ -54,7 +57,7 @@ class TestApiAuto(object):
         os.system(f'allure generate {report_data} -o {report_generate} --clean')
         logger.debug('报告已生成')
 
-    def treating_data(self, is_token, dependent, data):
+    def treating_data(self, is_token, parameters, dependent, data):
         # 使用那个header
         if is_token == '':
             header = no_token_header
@@ -82,17 +85,55 @@ class TestApiAuto(object):
             else:
                 data = json.loads(data)
                 logger.debug(f'data有数据，依赖无数据 {data}')
-        return data, header
+
+        # 处理路径参数Path的依赖
+        # 传进来的参数类似 {"case_002":"$.data.id"}/item/{"case_002":"$.meta.status"}，进行列表拆分
+        path_list = parameters.split('/')
+        logger.error(f'{parameters}')
+        logger.error(f'{path_list}')
+        # 获取列表长度迭代
+        for i in range(len(path_list)):
+            # 按着
+            try:
+                # 尝试序列化成dict:   json.loads('2') 可以转换成2
+                path_dict = json.loads(path_list[i])
+            except JSONDecodeError as e:
+                # 序列化失败此path_list[i]的值不变化
+                logger.debug(f'无法转换字典，进入下一个检查，本轮值不发生变化:{path_list[i]},\n {e}')
+                # 跳过进入下次循环
+                continue
+            else:
+                # 解析该字典，获得用例编号，表达式
+                logger.error(f'{path_dict}')
+                # 处理json.loads('数字')正常序列化导致的AttributeError
+                try:
+                    for k, v in path_dict.items():
+                        try:
+                            # 尝试从对应的case实际响应提取某个字段内容
+                            path_list[i] = jsonpath.jsonpath(save_response_dict.actual_response[k], v)[0]
+                        except TypeError as e:
+                            logger.info(f'无法提取，请检查响应字典中是否支持该表达式,{e}')
+                except AttributeError as e:
+                    logger.info(f'类型错误:{type(path_list[i])}，本此将不转换值 {path_list[i]},\n {e}')
+
+        logger.error(f"==== {path_list}")
+        # 字典中存在有不是str的元素:使用map 转换成全字符串的列表
+        path_list = map(str, path_list)
+
+        # 将字符串列表转换成字符：500/item/200
+        parameters_path_url = "/".join(path_list)
+        logger.info(f'path路径参数解析依赖后的路径为{parameters_path_url}')
+        return data, header, parameters_path_url
 
     @pytest.mark.parametrize('case_number,path,is_token,method,parametric_key,file_var,'
                              'file_path, parameters, dependent,data,expect,actual', data_list, ids=title_ids)
     def test_main(self, case_number, path, is_token, method, parametric_key, file_var, file_path, parameters,
                   dependent, data, expect, actual):
-        logger.warning(f"=========用例编号：{case_number}===========开始运行=====\n")
+
         with allure.step("处理相关数据依赖，header"):
-            data, header = self.treating_data(is_token, dependent, data)
+            data, header, parameters_path_url = self.treating_data(is_token, parameters, dependent, data)
         with allure.step("发送请求，取得响应结果的json串"):
-            res = br.base_requests(method=method, url=base_url + path, parametric_key=parametric_key, file_var=file_var, file_path=file_path,
+            res = br.base_requests(method=method, url=base_url + path + parameters_path_url, parametric_key=parametric_key, file_var=file_var, file_path=file_path,
                                    data=data, header=header)
         with allure.step("将响应结果的内容写入实际响应字典/excel实际结果栏中"):
             # ReadData(case_data_path).write_result(case_number, res)   # 向excel对应case中写入实际响应
