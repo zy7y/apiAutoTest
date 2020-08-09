@@ -13,9 +13,11 @@ from loguru import logger
 
 class ReadConfig(object):
     data = None
+
     @logger.catch
     def __init__(self):
-        with open('../config/config.yaml', 'r') as file:
+        # 指定编码格式解决，win下跑代码抛出错误
+        with open('../config/config.yaml', 'r', encoding='utf-8') as file:
             self.data = yaml.load(file.read(), Loader=yaml.FullLoader)
 
     @logger.catch
@@ -25,12 +27,8 @@ class ReadConfig(object):
 
     @logger.catch
     def read_response_reg(self):
-        # get_token = self.data.get("response_reg").get("token")
-        # get_resp = self.data.get('response_reg').get('response')
-        # 该写法与上面写法效果类似，随意选择
-        get_token = self.data["response_reg"]["token"]
-        get_resp = self.data['response_reg']['response']
-        
+        get_token = self.data.get("response_reg").get("token")
+        get_resp = self.data.get('response_reg').get('response')
         logger.info(f'从响应中提取的token表达式: {get_token}')
         logger.info(f'从响应提取的需要校验的表达式: {get_resp}')
         return get_token, get_resp
@@ -41,9 +39,3 @@ class ReadConfig(object):
 
     def read_email_setting(self):
         return self.data.get('email')
-
-
-if __name__ == '__main__':
-    rc = ReadConfig()
-    print(rc.read_email_setting().get('addressees'), type(rc.read_email_setting().get('addressees')))
-
