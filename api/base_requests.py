@@ -16,7 +16,7 @@ class BaseRequest(object):
         pass
 
     # 请求
-    def base_requests(self, method, url, parametric_key, data=None, file_var=None, file_path=None, header=None):
+    def base_requests(self, method, url, parametric_key=None, data=None, file_var=None, file_path=None, header=None):
         """
 
         :param method: 请求方法
@@ -26,7 +26,8 @@ class BaseRequest(object):
 
         :param data: 参数数据，默认等于None
         :param file_var: 接口中接受文件的参数关键字
-        :param file_path: 文件对象的地址
+        :param file_path: 文件对象的地址， 单个文件直接放地址：/Users/zy7y/Desktop/vue.js
+        多个文件格式：["/Users/zy7y/Desktop/vue.js","/Users/zy7y/Desktop/jenkins.war"]
         :param header: 请求头
         :return: 返回json格式的响应
         """
@@ -35,14 +36,15 @@ class BaseRequest(object):
             files = None
         else:
             # 文件不为空的操作
-            files = {file_var: open(file_path, 'rb')}
-        # # get 请求参数传递形式 params
-        # if method == 'get':
-        #     res = session.request(method=method, url=url, params=data, headers=header)
-        # else:
-        #     res = session.request(method=method, url=url, data=data, files=files, headers=header)
-        # logger.info(f'请求方法:{method}，请求路径:{url}, 请求参数:{data}, 请求文件:{files}, 请求头:{header})')
-        # return res.json()
+            if file_path.startswith('[') and file_path.endswith(']'):
+                file_path_list = eval(file_path)
+                files = []
+                # 多文件上传
+                for file_path in file_path_list:
+                    files.append((file_var, (open(file_path, 'rb'))))
+            else:
+                # 单文件上传
+                files = {file_var: open(file_path, 'rb')}
 
         if parametric_key == 'params':
             res = session.request(method=method, url=url, params=data, headers=header)
@@ -54,5 +56,6 @@ class BaseRequest(object):
             raise ValueError('可选关键字为：get/delete/head/options/请求使用params, post/put/patch请求可使用json（application/json）/data')
         logger.info(f'请求方法:{method}，请求路径:{url}, 请求参数:{data}, 请求文件:{files}, 请求头:{header})')
         return res.json()
+
 
 
