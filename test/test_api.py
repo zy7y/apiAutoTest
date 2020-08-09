@@ -147,7 +147,7 @@ class TestApiAuto(object):
         with allure.step("根据配置文件的提取响应规则提取实际数据"):
             really = jsonpath.jsonpath(res, res_reg)[0]
         with allure.step("处理读取出来的预期结果响应"):
-            expect = eval(expect)
+            expect = json.loads(expect)
         with allure.step("预期结果与实际响应进行断言操作"):
             assert really == expect
             logger.info(f'完整的json响应: {res}\n 需要校验的数据字典: {really}\n 预期校验的数据字典: {expect}\n 测试结果: {really == expect}\n')
