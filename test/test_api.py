@@ -29,9 +29,7 @@ log_path = rc.read_file_path('log_path')
 report_zip = rc.read_file_path('report_zip')
 email_setting = rc.read_email_setting()
 # 实例化存响应的对象
-s_p = SaveResponse()
-
-
+save_response_dict = SaveResponse()
 
 data_list, title_ids = ReadData(case_data_path).get_data()
 
@@ -57,14 +55,16 @@ class TestApiAuto(object):
         logger.debug('报告已生成')
 
     def treating_data(self, is_token, dependent, data):
+        # 使用那个header
         if is_token == '':
             header = no_token_header
         else:
             header = token_header
         logger.info(f'处理依赖前data的数据:{data} \n')
+        # 处理依赖数据data
         if dependent != '':
             # dependent_data = ReadData(case_data_path).read_actual(dependent)  # 从对应case实际响应栏中读取数据并进行依赖处理
-            dependent_data = s_p.read_depend_data(dependent)
+            dependent_data = save_response_dict.read_depend_data(dependent)
             logger.debug(f'依赖数据解析获得的字典{dependent_data}')
             if data != '':
                 # 合并组成一个新的data
@@ -96,7 +96,7 @@ class TestApiAuto(object):
                                    data=data, header=header)
         with allure.step("将响应结果的内容写入实际响应字典/excel实际结果栏中"):
             # ReadData(case_data_path).write_result(case_number, res)   # 向excel对应case中写入实际响应
-            s_p.save_actual_response(case_key=case_number, case_response=res)
+            save_response_dict.save_actual_response(case_key=case_number, case_response=res)
 
             # 写token的接口必须是要正确无误能返回token的
             if is_token == '写':
