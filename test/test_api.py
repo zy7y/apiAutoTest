@@ -8,7 +8,6 @@
 @time: 2020/7/31
 """
 import json
-import shutil
 import jsonpath
 from loguru import logger
 import pytest
@@ -37,21 +36,34 @@ data_list, title_ids = ReadData(case_data_path).get_data()
 treat_data = TreatingData()
 # 请求对象
 br = BaseRequest()
+logger.info(f'文件读取完毕\n\n')
 
 
 class TestApiAuto(object):
+
+    # 启动方法
+    def run_test(self):
+        import os, shutil
+        if os.path.exists('../report') and os.path.exists('../log'):
+            shutil.rmtree(path='../report')
+            shutil.rmtree(path='../log')
+        # 日志存取路径
+        logger.add(log_path)
+        pytest.main(args=[f'--alluredir={report_data}'])
+        os.system(f'allure generate {report_data} -o {report_generate} --clean')
+        logger.warning('报告已生成')
 
     @pytest.mark.parametrize('case_number,path,is_token,method,parametric_key,file_var,'
                              'file_path, parameters, dependent,data,expect', data_list, ids=title_ids)
     def test_main(self, case_number, path, is_token, method, parametric_key, file_var, file_path, parameters,
                   dependent, data, expect):
-        logger.debug(f'执行用例编号:{case_number}⬇️⬇️⬇️')
+        logger.debug(f'⬇️⬇️⬇️...执行用例编号:{case_number}...⬇️⬇️⬇️️')
         with allure.step("处理相关数据依赖，header"):
             data, header, parameters_path_url = treat_data.treating_data(is_token, parameters, dependent, data, save_response_dict)
         with allure.step("发送请求，取得响应结果的json串"):
             res = br.base_requests(method=method, url=base_url + path + parameters_path_url, parametric_key=parametric_key, file_var=file_var, file_path=file_path,
                                    data=data, header=header)
-        with allure.step("将响应结果的内容写入实际响应字典/excel实际结果栏中"):
+        with allure.step("将响应结果的内容写入实际响应字典中"):
             save_response_dict.save_actual_response(case_key=case_number, case_response=res)
             # 写token的接口必须是要正确无误能返回token的
             if is_token == '写':
@@ -62,23 +74,13 @@ class TestApiAuto(object):
         with allure.step("处理读取出来的预期结果响应"):
             expect = json.loads(expect)
         with allure.step("预期结果与实际响应进行断言操作"):
-            try:
-                assert really == expect
-                logger.info(f'完整的json响应: {res}\n需要校验的数据字典: {really} 预期校验的数据字典: {expect} \n测试结果: {really == expect}')
-            except AssertionError as e:
-                logger.error(f'用例执行不通过.{e}')
-        logger.debug(f'用例编号:{case_number},执行完毕,日志查看⬆️⬆️⬆️')
+            assert really == expect
+            logger.info(f'完整的json响应: {res}\n需要校验的数据字典: {really} 预期校验的数据字典: {expect} \n测试结果: {really == expect}')
+            logger.debug(f'⬆⬆⬆...用例编号:{case_number},执行完毕,日志查看...⬆⬆⬆\n\n️')
 
 
 if __name__ == '__main__':
-    import os
-    if os.path.exists('../report') and os.path.exists('../log'):
-        shutil.rmtree(path='../report')
-        shutil.rmtree(path='../log')
-    logger.add(log_path)
-    pytest.main(args=[f'--alluredir={report_data}'])
-    os.system(f'allure generate {report_data} -o {report_generate} --clean')
-    logger.warning('报告已生成')
+    TestApiAuto().run_test()
 
     # 使用jenkins集成将不会使用到这两个方法
     # from tools.zip_file import zipDir
