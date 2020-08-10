@@ -15,7 +15,7 @@ from loguru import logger
 
 class SaveResponse(object):
     def __init__(self):
-        self.actual_response= {}
+        self.actual_response = {}
 
     # 保存实际响应
     def save_actual_response(self, case_key, case_response):

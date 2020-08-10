@@ -46,10 +46,9 @@ class ReadData(object):
             dependent = table.cell_value(norw, 10)
             data = table.cell_value(norw, 11)
             expect = table.cell_value(norw, 12)
-            actual = table.cell_value(norw, 13)
-            value = [case_number, path, is_token, method, parametric_key, file_var, file_path, parameters, dependent, data, expect, actual]
-            logger.info(value)
+            value = [case_number, path, is_token, method, parametric_key, file_var, file_path, parameters, dependent, data, expect]
             # 配合将每一行转换成元组存储，迎合 pytest的参数化操作，如不需要可以注释掉 value = tuple(value)
             value = tuple(value)
             data_list.append(value)
+        logger.info(f'从Excel中读取到的用例数据列表\n{data_list}\n\n')
         return data_list, title_list
