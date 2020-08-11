@@ -40,7 +40,6 @@ logger.info(f'配置文件/excel数据/对象实例化，等前置条件处理�
 
 
 class TestApiAuto(object):
-
     # 启动方法
     def run_test(self):
         import os, shutil
@@ -48,15 +47,15 @@ class TestApiAuto(object):
             shutil.rmtree(path='../report')
             shutil.rmtree(path='../log')
         # 日志存取路径
-        logger.add(log_path)
+        logger.add(log_path, encoding='utf-8')
         pytest.main(args=[f'--alluredir={report_data}'])
         os.system(f'allure generate {report_data} -o {report_generate} --clean')
         logger.warning('报告已生成')
 
     @pytest.mark.parametrize('case_number,case_title,path,is_token,method,parametric_key,file_var,'
                              'file_path, parameters, dependent,data,expect', data_list)
-    def test_main(self, case_number, case_title,path, is_token, method, parametric_key, file_var, file_path, parameters,
-                  dependent, data, expect):
+    def test_main(self, case_number, case_title, path, is_token, method, parametric_key, file_var,
+                  file_path, parameters, dependent, data, expect):
         """
         :param case_number: 用例编号
         :param case_title: 用例标题
