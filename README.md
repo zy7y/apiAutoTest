@@ -26,6 +26,9 @@
 3.  执行pip install -r requirements.txt 安装依赖库
 4.  修改config.ymal文件中email文件配置收件人邮箱，授权码，发件人邮箱
 5.  运行/test/test_api.py 文件
+#### 用例说明文档
+![case_data.xlsx用例说明文档](./image/用例说明文档.png)
+[点击前往用例说明文档Markdown版](apiAutoTest用例说明.md)
 
 #### 使用说明
 
@@ -34,6 +37,7 @@
 3.  本项目用例书写格式请务必遵循，sheet页用例说明中有一部分
 4.  该项目找的是b站上的一个前后端分离应用，域名使用的是b站朋友提供的，请大家谨慎操作学习
 5.  本项目所要投入生产，请自行修改配置文件config.yaml及用例数据case_data.xlsx，
+
 
 #### 测试报告
 
