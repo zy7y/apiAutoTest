@@ -9,7 +9,7 @@
 """
 import json
 import jsonpath
-from loguru import logger
+from test import logger
 import pytest
 import allure
 from api.base_requests import BaseRequest
@@ -20,18 +20,20 @@ from tools.save_response import SaveResponse
 
 # 读取配置文件 对象
 rc = ReadConfig()
+log_path = rc.read_file_path('log_path')
+logger.add(log_path)
 base_url = rc.read_serve_config('dev')
 token_reg, res_reg = rc.read_response_reg()
 case_data_path = rc.read_file_path('case_data')
 report_data = rc.read_file_path('report_data')
 report_generate = rc.read_file_path('report_generate')
-log_path = rc.read_file_path('log_path')
+
 report_zip = rc.read_file_path('report_zip')
 email_setting = rc.read_email_setting()
 # 实例化存响应的对象
 save_response_dict = SaveResponse()
 # 读取excel数据对象
-data_list, title_ids = ReadData(case_data_path).get_data()
+data_list = ReadData(case_data_path).get_data()
 # 数据处理对象
 treat_data = TreatingData()
 # 请求对象
@@ -53,10 +55,14 @@ class TestApiAuto(object):
         os.system(f'allure generate {report_data} -o {report_generate} --clean')
         logger.warning('报告已生成')
 
-    @pytest.mark.parametrize('case_number,path,is_token,method,parametric_key,file_var,'
-                             'file_path, parameters, dependent,data,expect', data_list, ids=title_ids)
-    def test_main(self, case_number, path, is_token, method, parametric_key, file_var, file_path, parameters,
+    @pytest.mark.parametrize('case_number,case_title,path,is_token,method,parametric_key,file_var,'
+                             'file_path, parameters, dependent,data,expect', data_list)
+    def test_main(self, case_number, case_title,path, is_token, method, parametric_key, file_var, file_path, parameters,
                   dependent, data, expect):
+
+        # 动态添加标题
+        allure.dynamic.title(case_title)
+
         logger.debug(f'⬇️⬇️⬇️...执行用例编号:{case_number}...⬇️⬇️⬇️️')
         with allure.step("处理相关数据依赖，header"):
             data, header, parameters_path_url = treat_data.treating_data(is_token, parameters, dependent, data, save_response_dict)
