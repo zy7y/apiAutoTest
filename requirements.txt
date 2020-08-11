@@ -5,6 +5,5 @@ pytest==6.0.1
 PyYAML==5.3.1
 requests==2.24.0
 xlrd==1.2.0
-xlutils==2.0.0
 yagmail==0.11.224
 zipp==3.1.0
