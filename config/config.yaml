@@ -3,10 +3,11 @@ server:
   # 实例代码使用的接口服务，已改为作者是自己的云服务器部署。（后端源码来自b站：https://www.bilibili.com/video/BV1EE411B7SU?p=10）
   dev: http://49.232.203.244:8888/api/private/v1/
 
+# 实际响应jsonpath提取规则设置
 response_reg:
   # 提取token的jsonpath表达式
   token: $.data.token
-  # 提取响应的断言数据jsonpath表达式
+  # 提取实际响应的断言数据jsonpath表达式，与excel中预期结果的数据进行比对用
   response: $.meta
 
 file_path:
@@ -14,7 +15,7 @@ file_path:
   report_data: ../report/data/
   report_generate: ../report/html/
   report_zip: ../report/html/apiAutoTestReport.zip
-  log_path: ../log/运行日志.log
+  log_path: ../log/运行日志{time}.log
 
 email:
   # 发件人邮箱
