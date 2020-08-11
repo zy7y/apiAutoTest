@@ -1,11 +1,16 @@
+# 服务器数据来源：https://www.bilibili.com/video/BV1EE411B7SU?p=10
+# 用老师搭的接口的请注意同学注意，请不要乱删数据，删了请加回去，删的时候请留个一两条在列表里。特别是角色权限部分，删光了权限数据那做到这部分的同学就没法继续做下去了。。。
+# 另外给个提示，遇到没有数据的情况，可以去老师的项目网站里加一些数据进去。。。
+# 前端项目地址：http://shop.liulongbin.top/
+# 后端接口地址：https://www.liulongbin.top:8888/api/private/v1/
 server:
   test: http://127.0.0.1:8888/api/private/v1/
-  dev: http://47.115.124.102:8888/api/private/v1/
+  dev: https://www.liulongbin.top:8888/api/private/v1/
 
 response_reg:
-  # 提取token的表达式
+  # 提取token的jsonpath表达式
   token: $.data.token
-  # 提取响应的断言数据
+  # 提取响应的断言数据jsonpath表达式
   response: $.meta
 
 file_path:
@@ -13,7 +18,7 @@ file_path:
   report_data: ../report/data/
   report_generate: ../report/html/
   report_zip: ../report/html/apiAutoTestReport.zip
-  log_path: ../log/运行日志{time}.log
+  log_path: ../log/运行日志.log
 
 email:
   # 发件人邮箱
