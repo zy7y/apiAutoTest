@@ -60,6 +60,7 @@ class TestApiAuto(object):
     def test_main(self, case_number, case_title,path, is_token, method, parametric_key, file_var, file_path, parameters,
                   dependent, data, expect):
 
+        # 感谢：https://www.cnblogs.com/yoyoketang/p/13386145.html，提供动态添加标题的实例代码
         # 动态添加标题
         allure.dynamic.title(case_title)
 
