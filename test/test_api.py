@@ -56,27 +56,6 @@ class TestApiAuto(object):
                              'file_path, parameters, dependent,data,expect', data_list)
     def test_main(self, case_number, case_title, path, is_token, method, parametric_key, file_var,
                   file_path, parameters, dependent, data, expect):
-        """
-        :param case_number: 用例编号
-        :param case_title: 用例标题
-        :param path: 接口路径
-        :param is_token: token操作：写入token/读取token/不携带token
-        :param method: 请求方式：get/post/put/delete....
-        :param parametric_key: 入参关键字：params/data/json
-        :param file_var: 接口中接受文件对象的参数名称
-        :param file_path: 文件路径，单文件实例：/Users/zy7y/PycharmProjects/apiAutoTest/test/__init__.py
-        多文件实例['/Users/zy7y/PycharmProjects/apiAutoTest/test/__init__.py','/Users/zy7y/PycharmProjects/apiAutoTest/test/test_api.py']
-
-        :param parameters: path参数(携带在url中的参数)依赖处理 users/:id(id携带在url中) 实例:{"case_001": '$.data.id'}，解析
-        从用例编号为case_001的实际结果响应中提取data字典里面的id的内容(假设提取出来是500), 最后请求的路径将是host + users/500
-
-        :param dependent: data数据依赖，该接口需要上一个接口返回的响应中的某个字段及内容：实例{"case_001",["$.data.id","$.data.username"]}
-        解析: 从用例case_001的实际响应结果中提取到data下面的id，与username的值(假设id值为500，username为admin)，那么提取的数据依赖内容将是{"id":500, "username":"admin"}
-        纳闷最终请求的data 将是 {"id":500, "username":"admin"} 与本身的data合并后的内容
-        :param data: 请求数据
-        :param expect:预期结果，最后与config/config.yaml下的response_reg->response提取出来的实际响应内容做对比，实现断言
-        :return:
-        """
 
         # 感谢：https://www.cnblogs.com/yoyoketang/p/13386145.html，提供动态添加标题的实例代码
         # 动态添加标题
@@ -85,23 +64,37 @@ class TestApiAuto(object):
         logger.debug(f'⬇️⬇️⬇️...执行用例编号:{case_number}...⬇️⬇️⬇️️')
         with allure.step("处理相关数据依赖，header"):
             data, header, parameters_path_url = treat_data.treating_data(is_token, parameters, dependent, data, save_response_dict)
+            allure.attach(json.dumps(header, ensure_ascii=False, indent=4), "请求头", allure.attachment_type.TEXT)
+            allure.attach(json.dumps(data, ensure_ascii=False, indent=4), "请求数据", allure.attachment_type.TEXT)
+
         with allure.step("发送请求，取得响应结果的json串"):
+            allure.attach(json.dumps(base_url + path + parameters_path_url, ensure_ascii=False, indent=4), "最终请求地址", allure.attachment_type.TEXT)
             res = br.base_requests(method=method, url=base_url + path + parameters_path_url, parametric_key=parametric_key, file_var=file_var, file_path=file_path,
                                    data=data, header=header)
+            allure.attach(json.dumps(res, ensure_ascii=False, indent=4), "实际响应", allure.attachment_type.TEXT)
+
         with allure.step("将响应结果的内容写入实际响应字典中"):
             save_response_dict.save_actual_response(case_key=case_number, case_response=res)
+            allure.attach(json.dumps(save_response_dict.actual_response, ensure_ascii=False, indent=4), "实际响应字典", allure.attachment_type.TEXT)
+
             # 写token的接口必须是要正确无误能返回token的
             if is_token == '写':
                 with allure.step("从登录后的响应中提取token到header中"):
                     treat_data.token_header['Authorization'] = jsonpath.jsonpath(res, token_reg)[0]
+
         with allure.step("根据配置文件的提取响应规则提取实际数据"):
             really = jsonpath.jsonpath(res, res_reg)[0]
+            allure.attach(json.dumps(really, ensure_ascii=False, indent=4), "提取用于断言的实际响应部分数据", allure.attachment_type.TEXT)
+
         with allure.step("处理读取出来的预期结果响应"):
             expect = json.loads(expect)
+            allure.attach(json.dumps(expect, ensure_ascii=False, indent=4), "预期响应", allure.attachment_type.TEXT)
+
         with allure.step("预期结果与实际响应进行断言操作"):
-            assert really == expect
             logger.info(f'完整的json响应: {res}\n需要校验的数据字典: {really} 预期校验的数据字典: {expect} \n测试结果: {really == expect}')
             logger.debug(f'⬆⬆⬆...用例编号:{case_number},执行完毕,日志查看...⬆⬆⬆\n\n️')
+            allure.attach(json.dumps(really == expect, ensure_ascii=False, indent=4), "测试结果", allure.attachment_type.TEXT)
+            assert really == expect
 
 
 if __name__ == '__main__':
