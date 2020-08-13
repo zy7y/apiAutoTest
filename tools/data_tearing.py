@@ -11,7 +11,7 @@ import json
 from json import JSONDecodeError
 
 import jsonpath
-from loguru import logger
+from test import logger
 
 
 class TreatingData(object):
@@ -32,7 +32,12 @@ class TreatingData(object):
         logger.info(f'处理依赖前data的数据:{data}')
         # 处理依赖数据data
         if dependent != '':
-            dependent_data = save_response_dict.read_depend_data(dependent)
+            if dependent.find('=') != -1:
+                dependent_key = dependent.split('=')[0]
+                dependent_value = dependent.split('=')[1]
+                dependent_data = {dependent_key: save_response_dict.read_depend_data(dependent_value)}
+            else:
+                dependent_data = save_response_dict.read_depend_data(dependent)
             logger.debug(f'依赖数据解析获得的字典{dependent_data}')
             if data != '':
                 # 合并组成一个新的data
