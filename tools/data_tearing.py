@@ -40,10 +40,24 @@ class TreatingData(object):
                 dependent_data = save_response_dict.read_depend_data(dependent)
             logger.debug(f'依赖数据解析获得的字典{dependent_data}')
             if data != '':
-                # 合并组成一个新的data
-                dependent_data.update(json.loads(data))
-                data = dependent_data
-                logger.info(f'data有数据，依赖有数据时 {data}')
+                data = json.loads(data)
+                exists_key = False
+                # 处理data与依赖中有相同key的问题, 目前之支持列表，字典,本地 列表形式调试通过，需要在定义时，data中该key定义成列表
+                # 实例{"id": [1],"user":{"username":"123"}}
+                for k, v in data.items():
+                    for dk, dv in dependent_data.items():
+                        if k == dk:
+                            if isinstance(data[k], list):
+                                data[k].append(dv)
+                            if isinstance(data[k], dict):
+                                data[k].update(dv)
+                            exists_key = True
+                if exists_key is False:
+                    # 合并组成一个新的data
+                    dependent_data.update(data)
+                    data = dependent_data
+                    logger.info(f'data有数据，依赖有数据时 {data}')
+
             else:
                 # 赋值给data
                 data = dependent_data
