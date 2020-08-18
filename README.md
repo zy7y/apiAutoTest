@@ -16,6 +16,69 @@
 | xlrd                           | 1.2.0  | 用来读取excel中用例数据 |
 | yagmail | 0.11.224 | 测试完成后发送邮件 |
 | requests| 2.24.0 | 发送请求 |
+#### 目录结构
+>apiAutoTest
+>
+>> .pytest_cache(文件夹): pytest运行测试文件的时候产生的文件
+>>
+>> api(包)：主请求
+>>
+>> > `__init__`.py
+>> >
+>> > base_requests.py: 封装了get、post、put、delete等接口请求
+>>
+>> config(文件夹)： 配置文件
+>>
+>> > config.yaml: 脚本配置文件（sever、提取规则）
+>>
+>> data(文件夹) 用例数据
+>>
+>> > case_data.xlsx: 测试用例
+>>
+>> ~~image(文件夹)~~
+>>
+>> > ...: gitee仓库中使用的静态文件资源
+>>
+>> log 日志文件
+>>
+>> > 运行日志文件.....: 运行代码时，脚本中打印的日志会存到这里。
+>>
+>> report(文件夹) 测试报告文件
+>>
+>> > data ： 每次执行测试用例的结果，存在这里
+>> >
+>> > html： 使用了allure 的一个命令，生成的本地可视化的一个html报告
+>>
+>> test(包): 运行文件所在包
+>>
+>> > test_api.py：Pytest 命令可直接运行的测试文件，里面是我们的主函数
+>>
+>> tools(包): 工具包
+>>
+>> >`__init__.py`
+>> >
+>> >data_tearing.py：封装依赖数据与请求数据的逻辑处理，处理了path参数依赖，headers关键字参数的入参header
+>> >
+>> >read_config.py： 读取配置文件
+>> >
+>> >read_data.py： 读取excel用例文件
+>> >
+>> >save_response.py: 保存实际响应结果，处理依赖数据提取
+>> >
+>> >send_email.py ： 发送邮件
+>> >
+>> >zip_file.py ： 压缩测试报告
+>>
+>> venv： python 虚拟环境
+>>
+>> apiAutoTest用例说明.md： excel用例书写规则
+>>
+>> pytest.ini： pytest框架的一个可用配置，解决中文显示乱码
+>>
+>> requirements.txt： 依赖库
+>>
+>> 项目实战接口文档：该Demo中实例的电商后台项目接口文档
+
 
 
 
