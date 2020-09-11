@@ -49,7 +49,11 @@ class TestApiAuto(object):
         # 日志存取路径
         logger.add(log_path, encoding='utf-8')
         pytest.main(args=[f'--alluredir={report_data}'])
-        os.system(f'allure generate {report_data} -o {report_generate} --clean')
+        # 本地生成 allure 报告文件，需注意 不用pycharm等类似ide 打开会出现无数据情况
+        # os.system(f'allure generate {report_data} -o {report_generate} --clean')
+
+        # 直接启动allure报告（会占用一个进程，建立一个本地服务并且自动打开浏览器访问，ps 程序不会自动结束，需要自己去关闭）
+        os.system(f'allure serve {report_data}')
         logger.warning('报告已生成')
 
     @pytest.mark.parametrize('case_number,case_title,path,is_token,method,parametric_key,file_var,'
