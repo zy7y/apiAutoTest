@@ -13,7 +13,9 @@ import requests
 
 class BaseRequest(object):
     def __init__(self):
-        pass
+    # 修改时间：2020年9月14日17:09
+    # 确保，整个接口测试中，使用同一个requests.Session() 来管理cookie
+        self.session = requests.Session()
 
     # 请求
     def base_requests(self, method, url, parametric_key=None, data=None, file_var=None, file_path=None, header=None):
@@ -31,7 +33,8 @@ class BaseRequest(object):
         :param header: 请求头
         :return: 返回json格式的响应
         """
-        session = requests.Session()
+        # 修改时间：2020年9月14日17:09
+        session = self.session
         if (file_var in [None, '']) and (file_path in [None, '']):
             files = None
         else:
