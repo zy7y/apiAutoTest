@@ -91,9 +91,14 @@ class TestApiAuto(object):
             allure.attach(json.dumps(really, ensure_ascii=False, indent=4), "提取用于断言的实际响应部分数据", allure.attachment_type.TEXT)
 
         with allure.step("处理读取出来的预期结果响应"):
-            # 用eval解决读取出来的字符串中包含null，导致无法转换成dict/json的bug
-            # expect = json.loads(expect)
-            expect = eval(expect)
+            # 处理预期结果数据中使用True/False/None导致的无法转换bug
+            if 'None' in expect:
+                expect = expect.replace('None', 'null')
+            if 'True' in expect:
+                expect = expect.replace('True', 'true')
+            if 'False' in expect:
+                expect = expect.replace('False', 'false')
+            expect = json.loads(expect)
             allure.attach(json.dumps(expect, ensure_ascii=False, indent=4), "预期响应", allure.attachment_type.TEXT)
 
         with allure.step("预期结果与实际响应进行断言操作"):
