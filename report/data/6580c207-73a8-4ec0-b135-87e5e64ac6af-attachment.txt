@@ -1,0 +1,12 @@
+{
+    "data": {
+        "id": 510,
+        "username": "tester_zy7y1213",
+        "role_id": -1,
+        "create_time": 1603297268
+    },
+    "meta": {
+        "msg": "创建成功",
+        "status": 201
+    }
+}

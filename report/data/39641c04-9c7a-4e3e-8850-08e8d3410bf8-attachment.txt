@@ -1,0 +1,14 @@
+{
+    "data": {
+        "id": 500,
+        "rid": 0,
+        "username": "admin",
+        "mobile": "12345678",
+        "email": "adsfad@qq.com",
+        "token": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjUwMCwicmlkIjowLCJpYXQiOjE2MDMyOTcyNjgsImV4cCI6MTYwMzM4MzY2OH0.CiMit5XZQbW9B73C6lQOKRRnWb50ai9y_TfSptB6Os4"
+    },
+    "meta": {
+        "msg": "登录成功",
+        "status": 200
+    }
+}

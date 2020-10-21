@@ -1,0 +1,14 @@
+{
+    "data": {
+        "id": 510,
+        "rid": -1,
+        "username": "tester_zy7y1213",
+        "mobile": null,
+        "email": null,
+        "mg_state": 0
+    },
+    "meta": {
+        "msg": "设置状态成功",
+        "status": 200
+    }
+}
