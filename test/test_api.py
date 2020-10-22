@@ -9,7 +9,7 @@
 """
 import json
 import jsonpath
-from test import logger
+from loguru import logger
 import pytest
 import allure
 from api.base_requests import BaseRequest
