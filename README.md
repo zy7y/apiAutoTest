@@ -89,6 +89,10 @@
 3.  执行pip install -r requirements.txt 安装依赖库
 4.  修改config.ymal文件中email文件配置收件人邮箱，授权码，发件人邮箱
 5.  运行/test/test_api.py 文件
+#### 运行测试前修改
+首先确保需要的环境与依赖包无问题之后，使用Pycharm打开项目，找到`settings`修改为unitest或者其他非pytest，具体操作如下
+[![B21lr9.md.jpg](https://s1.ax1x.com/2020/11/05/B21lr9.md.jpg)](https://imgchr.com/i/B21lr9)
+[![B21GUx.png](https://s1.ax1x.com/2020/11/05/B21GUx.png)](https://imgchr.com/i/B21GUx)
 #### 用例说明文档
 ![case_data.xlsx用例说明文档](./image/用例说明文档.png)
 [点击前往用例说明文档Markdown版](apiAutoTest用例说明.md)
