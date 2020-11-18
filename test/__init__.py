@@ -7,5 +7,3 @@
 @ide: PyCharm
 @time: 2020/7/31
 """
-
-from loguru import logger

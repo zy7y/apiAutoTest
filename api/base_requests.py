@@ -10,15 +10,17 @@
 from loguru import logger
 import requests
 
+from tools.read_data import ReadData
+
 
 class BaseRequest(object):
     def __init__(self):
-    # 修改时间：2020年9月14日17:09
-    # 确保，整个接口测试中，使用同一个requests.Session() 来管理cookie
+        # 修改时间：2020年9月14日17:09
+        # 确保，整个接口测试中，使用同一个requests.Session() 来管理cookie
         self.session = requests.Session()
 
     # 请求
-    def base_requests(self, method, url, parametric_key=None, data=None, file_var=None, file_path=None, header=None):
+    def send_requests(self, method, url, parametric_key=None, data=None, file_var=None, file_path=None, header=None):
         """
 
         :param method: 请求方法
@@ -35,6 +37,7 @@ class BaseRequest(object):
         """
         # 修改时间：2020年9月14日17:09
         session = self.session
+
         if (file_var in [None, '']) and (file_path in [None, '']):
             files = None
         else:
@@ -48,7 +51,6 @@ class BaseRequest(object):
             else:
                 # 单文件上传
                 files = {file_var: open(file_path, 'rb')}
-
         if parametric_key == 'params':
             res = session.request(method=method, url=url, params=data, headers=header)
         elif parametric_key == 'data':
@@ -56,9 +58,7 @@ class BaseRequest(object):
         elif parametric_key == 'json':
             res = session.request(method=method, url=url, json=data, files=files, headers=header)
         else:
-            raise ValueError('可选关键字为：get/delete/head/options/请求使用params, post/put/patch请求可使用json（application/json）/data')
+            raise ValueError(
+                '可选关键字为：get/delete/head/options/请求使用params, post/put/patch请求可使用json（application/json）/data')
         logger.info(f'请求方法:{method}，请求路径:{url}, 请求参数:{data}, 请求文件:{files}, 请求头:{header})')
         return res.json()
-
-
-

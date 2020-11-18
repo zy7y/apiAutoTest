@@ -57,13 +57,12 @@
 >>
 >> >`__init__.py`
 >> >
->> >data_tearing.py：封装依赖数据与请求数据的逻辑处理，处理了path参数依赖，headers关键字参数的入参header
+>> >data_process.py：封装依赖数据与请求数据的逻辑处理，处理了path参数依赖，headers关键字参数的入参header
 >> >
 >> >read_config.py： 读取配置文件
 >> >
 >> >read_data.py： 读取excel用例文件
 >> >
->> >save_response.py: 保存实际响应结果，处理依赖数据提取
 >> >
 >> >send_email.py ： 发送邮件
 >> >
@@ -71,7 +70,6 @@
 >>
 >> venv： python 虚拟环境
 >>
->> apiAutoTest用例说明.md： excel用例书写规则
 >>
 >> pytest.ini： pytest框架的一个可用配置，解决中文显示乱码
 >>
@@ -117,6 +115,7 @@ https://www.bilibili.com/video/BV1EE411B7SU?p=10
 #### 更新
 2020/08/08 增加实际响应存储数据的方法，并在字典可以处理依赖见tools/svae_response.py
 2020/08/09 实现多文件上传，接口中Path参数依赖处理
+2020/11/18 使用re库解决当请求参数层级结构多出现无法提取的bug，减少冗余代码，优化path路径参数提取，更新用例填写说明文档
 
 #### 博客园首发
 https://www.cnblogs.com/zy7y/p/13426816.html

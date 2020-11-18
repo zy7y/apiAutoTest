@@ -13,27 +13,20 @@ from loguru import logger
 import pytest
 import allure
 from api.base_requests import BaseRequest
-from tools.data_tearing import TreatingData
+from tools.data_process import DataProcess
 from tools.read_config import ReadConfig
 from tools.read_data import ReadData
-from tools.save_response import SaveResponse
 
 # 读取配置文件 对象
 rc = ReadConfig()
 base_url = rc.read_serve_config('dev')
 token_reg, res_reg = rc.read_response_reg()
-case_data_path = rc.read_file_path('case_data')
 report_data = rc.read_file_path('report_data')
 report_generate = rc.read_file_path('report_generate')
 log_path = rc.read_file_path('log_path')
-report_zip = rc.read_file_path('report_zip')
 email_setting = rc.read_email_setting()
-# 实例化存响应的对象
-save_response_dict = SaveResponse()
 # 读取excel数据对象
-data_list = ReadData(case_data_path).get_data()
-# 数据处理对象
-treat_data = TreatingData()
+data_list = ReadData.get_data()
 # 请求对象
 br = BaseRequest()
 logger.info(f'配置文件/excel数据/对象实例化，等前置条件处理完毕\n\n')
@@ -57,9 +50,9 @@ class TestApiAuto(object):
         logger.warning('报告已生成')
 
     @pytest.mark.parametrize('case_number,case_title,path,is_token,method,parametric_key,file_var,'
-                             'file_path, parameters, dependent,data,expect', data_list)
+                             'file_path,data,expect', data_list)
     def test_main(self, case_number, case_title, path, is_token, method, parametric_key, file_var,
-                  file_path, parameters, dependent, data, expect):
+                  file_path, data, expect):
 
         # 感谢：https://www.cnblogs.com/yoyoketang/p/13386145.html，提供动态添加标题的实例代码
         # 动态添加标题
@@ -67,24 +60,28 @@ class TestApiAuto(object):
 
         logger.debug(f'⬇️⬇️⬇️...执行用例编号:{case_number}...⬇️⬇️⬇️️')
         with allure.step("处理相关数据依赖，header"):
-            data, header, parameters_path_url = treat_data.treating_data(is_token, parameters, dependent, data, save_response_dict)
+
+            header = DataProcess.header
             allure.attach(json.dumps(header, ensure_ascii=False, indent=4), "请求头", allure.attachment_type.TEXT)
+            path = DataProcess.handle_path(path)
+
+            data = DataProcess.handle_data(data)
             allure.attach(json.dumps(data, ensure_ascii=False, indent=4), "请求数据", allure.attachment_type.TEXT)
 
         with allure.step("发送请求，取得响应结果的json串"):
-            allure.attach(json.dumps(base_url + path + parameters_path_url, ensure_ascii=False, indent=4), "最终请求地址", allure.attachment_type.TEXT)
-            res = br.base_requests(method=method, url=base_url + path + parameters_path_url, parametric_key=parametric_key, file_var=file_var, file_path=file_path,
+            allure.attach(json.dumps(base_url + path, ensure_ascii=False, indent=4), "最终请求地址", allure.attachment_type.TEXT)
+            res = br.send_requests(method=method, url=base_url + path, parametric_key=parametric_key, file_var=file_var, file_path=file_path,
                                    data=data, header=header)
             allure.attach(json.dumps(res, ensure_ascii=False, indent=4), "实际响应", allure.attachment_type.TEXT)
 
         with allure.step("将响应结果的内容写入实际响应字典中"):
-            save_response_dict.save_actual_response(case_key=case_number, case_response=res)
-            allure.attach(json.dumps(save_response_dict.actual_response, ensure_ascii=False, indent=4), "实际响应字典", allure.attachment_type.TEXT)
+            DataProcess.save_response(case_number, res)
+            allure.attach(json.dumps(DataProcess.response_dict, ensure_ascii=False, indent=4), "实际响应字典", allure.attachment_type.TEXT)
 
             # 写token的接口必须是要正确无误能返回token的
             if is_token == '写':
                 with allure.step("从登录后的响应中提取token到header中"):
-                    treat_data.token_header['Authorization'] = jsonpath.jsonpath(res, token_reg)[0]
+                    DataProcess.handle_header(is_token, res, token_reg)
 
         with allure.step("根据配置文件的提取响应规则提取实际数据"):
             really = jsonpath.jsonpath(res, res_reg)[0]
