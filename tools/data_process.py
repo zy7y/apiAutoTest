@@ -10,7 +10,6 @@
 import json
 import re
 from tools import *
-from tools.read_config import ReadConfig
 
 
 class DataProcess:
