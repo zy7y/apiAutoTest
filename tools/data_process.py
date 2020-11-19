@@ -62,12 +62,11 @@ class DataProcess:
             return
         for i in re.findall('&(.*?)&', variable):
             variable = variable.replace(f'&{i}&', str(extractor(cls.response_dict, i)))
-        if 'null' in variable:
-            variable = variable.replace('null', 'None')
-        if 'true' in variable:
-            variable = variable.replace('true', 'True')
-        if 'false' in variable:
-            variable = variable.replace('false', 'False')
+        if 'None' in variable:
+            variable = variable.replace('None', 'null')
+        if 'True' in variable:
+            variable = variable.replace('True', 'true')
+        if 'False' in variable:
+            variable = variable.replace('False', 'false')
         logger.info(f'最终的请求数据如下: {variable}')
-        print(variable)
-        return eval(variable)
+        return json.loads(variable)
