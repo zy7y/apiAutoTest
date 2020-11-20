@@ -1,7 +1,0 @@
-{
-    "data": null,
-    "meta": {
-        "msg": "pagenum 参数错误",
-        "status": 400
-    }
-}

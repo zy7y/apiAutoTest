@@ -1,0 +1,3 @@
+[32m2020-11-20 18:41:26.259[0m | [34m[1mDEBUG   [0m | [36mtest.test_api[0m:[36mtest_main[0m:[36m61[0m - [34m[1m⬇️⬇️⬇️...执行用例编号:case_009...⬇️⬇️⬇️️[0m
+[32m2020-11-20 18:41:26.260[0m | [1mINFO    [0m | [36mtools.data_process[0m:[36mhandle_path[0m:[36m40[0m - [1m提取出的路径地址: upload_file/[0m
+[32m2020-11-20 18:41:26.261[0m | [31m[1mERROR   [0m | [36mtools.data_process[0m:[36mhandler_files[0m:[36m75[0m - [31m[1m{"file_excel":"/user/data/case_data - 副本.xls"}[0m

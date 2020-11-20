@@ -1,0 +1,21 @@
+[ {
+  "uid" : "ac01432a37a72dd3",
+  "name" : "本地测试上传多文件接口",
+  "time" : {
+    "start" : 1605868886328,
+    "stop" : 1605868886334,
+    "duration" : 6
+  },
+  "status" : "broken",
+  "severity" : "normal"
+}, {
+  "uid" : "df1ec7058dc1b9c1",
+  "name" : "本地测试上传单文件接口",
+  "time" : {
+    "start" : 1605868886259,
+    "stop" : 1605868886262,
+    "duration" : 3
+  },
+  "status" : "broken",
+  "severity" : "normal"
+} ]

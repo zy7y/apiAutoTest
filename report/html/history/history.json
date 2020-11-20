@@ -1,0 +1,42 @@
+{
+  "14463b871c106c316436f73567db2180" : {
+    "statistic" : {
+      "failed" : 0,
+      "broken" : 1,
+      "skipped" : 0,
+      "passed" : 0,
+      "unknown" : 0,
+      "total" : 1
+    },
+    "items" : [ {
+      "uid" : "ac01432a37a72dd3",
+      "status" : "broken",
+      "statusDetails" : "OSError: [Errno 22] Invalid argument: 'D:\\\\\\x07piAutoTest\\\\data\\\\case_data - 副本.xls'",
+      "time" : {
+        "start" : 1605868886328,
+        "stop" : 1605868886334,
+        "duration" : 6
+      }
+    } ]
+  },
+  "910763468c64238ed99675960d57246a" : {
+    "statistic" : {
+      "failed" : 0,
+      "broken" : 1,
+      "skipped" : 0,
+      "passed" : 0,
+      "unknown" : 0,
+      "total" : 1
+    },
+    "items" : [ {
+      "uid" : "df1ec7058dc1b9c1",
+      "status" : "broken",
+      "statusDetails" : "FileNotFoundError: [Errno 2] No such file or directory: '/user/data/case_data - 副本.xls'",
+      "time" : {
+        "start" : 1605868886259,
+        "stop" : 1605868886262,
+        "duration" : 3
+      }
+    } ]
+  }
+}
