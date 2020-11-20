@@ -82,11 +82,12 @@
 
 #### 安装教程
 
-1.  git clone  https://gitee.com/zy7y/apiAutoTest.git 
-2.  使用pycharm打开项目使用Terminal 输入 python3 -m venv venv 新建虚拟环境
-3.  执行pip install -r requirements.txt 安装依赖库
-4.  修改config.ymal文件中email文件配置收件人邮箱，授权码，发件人邮箱
-5.  运行/test/test_api.py 文件
+1.  git clone  https://gitee.com/zy7y/apiAutoTest.git  /  https://github.com/zy7y/apiAutoTest.git
+2.  安装Java与allure，https://www.cnblogs.com/zy7y/p/13403699.html
+3.  使用pycharm打开项目使用Terminal 输入 python3 -m venv venv 新建虚拟环境 （可选）
+4.  执行pip install -r requirements.txt 安装依赖库（若下载超时：pip install -i https://pypi.tuna.tsinghua.edu.cn/simple -r pip install -i https://pypi.tuna.tsinghua.edu.cn/simple some-package）
+5.  修改config.ymal文件中email文件配置收件人邮箱，授权码，发件人邮箱
+6.  运行/test/test_api.py 文件
 #### 运行测试前修改
 首先确保需要的环境与依赖包无问题之后，使用Pycharm打开项目，找到`settings`修改为unitest或者其他非pytest，具体操作如下
 [![B21lr9.md.jpg](https://s1.ax1x.com/2020/11/05/B21lr9.md.jpg)](https://imgchr.com/i/B21lr9)

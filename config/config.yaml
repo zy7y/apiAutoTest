@@ -1,5 +1,6 @@
 server:
-  test: http://127.0.0.1:8000
+  # 本地接口服务
+  test: http://127.0.0.1:8888/
   # https://space.bilibili.com/283273603 演示项目后端服务来自
   dev: http://www.ysqorz.top:8888/api/private/v1/
 

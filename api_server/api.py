@@ -12,7 +12,7 @@ FastAPI官网 https://fastapi.tiangolo.com/zh/tutorial/request-files/
 
 from typing import List
 
-from fastapi import FastAPI, File, UploadFile, Form
+from fastapi import FastAPI, File, UploadFile
 
 app = FastAPI()
 
@@ -25,7 +25,7 @@ async def create_upload_file(file_excel: UploadFile = File(...)):
     # 保存本地
     with open(file_excel.filename, "wb") as f:
         f.write(contents)
-    return {'msg': '操作成功', "filename": file_excel.filename, 'username': username, "meta": {"msg": "ok"}}
+    return {'msg': '操作成功', "filename": file_excel.filename, "meta": {"msg": "ok"}}
 
 
 @app.post("/upload_files/", name='上传多个文件')
@@ -41,6 +41,6 @@ async def create_upload_files(files: List[UploadFile] = File(...)):
 
 
 if __name__ == '__main__':
-    # 启动项目后 访问  http://127.0.0.1:8000/docs 可查看接口文档
+    # 启动项目后 访问  http://127.0.0.1:8888/docs 可查看接口文档
     import uvicorn
-    uvicorn.run('api:app', reload=True)
+    uvicorn.run('api:app', reload=True, port=8888)

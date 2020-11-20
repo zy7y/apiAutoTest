@@ -8,6 +8,8 @@
 @time: 2020/7/31
 """
 import json
+import re
+
 import allure
 
 from jsonpath import jsonpath
@@ -28,6 +30,20 @@ def extractor(obj: dict, expr: str = '.') -> object:
     return result
 
 
+def rep_expr(content: str, data: dict, expr: str = '&(.*?)&') -> str:
+    """从请求参数的字符串中，使用正则的方法找出合适的字符串内容并进行替换
+    :param content: 原始的字符串内容
+    :param data: 在该项目中一般为响应字典，从字典取值出来
+    :param expr: 查找用的正则表达式
+    return content： 替换表达式后的字符串
+    """
+    logger.info(f'替换前内容{content}')
+    for ctt in re.findall(expr, content):
+        content = content.replace(f'&{ctt}&', str(extractor(data, ctt)))
+    logger.info(f'替换后内容{content}')
+    return content
+
+
 def convert_json(dict_str: str) -> dict:
     """
     :param dict_str: 长得像字典的字符串
@@ -40,10 +56,18 @@ def convert_json(dict_str: str) -> dict:
             dict_str = dict_str.replace('True', 'true')
         elif 'False' in dict_str:
             dict_str = dict_str.replace('False', 'false')
-        return json.loads(dict_str)
+        dict_str = json.loads(dict_str)
     except Exception as e:
-        logger.error(f'{e}， json.loads转字典失败')
-        return eval(dict_str)
+        if 'null' in dict_str:
+            dict_str = dict_str.replace('null', 'None')
+        elif 'true' in dict_str:
+            dict_str = dict_str.replace('true', 'True')
+        elif 'False' in dict_str:
+            dict_str = dict_str.replace('false', 'False')
+        dict_str = eval(dict_str)
+        logger.error(e)
+    logger.info(f'{dict_str}, {type(dict_str)}')
+    return dict_str
 
 
 def allure_title(title: str) -> None:
@@ -51,14 +75,14 @@ def allure_title(title: str) -> None:
     allure.dynamic.title(title)
 
 
-def allure_step(step: str, title: object, var: str) -> None:
+def allure_step(step: str, var: str) -> None:
     """
-    :param step: 步骤名称
-    :param title: 附件标题
+    :param step: 步骤及附件名称
     :param var: 附件内容
     """
     with allure.step(step):
-        allure.attach(json.dumps(var, ensure_ascii=False, indent=4), title, allure.attachment_type.TEXT)
+        allure.attach(json.dumps(var, ensure_ascii=False, indent=4), step, allure.attachment_type.TEXT)
+
 
 if __name__ == '__main__':
     print(convert_json('["1","2"]'))
