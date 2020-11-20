@@ -19,7 +19,7 @@ from tools.read_data import ReadData
 
 # 读取配置文件 对象
 rc = ReadConfig()
-base_url = rc.read_serve_config('dev')
+base_url = rc.read_serve_config('test')
 token_reg, res_reg = rc.read_response_reg()
 report_data = rc.read_file_path('report_data')
 report_generate = rc.read_file_path('report_generate')
@@ -43,16 +43,16 @@ class TestApiAuto(object):
         logger.add(log_path, encoding='utf-8')
         pytest.main(args=[f'--alluredir={report_data}'])
         # 本地生成 allure 报告文件，需注意 不用pycharm等类似ide 打开会出现无数据情况
-        # os.system(f'allure generate {report_data} -o {report_generate} --clean')
+        os.system(f'allure generate {report_data} -o {report_generate} --clean')
 
         # 直接启动allure报告（会占用一个进程，建立一个本地服务并且自动打开浏览器访问，ps 程序不会自动结束，需要自己去关闭）
-        os.system(f'allure serve {report_data}')
+        # os.system(f'allure serve {report_data}')
         logger.warning('报告已生成')
 
     @pytest.mark.parametrize('case_number,case_title,path,is_token,method,parametric_key,file_var,'
-                             'file_path,data,expect', data_list)
+                             'data,expect', data_list)
     def test_main(self, case_number, case_title, path, is_token, method, parametric_key, file_var,
-                  file_path, data, expect):
+                data, expect):
 
         # 感谢：https://www.cnblogs.com/yoyoketang/p/13386145.html，提供动态添加标题的实例代码
         # 动态添加标题
@@ -70,7 +70,7 @@ class TestApiAuto(object):
 
         with allure.step("发送请求，取得响应结果的json串"):
             allure.attach(json.dumps(base_url + path, ensure_ascii=False, indent=4), "最终请求地址", allure.attachment_type.TEXT)
-            res = br.send_requests(method=method, url=base_url + path, parametric_key=parametric_key, file_var=file_var, file_path=file_path,
+            res = br.api_send(method=method, url=base_url + path, parametric_key=parametric_key, file_obj=file_var,
                                    data=data, header=header)
             allure.attach(json.dumps(res, ensure_ascii=False, indent=4), "实际响应", allure.attachment_type.TEXT)
 

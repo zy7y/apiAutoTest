@@ -52,6 +52,28 @@ class DataProcess:
             return cls.header
 
     @classmethod
+    def handler_files(cls, file_obj: str) -> object:
+        """file对象处理方法
+        :param file_obj: 上传文件使用，格式：接口中文件参数的名称:"文件路径地址"/["文件地址1", "文件地址2"]
+        实例- 单个文件: &file&D:
+        """
+        # todo 待完成
+        if file_obj == '':
+            return None
+        file_var = file_obj.split(':')[0]
+        file_path = file_obj.split(':')[1]
+        if file_path.startswith('[') and file_path.endswith(']'):
+            file_path_list = convert_json(file_path)
+            files = []
+            # 多文件上传
+            for file_path in file_path_list:
+                files.append((file_var, (open(file_path, 'rb'))))
+        else:
+            # 单文件上传
+            files = {file_var: open(file_path, 'rb')}
+        return files
+
+    @classmethod
     def handle_data(cls, variable: str) -> dict:
         """请求数据处理
         :param variable: 请求数据，传入的是可转换字典/json的字符串,其中可以包含变量表达式
@@ -64,3 +86,6 @@ class DataProcess:
         variable = convert_json(variable)
         logger.info(f'最终的请求数据如下: {variable}')
         return variable
+
+if __name__ == '__main__':
+    print(convert_json("""{"files":["D:\\apiAutoTest\\data\\case_data - 副本.xls", "D:\\apiAutoTest\\data\\case_data.xlsx"]}"""))

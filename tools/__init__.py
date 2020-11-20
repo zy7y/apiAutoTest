@@ -33,13 +33,17 @@ def convert_json(dict_str: str) -> dict:
     :param dict_str: 长得像字典的字符串
     return json格式的内容
     """
-    if 'None' in dict_str:
-        dict_str = dict_str.replace('None', 'null')
-    elif 'True' in dict_str:
-        dict_str = dict_str.replace('True', 'true')
-    elif 'False' in dict_str:
-        dict_str = dict_str.replace('False', 'false')
-    return json.loads(dict_str)
+    try:
+        if 'None' in dict_str:
+            dict_str = dict_str.replace('None', 'null')
+        elif 'True' in dict_str:
+            dict_str = dict_str.replace('True', 'true')
+        elif 'False' in dict_str:
+            dict_str = dict_str.replace('False', 'false')
+        return json.loads(dict_str)
+    except Exception as e:
+        logger.error(f'{e}， json.loads转字典失败')
+        return eval(dict_str)
 
 
 def allure_title(title: str) -> None:
@@ -56,8 +60,5 @@ def allure_step(step: str, title: object, var: str) -> None:
     with allure.step(step):
         allure.attach(json.dumps(var, ensure_ascii=False, indent=4), title, allure.attachment_type.TEXT)
 
-
-
 if __name__ == '__main__':
-    r = json.dumps('')
-    print(r)
+    print(convert_json('["1","2"]'))
