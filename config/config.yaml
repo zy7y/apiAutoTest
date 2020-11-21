@@ -1,7 +1,7 @@
 server:
   test: http://127.0.0.1:8888/api/private/v1/
   # 实例代码使用的接口服务，已改为作者是自己的云服务器部署。（后端源码来自b站：https://www.bilibili.com/video/BV1EE411B7SU?p=10）
-  dev: http://49.232.203.244:8888/api/private/v1/
+  dev: http://www.ysqorz.top:8888/api/private/v1/
 
 # 实际响应jsonpath提取规则设置
 response_reg:
