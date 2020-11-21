@@ -12,7 +12,6 @@ import requests
 
 from tools import convert_json
 from tools.data_process import DataProcess
-from tools.read_data import ReadData
 
 
 class BaseRequest(object):
@@ -42,6 +41,7 @@ class BaseRequest(object):
         files = DataProcess.handler_files(file_obj)
 
         if parametric_key == 'params':
+            logger.info(f'{method, url, data, header}')
             res = session.request(method=method, url=url, params=data, headers=header)
         elif parametric_key == 'data':
             res = session.request(method=method, url=url, data=data, files=files, headers=header)

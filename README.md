@@ -85,7 +85,7 @@
 1.  git clone  https://gitee.com/zy7y/apiAutoTest.git  /  https://github.com/zy7y/apiAutoTest.git
 2.  安装Java与allure，https://www.cnblogs.com/zy7y/p/13403699.html
 3.  使用pycharm打开项目使用Terminal 输入 python3 -m venv venv 新建虚拟环境 （可选）
-4.  执行pip install -r requirements.txt 安装依赖库（若下载超时：pip install -i https://pypi.tuna.tsinghua.edu.cn/simple -r pip install -i https://pypi.tuna.tsinghua.edu.cn/simple some-package）
+4.  执行pip install -r requirements.txt 安装依赖库（若下载超时：pip install -i https://pypi.tuna.tsinghua.edu.cn/simple -r requirements.txt）
 5.  修改config.ymal文件中email文件配置收件人邮箱，授权码，发件人邮箱
 6.  运行/test/test_api.py 文件
 #### 运行测试前修改
@@ -94,7 +94,6 @@
 [![B21GUx.png](https://s1.ax1x.com/2020/11/05/B21GUx.png)](https://imgchr.com/i/B21GUx)
 #### 用例说明文档
 ![case_data.xlsx用例说明文档](./image/用例说明文档.png)
-[点击前往用例说明文档Markdown版](apiAutoTest用例说明.md)
 
 #### 使用说明
 
@@ -115,9 +114,14 @@ https://www.bilibili.com/video/BV1EE411B7SU?p=10
 
 #### 更新
 2020/08/08 增加实际响应存储数据的方法，并在字典可以处理依赖见tools/svae_response.py
+
 2020/08/09 实现多文件上传，接口中Path参数依赖处理
+
 2020/11/18 使用re库解决当请求参数层级结构多出现无法提取的bug，减少冗余代码，优化path路径参数提取，更新用例填写说明文档
 
+2020/11/21 更新用例文档，合并文件对象，文件地址，优化文件上传处理方式
+
+2020/11/21 config.yaml文件中新增request_headers 选项，默认header在此设置，优化test_api.py文件，整合read_file.py
 #### 博客园首发
 https://www.cnblogs.com/zy7y/p/13426816.html
 

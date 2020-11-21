@@ -4,9 +4,15 @@ server:
   # https://space.bilibili.com/283273603 演示项目后端服务来自
   dev: http://www.ysqorz.top:8888/api/private/v1/
 
+# 基准的请求头信息
+request_headers:
+  Accept-Encoding: gzip, deflate
+  Accept-Language: zh-CN,zh;q=0.9
+  User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36
+
 
 # 实际响应jsonpath提取规则设置
-response_reg:
+expr:
   # 提取token的jsonpath表达式
   token: $.data.token
   # 提取实际响应的断言数据jsonpath表达式，与excel中预期结果的数据进行比对用
@@ -16,7 +22,6 @@ file_path:
   case_data: ../data/case_data.xlsx
   report_data: ../report/data/
   report_generate: ../report/html/
-  report_zip: ../report/html/apiAutoTestReport.zip
   log_path: ../log/运行日志{time}.log
 
 email:
