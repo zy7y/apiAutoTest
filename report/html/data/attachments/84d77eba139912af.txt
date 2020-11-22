@@ -1,7 +1,0 @@
-[32m2020-11-20 18:41:26.328[0m | [34m[1mDEBUG   [0m | [36mtest.test_api[0m:[36mtest_main[0m:[36m61[0m - [34m[1m⬇️⬇️⬇️...执行用例编号:case_009...⬇️⬇️⬇️️[0m
-[32m2020-11-20 18:41:26.329[0m | [1mINFO    [0m | [36mtools.data_process[0m:[36mhandle_path[0m:[36m40[0m - [1m提取出的路径地址: upload_files/[0m
-[32m2020-11-20 18:41:26.331[0m | [31m[1mERROR   [0m | [36mtools.data_process[0m:[36mhandler_files[0m:[36m75[0m - [31m[1m{"files":["D:\apiAutoTest\data\case_data - 副本.xls", "D:\apiAutoTest\data\case_data.xlsx"]}[0m
-[32m2020-11-20 18:41:26.332[0m | [31m[1mERROR   [0m | [36mtools[0m:[36mconvert_json[0m:[36m45[0m - [31m[1mInvalid \escape: line 1 column 14 (char 13)， json.loads转字典失败[0m
-[32m2020-11-20 18:41:26.332[0m | [1mINFO    [0m | [36mtools.data_process[0m:[36mhandler_files[0m:[36m80[0m - [1mlist类型[0m
-[32m2020-11-20 18:41:26.332[0m | [1mINFO    [0m | [36mtools.data_process[0m:[36mhandler_files[0m:[36m85[0m - [1m['D:\x07piAutoTest\\data\\case_data - 副本.xls', 'D:\x07piAutoTest\\data\\case_data.xlsx'][0m
-[32m2020-11-20 18:41:26.333[0m | [1mINFO    [0m | [36mtools.data_process[0m:[36mhandler_files[0m:[36m86[0m - [1mD:\piAutoTest\data\case_data - 副本.xls[0m

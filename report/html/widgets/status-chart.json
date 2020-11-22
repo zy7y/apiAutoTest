@@ -1,21 +1,81 @@
 [ {
-  "uid" : "ac01432a37a72dd3",
-  "name" : "本地测试上传多文件接口",
+  "uid" : "fe62b33d1afcdd4",
+  "name" : "修改用户状态接口",
   "time" : {
-    "start" : 1605868886328,
-    "stop" : 1605868886334,
-    "duration" : 6
+    "start" : 1606055460551,
+    "stop" : 1606055460605,
+    "duration" : 54
   },
-  "status" : "broken",
+  "status" : "passed",
   "severity" : "normal"
 }, {
-  "uid" : "df1ec7058dc1b9c1",
-  "name" : "本地测试上传单文件接口",
+  "uid" : "65d6ad4f916a0f62",
+  "name" : "删除用户zy7y",
   "time" : {
-    "start" : 1605868886259,
-    "stop" : 1605868886262,
-    "duration" : 3
+    "start" : 1606055460665,
+    "stop" : 1606055460721,
+    "duration" : 56
   },
-  "status" : "broken",
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "e68c11d0e6e8364a",
+  "name" : "修改用户状态为2",
+  "time" : {
+    "start" : 1606055460611,
+    "stop" : 1606055460660,
+    "duration" : 49
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "cae1f137d52e87b6",
+  "name" : "get请求查询用户数据列表",
+  "time" : {
+    "start" : 1606055460038,
+    "stop" : 1606055460227,
+    "duration" : 189
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "436705ea6a1f0cd9",
+  "name" : "get请求查询用户数据列表",
+  "time" : {
+    "start" : 1606055460236,
+    "stop" : 1606055460283,
+    "duration" : 47
+  },
+  "status" : "failed",
+  "severity" : "normal"
+}, {
+  "uid" : "c63f50ef4036c2df",
+  "name" : "post请求实现登录",
+  "time" : {
+    "start" : 1606055459865,
+    "stop" : 1606055460031,
+    "duration" : 166
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "e7bb1220dd2eaa50",
+  "name" : "get请求实现登录",
+  "time" : {
+    "start" : 1606055459770,
+    "stop" : 1606055459860,
+    "duration" : 90
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "4738a6b93ef00142",
+  "name" : "添加用户正常接口数据",
+  "time" : {
+    "start" : 1606055460372,
+    "stop" : 1606055460545,
+    "duration" : 173
+  },
+  "status" : "passed",
   "severity" : "normal"
 } ]

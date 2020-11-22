@@ -1,41 +1,154 @@
 {
-  "14463b871c106c316436f73567db2180" : {
+  "5fa6656b8b1b28bc1fdd0eb962f2b477" : {
     "statistic" : {
-      "failed" : 0,
-      "broken" : 1,
+      "failed" : 1,
+      "broken" : 0,
       "skipped" : 0,
       "passed" : 0,
       "unknown" : 0,
       "total" : 1
     },
     "items" : [ {
-      "uid" : "ac01432a37a72dd3",
-      "status" : "broken",
-      "statusDetails" : "OSError: [Errno 22] Invalid argument: 'D:\\\\\\x07piAutoTest\\\\data\\\\case_data - 副本.xls'",
+      "uid" : "436705ea6a1f0cd9",
+      "status" : "failed",
+      "statusDetails" : "AssertionError",
       "time" : {
-        "start" : 1605868886328,
-        "stop" : 1605868886334,
-        "duration" : 6
+        "start" : 1606055460236,
+        "stop" : 1606055460283,
+        "duration" : 47
       }
     } ]
   },
-  "910763468c64238ed99675960d57246a" : {
+  "ff4c616539ac64f4683d87b3cf78fc56" : {
     "statistic" : {
       "failed" : 0,
-      "broken" : 1,
+      "broken" : 0,
       "skipped" : 0,
-      "passed" : 0,
+      "passed" : 1,
       "unknown" : 0,
       "total" : 1
     },
     "items" : [ {
-      "uid" : "df1ec7058dc1b9c1",
-      "status" : "broken",
-      "statusDetails" : "FileNotFoundError: [Errno 2] No such file or directory: '/user/data/case_data - 副本.xls'",
+      "uid" : "e68c11d0e6e8364a",
+      "status" : "passed",
       "time" : {
-        "start" : 1605868886259,
-        "stop" : 1605868886262,
-        "duration" : 3
+        "start" : 1606055460611,
+        "stop" : 1606055460660,
+        "duration" : 49
+      }
+    } ]
+  },
+  "e37eee6749637e7e7e0c6b281657f72a" : {
+    "statistic" : {
+      "failed" : 0,
+      "broken" : 0,
+      "skipped" : 0,
+      "passed" : 1,
+      "unknown" : 0,
+      "total" : 1
+    },
+    "items" : [ {
+      "uid" : "c63f50ef4036c2df",
+      "status" : "passed",
+      "time" : {
+        "start" : 1606055459865,
+        "stop" : 1606055460031,
+        "duration" : 166
+      }
+    } ]
+  },
+  "fcaa653e818be3057f2f484b8886f2fb" : {
+    "statistic" : {
+      "failed" : 0,
+      "broken" : 0,
+      "skipped" : 0,
+      "passed" : 1,
+      "unknown" : 0,
+      "total" : 1
+    },
+    "items" : [ {
+      "uid" : "4738a6b93ef00142",
+      "status" : "passed",
+      "time" : {
+        "start" : 1606055460372,
+        "stop" : 1606055460545,
+        "duration" : 173
+      }
+    } ]
+  },
+  "613f214da5e2528e663bdd8f906068d7" : {
+    "statistic" : {
+      "failed" : 0,
+      "broken" : 0,
+      "skipped" : 0,
+      "passed" : 1,
+      "unknown" : 0,
+      "total" : 1
+    },
+    "items" : [ {
+      "uid" : "e7bb1220dd2eaa50",
+      "status" : "passed",
+      "time" : {
+        "start" : 1606055459770,
+        "stop" : 1606055459860,
+        "duration" : 90
+      }
+    } ]
+  },
+  "db9c6b492c2f49ac32bf1152d397b96f" : {
+    "statistic" : {
+      "failed" : 0,
+      "broken" : 0,
+      "skipped" : 0,
+      "passed" : 1,
+      "unknown" : 0,
+      "total" : 1
+    },
+    "items" : [ {
+      "uid" : "fe62b33d1afcdd4",
+      "status" : "passed",
+      "time" : {
+        "start" : 1606055460551,
+        "stop" : 1606055460605,
+        "duration" : 54
+      }
+    } ]
+  },
+  "a86ca099b0f3d8ed88fb7191ad51c143" : {
+    "statistic" : {
+      "failed" : 0,
+      "broken" : 0,
+      "skipped" : 0,
+      "passed" : 1,
+      "unknown" : 0,
+      "total" : 1
+    },
+    "items" : [ {
+      "uid" : "65d6ad4f916a0f62",
+      "status" : "passed",
+      "time" : {
+        "start" : 1606055460665,
+        "stop" : 1606055460721,
+        "duration" : 56
+      }
+    } ]
+  },
+  "e22e29a3736852b3693b6ddc60bd9936" : {
+    "statistic" : {
+      "failed" : 0,
+      "broken" : 0,
+      "skipped" : 0,
+      "passed" : 1,
+      "unknown" : 0,
+      "total" : 1
+    },
+    "items" : [ {
+      "uid" : "cae1f137d52e87b6",
+      "status" : "passed",
+      "time" : {
+        "start" : 1606055460038,
+        "stop" : 1606055460227,
+        "duration" : 189
       }
     } ]
   }
