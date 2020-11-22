@@ -11,18 +11,15 @@ request_headers:
   User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36
 
 
-# 实际响应jsonpath提取规则设置
+# 提取规则设置
 expr:
   # 提取token的jsonpath表达式
   token: $.data.token
-  # 提取实际响应的断言数据jsonpath表达式，与excel中预期结果的数据进行比对用
-  response: $.meta
 
 file_path:
-  case_data: ../data/case_data.xlsx
-  report_data: ../report/data/
-  report_generate: ../report/html/
-  log_path: ../log/运行日志{time}.log
+  test_case: ../data/case_data.xlsx
+  report: ../report/
+  log: ../log/run{time}.log
 
 email:
   # 发件人邮箱
@@ -35,6 +32,4 @@ email:
   # 收件人邮箱
   addressees:  ["收件人邮箱1","收件人邮箱2","收件人邮箱3"]
   title:  接口自动化测试报告(见附件)
-  # 附件地址
-  enclosures: ["../report/html/apiAutoTestReport.zip",]
 

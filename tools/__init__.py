@@ -38,10 +38,8 @@ def rep_expr(content: str, data: dict, expr: str = '&(.*?)&') -> str:
     :param expr: 查找用的正则表达式
     return content： 替换表达式后的字符串
     """
-    logger.info(f'替换前内容{content}')
     for ctt in re.findall(expr, content):
         content = content.replace(f'&{ctt}&', str(extractor(data, ctt)))
-    logger.info(f'替换后内容{content}')
     return content
 
 
@@ -67,7 +65,6 @@ def convert_json(dict_str: str) -> dict:
             dict_str = dict_str.replace('false', 'False')
         dict_str = eval(dict_str)
         logger.error(e)
-    logger.info(f'{dict_str}, {type(dict_str)}')
     return dict_str
 
 
@@ -83,7 +80,3 @@ def allure_step(step: str, var: str) -> None:
     """
     with allure.step(step):
         allure.attach(json.dumps(var, ensure_ascii=False, indent=4), step, allure.attachment_type.TEXT)
-
-
-if __name__ == '__main__':
-    print(convert_json('["1","2"]'))

@@ -8,7 +8,7 @@
 @time: 2020/8/3
 """
 import yagmail
-from loguru import logger
+from tools import logger
 
 
 def send_email(setting):
@@ -25,7 +25,7 @@ def send_email(setting):
     """
     yag = yagmail.SMTP(setting['user'], setting['password'], setting['host'])
     # 发送邮件
-    yag.send(setting['addressees'], setting['title'], setting['contents'], setting['enclosures'])
+    yag.send(setting['addressees'], setting['title'], setting['contents'])
     # 关闭服务
     yag.close()
     logger.info("邮件发送成功！")

@@ -122,6 +122,9 @@ https://www.bilibili.com/video/BV1EE411B7SU?p=10
 2020/11/21 更新用例文档，合并文件对象，文件地址，优化文件上传处理方式
 
 2020/11/21 config.yaml文件中新增request_headers 选项，默认header在此设置，优化test_api.py文件，整合read_file.py
+
+2020/11/22 优化请求断言方法支持用户自定义提取响应自定内容，支持多数据断言，整合请求方法，优化测试启动方法，部分日志移除，修改预期结果处理
+
 #### 博客园首发
 https://www.cnblogs.com/zy7y/p/13426816.html
 
