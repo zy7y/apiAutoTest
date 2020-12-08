@@ -9,7 +9,7 @@
 """
 
 import requests
-from tools import allure_step, allure_title, logger, extractor
+from tools import allure_step, allure_title, logger, extractor, rep_expr
 from tools.data_process import DataProcess
 from tools.read_file import ReadFile
 
@@ -30,7 +30,7 @@ class BaseRequest(object):
         :param env: 环境名称 默认使用config.yaml server下的 dev 后面的基准地址
         return: 响应结果， 预期结果
         """
-        case_number, case_title, path, token, method, parametric_key, file_obj, data, expect = case
+        case_number, case_title, path, token, method, parametric_key, file_obj, data, sql, expect = case
         # allure报告 用例标题
         allure_title(case_title)
         # 处理url、header、data、file、的前置方法
@@ -52,7 +52,7 @@ class BaseRequest(object):
             allure_step('请求头中添加Token', DataProcess.have_token)
         DataProcess.save_response(case_number, res.json())
         allure_step('存储实际响应', DataProcess.response_dict)
-        return res.json(), expect
+        return res.json(), expect, sql
 
     @classmethod
     def send_api(cls, url, method, parametric_key, header=None, data=None, file=None) -> object:

@@ -79,18 +79,43 @@ class DataProcess:
         return variable
 
     @classmethod
+    def handle_sql(cls, sql: str, db: object):
+        """处理sql，并将结果写到响应字典中"""
+        if sql not in ['no', '']:
+            sql = rep_expr(sql, DataProcess.response_dict)
+        else:
+            sql = None
+        allure_step('运行sql', sql)
+        logger.info(sql)
+        if sql is not None:
+            # 查后置sql
+            result = db.fetch_one(sql)
+            allure_step('sql执行结果', {"sql_result": result})
+            logger.info(f'结果：{result}')
+            if result is not None:
+                # 将查询结果添加到响应字典里面，作用在，接口响应的内容某个字段 直接和数据库某个字段比对，在预期结果中
+                # 使用同样的语法提取即可
+                DataProcess.response_dict.update(result)
+
+    @classmethod
     def assert_result(cls, response: dict, expect_str: str):
         """ 预期结果实际结果断言方法
-        :param response: 实际响应字典
+        :param response: 实际响应结果
         :param expect_str: 预期响应内容，从excel中读取
         return None
         """
+        # 后置sql变量转换
+        expect_str = rep_expr(expect_str, DataProcess.response_dict)
         expect_dict = convert_json(expect_str)
         index = 0
         for k, v in expect_dict.items():
+            # 获取需要断言的实际结果部分
             actual = extractor(response, k)
             index += 1
             logger.info(f'第{index}个断言,实际结果:{actual} | 预期结果:{v} \n断言结果 {actual == v}')
             allure_step(f'第{index}个断言',  f'实际结果:{actual} = 预期结果:{v}')
-            assert actual == v
+            try:
+                assert actual == v
+            except AssertionError:
+                raise AssertionError(f'断言失败 -|- 实际结果:{actual} || 预期结果: {v}')
 

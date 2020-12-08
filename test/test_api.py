@@ -37,8 +37,11 @@ class TestApi:
         logger.success('报告已生成')
 
     @pytest.mark.parametrize('case', cases)
-    def test_main(self, case):
-        response, expect = BaseRequest.send_request(case)
+    def test_main(self, case, get_db):
+        # 发送请求
+        response, expect, sql = BaseRequest.send_request(case)
+        # 执行sql
+        DataProcess.handle_sql(sql, get_db)
         # 断言操作
         DataProcess.assert_result(response, expect)
 
