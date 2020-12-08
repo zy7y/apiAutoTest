@@ -16,6 +16,7 @@
 | xlrd                           | 1.2.0  | 用来读取excel中用例数据 |
 | yagmail | 0.11.224 | 测试完成后发送邮件 |
 | requests| 2.24.0 | 发送请求 |
+|pymysql|0.10.1|连接mysql|
 #### 目录结构
 >apiAutoTest
 >
@@ -50,7 +51,7 @@
 >> > html： 使用了allure 的一个命令，生成的本地可视化的一个html报告
 >>
 >> test(包): 运行文件所在包
->>
+>> > conftest.py: 存放可用于整个测试目录的方法 （2020/12/08 +）
 >> > test_api.py：Pytest 命令可直接运行的测试文件，里面是我们的主函数
 >>
 >> tools(包): 工具包
@@ -59,9 +60,10 @@
 >> >
 >> >data_process.py：封装依赖数据与请求数据的逻辑处理，处理了path参数依赖，headers关键字参数的入参header
 >> >
->> >read_config.py： 读取配置文件
+>> >db.py : 封装连接mysql方法
+>> >read_file.py： 读取配置文件、读取excel用例文件
 >> >
->> >read_data.py： 读取excel用例文件
+>> >~~read_data.py：~~ 
 >> >
 >> >
 >> >send_email.py ： 发送邮件
@@ -124,6 +126,8 @@ https://www.bilibili.com/video/BV1EE411B7SU?p=10
 2020/11/21 config.yaml文件中新增request_headers 选项，默认header在此设置，优化test_api.py文件，整合read_file.py
 
 2020/11/22 优化请求断言方法支持用户自定义提取响应自定内容，支持多数据断言，整合请求方法，优化测试启动方法，部分日志移除，修改预期结果处理
+
+2020/12/08 优化断言信息，增加数据库（支持mysql）查询操作， 使用`@pytest.fixture(scope="session")`来托管数据库对象，用例新增sql栏
 
 #### 博客园首发
 https://www.cnblogs.com/zy7y/p/13426816.html
