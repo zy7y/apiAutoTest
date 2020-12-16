@@ -10,3 +10,4 @@ uvicorn==0.12.2
 fastapi==0.61.2
 python-multipart==0.0.5
 PyMySQL==0.10.1
+pytest-rerunfailures==9.1.1
