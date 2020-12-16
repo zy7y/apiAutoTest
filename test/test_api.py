@@ -20,8 +20,6 @@ from tools.read_file import ReadFile
 
 report = ReadFile.read_config('$.file_path.report')
 logfile = ReadFile.read_config('$.file_path.log')
-# 读取excel数据对象
-cases = ReadFile.read_testcase()
 
 
 class TestApi:
@@ -36,10 +34,15 @@ class TestApi:
         os.system(f'allure generate {report}/data -o {report}/html --clean')
         logger.success('报告已生成')
 
-    @pytest.mark.parametrize('case', cases)
-    def test_main(self, case, get_db):
+    # https://www.cnblogs.com/shouhu/p/12392917.html
+    # reruns 重试次数 reruns_delay 次数之间的延时设置（单位：秒）
+    # 失败重跑，会影响总测试时长，如不需要 将 @pytest.mark.flaky(reruns=3, reruns_delay=5) 注释即可
+    @pytest.mark.flaky(reruns=3, reruns_delay=5)
+    def test_main(self, cases, get_db):
+        # 此处的cases入参来自与 conftest.py  文件中 cases函数，与直接使用 @pytest.mark.parametrize
+        # 有着差不多的效果
         # 发送请求
-        response, expect, sql = BaseRequest.send_request(case)
+        response, expect, sql = BaseRequest.send_request(cases)
         # 执行sql
         DataProcess.handle_sql(sql, get_db)
         # 断言操作
