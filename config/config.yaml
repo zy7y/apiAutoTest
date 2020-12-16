@@ -17,9 +17,9 @@ expr:
   token: $.data.token
 
 file_path:
-  test_case: ../data/case_data.xlsx
-  report: ../report/
-  log: ../log/run{time}.log
+  test_case: data/case_data.xlsx
+  report: report/
+  log: log/run{time}.log
 
 email:
   # 发件人邮箱

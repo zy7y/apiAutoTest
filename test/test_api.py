@@ -8,46 +8,22 @@
 @time: 2020/11/22
 @desc: 测试方法
 """
-import os
-import shutil
+from .conftest import pytest
 
-import pytest
-
-from tools import logger
 from api.base_requests import BaseRequest
 from tools.data_process import DataProcess
-from tools.read_file import ReadFile
-
-report = ReadFile.read_config('$.file_path.report')
-logfile = ReadFile.read_config('$.file_path.log')
 
 
-class TestApi:
-
-    @classmethod
-    def run(cls):
-        if os.path.exists('../report'):
-            shutil.rmtree(path='../report')
-        logger.add(logfile, enqueue=True, encoding='utf-8')
-        logger.info('开始测试...')
-        pytest.main(args=[f'--alluredir={report}/data'])
-        os.system(f'allure generate {report}/data -o {report}/html --clean')
-        logger.success('报告已生成')
-
-    # https://www.cnblogs.com/shouhu/p/12392917.html
-    # reruns 重试次数 reruns_delay 次数之间的延时设置（单位：秒）
-    # 失败重跑，会影响总测试时长，如不需要 将 @pytest.mark.flaky(reruns=3, reruns_delay=5) 注释即可
-    @pytest.mark.flaky(reruns=3, reruns_delay=5)
-    def test_main(self, cases, get_db):
-        # 此处的cases入参来自与 conftest.py  文件中 cases函数，与直接使用 @pytest.mark.parametrize
-        # 有着差不多的效果
-        # 发送请求
-        response, expect, sql = BaseRequest.send_request(cases)
-        # 执行sql
-        DataProcess.handle_sql(sql, get_db)
-        # 断言操作
-        DataProcess.assert_result(response, expect)
-
-
-if __name__ == '__main__':
-    TestApi.run()
+# https://www.cnblogs.com/shouhu/p/12392917.html
+# reruns 重试次数 reruns_delay 次数之间的延时设置（单位：秒）
+# 失败重跑，会影响总测试时长，如不需要 将 @pytest.mark.flaky(reruns=3, reruns_delay=5) 注释即可
+# @pytest.mark.flaky(reruns=2, reruns_delay=1)
+def test_main(cases, get_db):
+    # 此处的cases入参来自与 conftest.py  文件中 cases函数，与直接使用 @pytest.mark.parametrize
+    # 有着差不多的效果
+    # 发送请求
+    response, expect, sql = BaseRequest.send_request(cases)
+    # 执行sql
+    DataProcess.handle_sql(sql, get_db)
+    # 断言操作
+    DataProcess.assert_result(response, expect)

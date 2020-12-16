@@ -113,7 +113,7 @@ https://www.bilibili.com/video/BV1EE411B7SU?p=10
 #### 测试报告
 
 ![本地运行测试后生成报告](./image/localhost_report.png)
-
+![测试报告用例失败重跑](./image/用例失败重跑截图.png)
 #### 更新
 2020/08/08 增加实际响应存储数据的方法，并在字典可以处理依赖见tools/svae_response.py
 
@@ -129,6 +129,7 @@ https://www.bilibili.com/video/BV1EE411B7SU?p=10
 
 2020/12/08 优化断言信息，增加数据库（支持mysql）查询操作， 使用`@pytest.fixture(scope="session")`来托管数据库对象，用例新增sql栏
 
+2020/12/16 使用conftest.py 初始化用例， 增加失败重跑机制, 增加运行文件run，优化test_api.py冗余代码
 #### 博客园首发
 https://www.cnblogs.com/zy7y/p/13426816.html
 
