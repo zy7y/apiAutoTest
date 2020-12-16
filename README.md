@@ -78,6 +78,9 @@
 >> requirements.txt： 依赖库
 >>
 >> 项目实战接口文档：该Demo中实例的电商后台项目接口文档
+>> run.py: 主运行文件，2020/12/06 更新
+>> test.sql 模拟用例sql的数据
+
 
 
 
@@ -88,12 +91,9 @@
 2.  安装Java与allure，https://www.cnblogs.com/zy7y/p/13403699.html
 3.  使用pycharm打开项目使用Terminal 输入 python3 -m venv venv 新建虚拟环境 （可选）
 4.  执行pip install -r requirements.txt 安装依赖库（若下载超时：pip install -i https://pypi.tuna.tsinghua.edu.cn/simple -r requirements.txt）
-5.  修改config.ymal文件中email文件配置收件人邮箱，授权码，发件人邮箱
-6.  运行/test/test_api.py 文件
-#### 运行测试前修改
-首先确保需要的环境与依赖包无问题之后，使用Pycharm打开项目，找到`settings`修改为unitest或者其他非pytest，具体操作如下
-[![B21lr9.md.jpg](https://s1.ax1x.com/2020/11/05/B21lr9.md.jpg)](https://imgchr.com/i/B21lr9)
-[![B21GUx.png](https://s1.ax1x.com/2020/11/05/B21GUx.png)](https://imgchr.com/i/B21GUx)
+5.  修改config.ymal文件中email文件配置邮箱，request_header配置初始请求头，database 配置数据库信息
+6.  ~~运行/test/test_api.py 文件~~
+6. 运行 `run.py`文件
 #### 用例说明文档
 ![case_data.xlsx用例说明文档](./image/用例说明文档.png)
 
@@ -104,6 +104,8 @@
 3.  本项目用例书写格式请务必遵循，sheet页用例说明中有一部分
 4.  该项目找的是b站上的一个前后端分离应用，域名使用的是b站某视频里提供的，请大家谨慎操作学习
 5.  本项目所要投入生产，请自行修改配置文件config.yaml及用例数据case_data.xlsx，
+6.  默认注释了用例失败重跑装饰器，需要的时候自行解除注释即可，但这个功能比较耗时间，自取所需吧
+7.  本项目从2020年8月提交，陆续迭代，如果各位有什么建议 欢迎提给我，会尽力解决~~
 
 #### 接口服务（后端源码来自）
 vue 电商项目实战
@@ -136,7 +138,7 @@ https://www.cnblogs.com/zy7y/p/13426816.html
 #### Jenkins集成
 
 https://www.cnblogs.com/zy7y/p/13448102.html
-#### 视频教程（主要给大家讲这个Demo实现的一些思路）
+#### 视频教程（主要给大家讲这个Demo实现的一些思路， 后续将考虑从0-1录一个但能力有限，别有太多期许，一是免费二是开源）
 B站：https://www.bilibili.com/video/BV1pv411i7zK/
 #### 联系我
 
