@@ -41,7 +41,7 @@ class BaseRequest(object):
         data = DataProcess.handle_data(data)
         allure_step('请求参数', data)
         file = DataProcess.handler_files(file_obj)
-        allure_step('上传文件', file)
+        allure_step('上传文件', file_obj)
         # 发送请求
         res = cls.send_api(url, method, parametric_key, header, data, file)
         allure_step('响应耗时(s)', res.elapsed.total_seconds())
@@ -77,7 +77,7 @@ class BaseRequest(object):
         else:
             raise ValueError(
                 '可选关键字为：get/delete/head/options/请求使用params, post/put/patch请求可使用json（application/json）/data')
-        logger.info(f'\n请求地址:{url}\n请求方法:{method}\n请求头:{header}\n请求参数:{data}\n响应数据:{res.json()}')
+        logger.info(f'\n请求地址:{url}\n请求方法:{method}\n请求头:{header}\n请求参数:{data}\n上传文件:{file}\n响应数据:{res.json()}')
         return res
 
 
