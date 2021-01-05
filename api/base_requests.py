@@ -77,7 +77,7 @@ class BaseRequest(object):
         else:
             raise ValueError(
                 '可选关键字为：get/delete/head/options/请求使用params, post/put/patch请求可使用json（application/json）/data')
-        logger.info(f'\n请求地址:{url}\n请求方法:{method}\n请求头:{header}\n请求参数:{data}\n上传文件:{file}\n响应数据:{res.json()}')
+        logger.info(f'\n最终请求地址:{res.url}\n请求方法:{method}\n请求头:{header}\n请求参数:{data}\n上传文件:{file}\n响应数据:{res.json()}')
         return res
 
 
