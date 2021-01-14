@@ -59,8 +59,8 @@ class BaseRequest(object):
         """
         :param method: 请求方法
         :param url: 请求url
-        :param parametric_key: 入参关键字， get/delete/head/options/请求使用params,
-         post/put/patch请求可使用json（application/json）/data
+        :param parametric_key: 入参关键字， params(查询参数类型，明文传输，一般在url?参数名=参数值), data(一般用于form表单类型参数)
+        json(一般用于json类型请求参数)
         :param data: 参数数据，默认等于None
         :param file: 文件对象
         :param header: 请求头
@@ -76,7 +76,7 @@ class BaseRequest(object):
             res = session.request(method=method, url=url, json=data, files=file, headers=header)
         else:
             raise ValueError(
-                '可选关键字为：get/delete/head/options/请求使用params, post/put/patch请求可使用json（application/json）/data')
+                '可选关键字为params, json, data')
         logger.info(f'\n最终请求地址:{res.url}\n请求方法:{method}\n请求头:{header}\n请求参数:{data}\n上传文件:{file}\n响应数据:{res.json()}')
         return res
 
