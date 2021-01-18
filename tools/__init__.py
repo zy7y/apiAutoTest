@@ -61,7 +61,7 @@ def convert_json(dict_str: str) -> dict:
             dict_str = dict_str.replace('null', 'None')
         elif 'true' in dict_str:
             dict_str = dict_str.replace('true', 'True')
-        elif 'False' in dict_str:
+        elif 'false' in dict_str:
             dict_str = dict_str.replace('false', 'False')
         dict_str = eval(dict_str)
         logger.error(e)
