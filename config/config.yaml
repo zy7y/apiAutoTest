@@ -37,17 +37,23 @@ email:
 database:
   host: localhost
   port: 3306
-  user: test
+  user: root
   # 不用''会被解析成int类型数据
   password: '123456'
   db_name:  test
   charset:  utf8mb4
 
-# 响应存储/sql结果存储
-cache:
-  host: localhost
-  port: 6379
-  db: 0
+  # 数据库所在的服务器配置
+  ssh_server:
+    port: 22
+    username: root
+    password: '123456'
+    # 私有密钥文件路径
+    private_key_file:
+    # 如果使用的docker容器部署mysql服务，需要传入mysql的容器id/name
+    mysql_container: mysql8
+    # 数据库备份文件导出的本地路径, 需要保证存在该文件夹
+    sql_data_file: backup_sqls/
 
 
 

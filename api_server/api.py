@@ -9,12 +9,23 @@
 @desc: 上传文件接口服务,用于调试上传文件接口处理方法，源码来自
 FastAPI官网 https://fastapi.tiangolo.com/zh/tutorial/request-files/
 """
-
+import random
 from typing import List
 
 from fastapi import FastAPI, File, UploadFile
 
+from tools.db import DB
+
+from faker import Faker
+
+fake = Faker('zh_CN')
+
 app = FastAPI()
+
+# 连接数据库
+db = DB()
+# 创建游标
+cursor = db.connection.cursor()
 
 
 @app.post("/upload_file/", name='上传单文件接口')
@@ -40,7 +51,40 @@ async def create_upload_files(files: List[UploadFile] = File(...)):
     return {"filenames": [file.filename for file in files], "meta": {"msg": "ok"}}
 
 
+@app.post("/users", summary="新增用户")
+async def add_user():
+    sql = f"insert into user values ({random.randint(10,1000)},'{fake.name()}', '{fake.ean8()}')"
+    try:
+        # 执行sql语句
+        cursor.execute(sql)
+        # 提交到数据库执行
+        db.connection.commit()
+        return {"msg": "成功"}
+    except Exception as e:
+        # 如果发生错误则回滚
+        db.connection.rollback()
+        print(e)
+
+
+
+@app.delete("/users", summary="删除用户")
+async def delete_user(id: int):
+    sql = f"DELETE FROM user WHERE id = {id}"
+    try:
+        # 执行sql语句
+        cursor.execute(sql)
+        # 提交到数据库执行
+        db.connection.commit()
+        return {"msg": "成功"}
+    except Exception as  e:
+        # 如果发生错误则回滚
+        db.connection.rollback()
+        print(e)
+
+
+
 if __name__ == '__main__':
     # 启动项目后 访问  http://127.0.0.1:8888/docs 可查看接口文档
     import uvicorn
+
     uvicorn.run('api:app', reload=True, port=8888)

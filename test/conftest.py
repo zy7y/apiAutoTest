@@ -11,12 +11,26 @@
 
 import pytest
 
+from tools.data_clearing import DataClearing
 from tools.db import DB
 from tools.read_file import ReadFile
 
 
 @pytest.fixture(scope="session")
-def get_db():
+def data_clearing():
+    """数据清洗"""
+    DataClearing.server_init()
+    # 1. 备份数据库
+    DataClearing.backup_mysql()
+    yield
+    # 2. 恢复数据库
+    DataClearing.recovery_mysql()
+    DataClearing.close_client()
+
+
+# 若不需要数据清洗功能，请把get_db()入参拿掉
+@pytest.fixture(scope="session")
+def get_db(data_clearing):
     """关于其作用域请移步查看官方文档"""
     try:
         db = DB()

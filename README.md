@@ -17,6 +17,7 @@
 | yagmail | 0.11.224 | 测试完成后发送邮件 |
 | requests| 2.24.0 | 发送请求 |
 |pymysql|0.10.1|连接mysql|
+|paramiko|2.7.2|ssh连接linux服务器，用于备份/删除数据库文件
 #### 目录结构
 >apiAutoTest
 >
@@ -63,7 +64,7 @@
 >> >db.py : 封装连接mysql方法
 >> >read_file.py： 读取配置文件、读取excel用例文件
 >> >
->> >~~read_data.py：~~ 
+>> >data_clearing.py: 数据清洗方法封装，ssh2服务器连接，数据库备份/恢复 2021/01/19日更新 
 >> >
 >> >
 >> >send_email.py ： 发送邮件
@@ -134,6 +135,11 @@ https://www.bilibili.com/video/BV1EE411B7SU?p=10
 2020/12/08 优化断言信息，增加数据库（支持mysql）查询操作， 使用`@pytest.fixture(scope="session")`来托管数据库对象，用例新增sql栏
 
 2020/12/16 使用conftest.py 初始化用例， 增加失败重跑机制, 增加运行文件run，优化test_api.py冗余代码
+
+2021/01/19 添加数据清洗功能(测试开始前进行数据库备份-分别在服务器和本地进行，测试结束后将备份用以恢复数据-将尝试从服务器和本地恢复到服务器数据库中，docker部署的mysql服务已本地调试通过，直接linux部署的mysql并未测试)
+> 详细内容见代码注释`tools/data_clearing.py`
+> 如不需要使用该功能请做如下处理,如也不使用数据库对象，只需参考 https://gitee.com/zy7y/apiAutoTest/issues/I2BAQL 修改即可
+![](https://gitee.com/zy7y/blog_images/raw/master/img/20210119184856.png)
 #### 博客园首发
 https://www.cnblogs.com/zy7y/p/13426816.html
 
