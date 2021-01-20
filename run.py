@@ -25,7 +25,15 @@ def run():
     if os.path.exists('report/'):
         shutil.rmtree(path='report/')
     logger.add(logfile, enqueue=True, encoding='utf-8')
-    logger.info('开始测试...')
+    logger.info("""
+                 _    _         _      _____         _   
+  __ _ _ __ (_)  / \  _   _| |_ __|_   _|__  ___| |_ 
+ / _` | '_ \| | / _ \| | | | __/ _ \| |/ _ \/ __| __|
+| (_| | |_) | |/ ___ \ |_| | || (_) | |  __/\__ \ |_ 
+ \__,_| .__/|_/_/   \_\__,_|\__\___/|_|\___||___/\__|
+      |_|                                            
+      Starting      ...     ...     ...
+    """)
     pytest.main(args=['test/test_api.py', f'--alluredir={report}/data'])
     # 自动以服务形式打开报告
     # os.system(f'allure serve {report}/data')
