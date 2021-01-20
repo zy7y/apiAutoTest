@@ -20,12 +20,12 @@ from tools import logger
 
 class ServerTools:
     def __init__(self, host: str, port: int = 22, username: str = "root", password: str = None,
-                 private_key_file: str = None):
+                 private_key_file: str = None, privat_passowrd: str = None):
         # 进行SSH连接
         self.trans = paramiko.Transport((host, port))
         self.host = host
         if password is None:
-            self.trans.connect(username=username, pkey=paramiko.RSAKey.from_private_key_file(private_key_file))
+            self.trans.connect(username=username, pkey=paramiko.RSAKey.from_private_key_file(private_key_file, privat_passowrd))
         else:
             self.trans.connect(username=username, password=password)
         # 将sshclient的对象的transport指定为以上的trans
@@ -79,7 +79,8 @@ class DataClearing:
         cls.server = ServerTools(host=settings.get('host'), port=server_settings.get('port'),
                     username=server_settings.get('username'),
                     password=server_settings.get('password'),
-                    private_key_file=server_settings.get('private_key_file'))
+                    private_key_file=server_settings.get('private_key_file'),
+                    privat_passowrd=server_settings.get('privat_passowrd'))
         # 新建backup_sql文件夹在服务器上，存放导出的sql文件
         cls.server.execute_cmd("mkdir backup_sql")
 
