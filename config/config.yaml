@@ -50,6 +50,8 @@ database:
     password: '123456'
     # 私有密钥文件路径
     private_key_file:
+    # 私钥密码
+    privat_passowrd:
     # 如果使用的docker容器部署mysql服务，需要传入mysql的容器id/name
     mysql_container: mysql8
     # 数据库备份文件导出的本地路径, 需要保证存在该文件夹
