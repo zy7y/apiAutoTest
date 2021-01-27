@@ -4,22 +4,99 @@
   "children" : [ {
     "name" : "Product defects",
     "children" : [ {
-      "name" : "AssertionError",
+      "name" : "AssertionError: 断言失败 -|- 实际结果:None || 预期结果: 400",
       "children" : [ {
-        "name" : "get请求查询用户数据列表",
-        "uid" : "436705ea6a1f0cd9",
-        "parentUid" : "a0017ad855102fea08b8682d27fec4ca",
+        "name" : "get请求实现登录",
+        "uid" : "775201c98d5e3a30",
+        "parentUid" : "452f79d47ae48b63dd45ee6c73133a6c",
         "status" : "failed",
         "time" : {
-          "start" : 1606055460236,
-          "stop" : 1606055460283,
-          "duration" : 47
+          "start" : 1611727379651,
+          "stop" : 1611727379762,
+          "duration" : 111
         },
         "flaky" : false,
         "newFailed" : false,
-        "parameters" : [ "['case_004', 'get请求查询用户数据列表', 'users', '', 'get', 'data', '', '{\"pagenum\": 1, \"pagesize\": \"12\", \"msg\": &$.msg&}', '{\"$.meta\":{\"msg\": \"获取管理员列表成功\", \"status\": 200}}']" ]
+        "parameters" : [ "['case_001', 'get请求实现登录', 'login', '', 'get', 'params', '', '{\"username\": \"admin\", \"password\": \"\"}', '', '{\"$.meta.code\":400}']" ]
       } ],
-      "uid" : "a0017ad855102fea08b8682d27fec4ca"
+      "uid" : "452f79d47ae48b63dd45ee6c73133a6c"
+    }, {
+      "name" : "AssertionError: 断言失败 -|- 实际结果:{'msg': '无效token', 'status': 400} || 预期结果: {'msg': '获取管理员列表成功', 'status': 200}",
+      "children" : [ {
+        "name" : "get请求查询用户数据列表",
+        "uid" : "f1600089f14cf0d7",
+        "parentUid" : "d6f995cec6c1884bd6523dcb684850ac",
+        "status" : "failed",
+        "time" : {
+          "start" : 1611727380199,
+          "stop" : 1611727380256,
+          "duration" : 57
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "['case_004', 'get请求查询用户数据列表', 'users', '', 'get', 'data', '', '{\"pagenum\": 1, \"pagesize\": \"12\", \"msg\": &$.msg&}', '', '{\"$.meta\":{\"msg\": \"获取管理员列表成功\", \"status\": 200}}']" ]
+      } ],
+      "uid" : "d6f995cec6c1884bd6523dcb684850ac"
+    }, {
+      "name" : "AssertionError: 断言失败 -|- 实际结果:None || 预期结果: 成功",
+      "children" : [ {
+        "name" : "本地添加用户，测试数据库备份",
+        "uid" : "5363b4ff311218d8",
+        "parentUid" : "d37d9df07b03bfba958e7d9de6188e0a",
+        "status" : "failed",
+        "time" : {
+          "start" : 1611727380696,
+          "stop" : 1611727380750,
+          "duration" : 54
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "['case_013', '本地添加用户，测试数据库备份', 'users/', '', 'post', 'data', '', '', '', '{\"$.msg\": \"成功\"}']" ]
+      }, {
+        "name" : "调试运算新功能",
+        "uid" : "8e8882fe810305d4",
+        "parentUid" : "d37d9df07b03bfba958e7d9de6188e0a",
+        "status" : "failed",
+        "time" : {
+          "start" : 1611727380763,
+          "stop" : 1611727380933,
+          "duration" : 170
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "['case_017', '调试运算新功能', 'users/', '读', 'post', 'data', '', '{\"username\": \"tery\",\"password\": \"eval`1+2`\"}', '', '{\"$.msg\": \"成功\"}']" ]
+      }, {
+        "name" : "调试运算新功能,从响应提取后运算",
+        "uid" : "9100d8f4e1fc0167",
+        "parentUid" : "d37d9df07b03bfba958e7d9de6188e0a",
+        "status" : "failed",
+        "time" : {
+          "start" : 1611727380944,
+          "stop" : 1611727380988,
+          "duration" : 44
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "['case_018', '调试运算新功能,从响应提取后运算', 'users/', '读', 'post', 'data', '', '{\"username\": \"tery\",\"password\": eval`&$.case_002.data.id&+500`}', '', '{\"$.msg\": \"成功\"}']" ]
+      } ],
+      "uid" : "d37d9df07b03bfba958e7d9de6188e0a"
+    }, {
+      "name" : "AssertionError: 断言失败 -|- 实际结果:{'msg': '更新失败', 'status': 400} || 预期结果: {'msg': '设置状态成功', 'status': 200}",
+      "children" : [ {
+        "name" : "调试运算新功能,从path需要运算",
+        "uid" : "3df58905af4378fb",
+        "parentUid" : "491d663a50609eaab0d75e1ac09c0b18",
+        "status" : "failed",
+        "time" : {
+          "start" : 1611727380998,
+          "stop" : 1611727381044,
+          "duration" : 46
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "['case_019', '调试运算新功能,从path需要运算', 'users/eval`&$.case_005.data.id&*2`/', '读', 'put', 'data', '', '', '', '{\"$.meta\":{\"msg\": \"设置状态成功\", \"status\": 200}}']" ]
+      } ],
+      "uid" : "491d663a50609eaab0d75e1ac09c0b18"
     } ],
     "uid" : "8fb3a91ba5aaf9de24cc8a92edc82b5d"
   } ]

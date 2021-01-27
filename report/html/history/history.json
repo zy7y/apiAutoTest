@@ -1,5 +1,5 @@
 {
-  "5fa6656b8b1b28bc1fdd0eb962f2b477" : {
+  "5777368728cab34aec99bce292e15e60" : {
     "statistic" : {
       "failed" : 1,
       "broken" : 0,
@@ -9,112 +9,17 @@
       "total" : 1
     },
     "items" : [ {
-      "uid" : "436705ea6a1f0cd9",
+      "uid" : "5363b4ff311218d8",
       "status" : "failed",
-      "statusDetails" : "AssertionError",
+      "statusDetails" : "AssertionError: 断言失败 -|- 实际结果:None || 预期结果: 成功",
       "time" : {
-        "start" : 1606055460236,
-        "stop" : 1606055460283,
-        "duration" : 47
-      }
-    } ]
-  },
-  "ff4c616539ac64f4683d87b3cf78fc56" : {
-    "statistic" : {
-      "failed" : 0,
-      "broken" : 0,
-      "skipped" : 0,
-      "passed" : 1,
-      "unknown" : 0,
-      "total" : 1
-    },
-    "items" : [ {
-      "uid" : "e68c11d0e6e8364a",
-      "status" : "passed",
-      "time" : {
-        "start" : 1606055460611,
-        "stop" : 1606055460660,
-        "duration" : 49
-      }
-    } ]
-  },
-  "e37eee6749637e7e7e0c6b281657f72a" : {
-    "statistic" : {
-      "failed" : 0,
-      "broken" : 0,
-      "skipped" : 0,
-      "passed" : 1,
-      "unknown" : 0,
-      "total" : 1
-    },
-    "items" : [ {
-      "uid" : "c63f50ef4036c2df",
-      "status" : "passed",
-      "time" : {
-        "start" : 1606055459865,
-        "stop" : 1606055460031,
-        "duration" : 166
-      }
-    } ]
-  },
-  "fcaa653e818be3057f2f484b8886f2fb" : {
-    "statistic" : {
-      "failed" : 0,
-      "broken" : 0,
-      "skipped" : 0,
-      "passed" : 1,
-      "unknown" : 0,
-      "total" : 1
-    },
-    "items" : [ {
-      "uid" : "4738a6b93ef00142",
-      "status" : "passed",
-      "time" : {
-        "start" : 1606055460372,
-        "stop" : 1606055460545,
-        "duration" : 173
-      }
-    } ]
-  },
-  "613f214da5e2528e663bdd8f906068d7" : {
-    "statistic" : {
-      "failed" : 0,
-      "broken" : 0,
-      "skipped" : 0,
-      "passed" : 1,
-      "unknown" : 0,
-      "total" : 1
-    },
-    "items" : [ {
-      "uid" : "e7bb1220dd2eaa50",
-      "status" : "passed",
-      "time" : {
-        "start" : 1606055459770,
-        "stop" : 1606055459860,
-        "duration" : 90
-      }
-    } ]
-  },
-  "db9c6b492c2f49ac32bf1152d397b96f" : {
-    "statistic" : {
-      "failed" : 0,
-      "broken" : 0,
-      "skipped" : 0,
-      "passed" : 1,
-      "unknown" : 0,
-      "total" : 1
-    },
-    "items" : [ {
-      "uid" : "fe62b33d1afcdd4",
-      "status" : "passed",
-      "time" : {
-        "start" : 1606055460551,
-        "stop" : 1606055460605,
+        "start" : 1611727380696,
+        "stop" : 1611727380750,
         "duration" : 54
       }
     } ]
   },
-  "a86ca099b0f3d8ed88fb7191ad51c143" : {
+  "9b58e419aa66c81ba5e26368887473ad" : {
     "statistic" : {
       "failed" : 0,
       "broken" : 0,
@@ -124,16 +29,36 @@
       "total" : 1
     },
     "items" : [ {
-      "uid" : "65d6ad4f916a0f62",
+      "uid" : "8635dce19545396f",
       "status" : "passed",
       "time" : {
-        "start" : 1606055460665,
-        "stop" : 1606055460721,
-        "duration" : 56
+        "start" : 1611727380475,
+        "stop" : 1611727380541,
+        "duration" : 66
       }
     } ]
   },
-  "e22e29a3736852b3693b6ddc60bd9936" : {
+  "25f6ba9e78828713a480fcdbed4cfa82" : {
+    "statistic" : {
+      "failed" : 1,
+      "broken" : 0,
+      "skipped" : 0,
+      "passed" : 0,
+      "unknown" : 0,
+      "total" : 1
+    },
+    "items" : [ {
+      "uid" : "8e8882fe810305d4",
+      "status" : "failed",
+      "statusDetails" : "AssertionError: 断言失败 -|- 实际结果:None || 预期结果: 成功",
+      "time" : {
+        "start" : 1611727380763,
+        "stop" : 1611727380933,
+        "duration" : 170
+      }
+    } ]
+  },
+  "e48abca8fb0895e685397860fb6393f1" : {
     "statistic" : {
       "failed" : 0,
       "broken" : 0,
@@ -143,12 +68,168 @@
       "total" : 1
     },
     "items" : [ {
-      "uid" : "cae1f137d52e87b6",
+      "uid" : "a16534ded807893",
       "status" : "passed",
       "time" : {
-        "start" : 1606055460038,
-        "stop" : 1606055460227,
-        "duration" : 189
+        "start" : 1611727380615,
+        "stop" : 1611727380689,
+        "duration" : 74
+      }
+    } ]
+  },
+  "f9a3a528aa08d345b131e068670a2332" : {
+    "statistic" : {
+      "failed" : 1,
+      "broken" : 0,
+      "skipped" : 0,
+      "passed" : 0,
+      "unknown" : 0,
+      "total" : 1
+    },
+    "items" : [ {
+      "uid" : "f1600089f14cf0d7",
+      "status" : "failed",
+      "statusDetails" : "AssertionError: 断言失败 -|- 实际结果:{'msg': '无效token', 'status': 400} || 预期结果: {'msg': '获取管理员列表成功', 'status': 200}",
+      "time" : {
+        "start" : 1611727380199,
+        "stop" : 1611727380256,
+        "duration" : 57
+      }
+    } ]
+  },
+  "94c53f645702c06e17118fd92e09f479" : {
+    "statistic" : {
+      "failed" : 0,
+      "broken" : 0,
+      "skipped" : 0,
+      "passed" : 1,
+      "unknown" : 0,
+      "total" : 1
+    },
+    "items" : [ {
+      "uid" : "4970b263bd143b68",
+      "status" : "passed",
+      "time" : {
+        "start" : 1611727380546,
+        "stop" : 1611727380611,
+        "duration" : 65
+      }
+    } ]
+  },
+  "3a098e261ee7b9115a8be890393002aa" : {
+    "statistic" : {
+      "failed" : 0,
+      "broken" : 0,
+      "skipped" : 0,
+      "passed" : 1,
+      "unknown" : 0,
+      "total" : 1
+    },
+    "items" : [ {
+      "uid" : "c78627aa4a5a8921",
+      "status" : "passed",
+      "time" : {
+        "start" : 1611727380024,
+        "stop" : 1611727380194,
+        "duration" : 170
+      }
+    } ]
+  },
+  "0d3dd93f9d173bd3e59f983349bd1202" : {
+    "statistic" : {
+      "failed" : 1,
+      "broken" : 0,
+      "skipped" : 0,
+      "passed" : 0,
+      "unknown" : 0,
+      "total" : 1
+    },
+    "items" : [ {
+      "uid" : "9100d8f4e1fc0167",
+      "status" : "failed",
+      "statusDetails" : "AssertionError: 断言失败 -|- 实际结果:None || 预期结果: 成功",
+      "time" : {
+        "start" : 1611727380944,
+        "stop" : 1611727380988,
+        "duration" : 44
+      }
+    } ]
+  },
+  "5a1a59aa4470006c7c58a5ba625a4478" : {
+    "statistic" : {
+      "failed" : 1,
+      "broken" : 0,
+      "skipped" : 0,
+      "passed" : 0,
+      "unknown" : 0,
+      "total" : 1
+    },
+    "items" : [ {
+      "uid" : "3df58905af4378fb",
+      "status" : "failed",
+      "statusDetails" : "AssertionError: 断言失败 -|- 实际结果:{'msg': '更新失败', 'status': 400} || 预期结果: {'msg': '设置状态成功', 'status': 200}",
+      "time" : {
+        "start" : 1611727380998,
+        "stop" : 1611727381044,
+        "duration" : 46
+      }
+    } ]
+  },
+  "d5345d39adc3d02ffcaf8f15af49ab18" : {
+    "statistic" : {
+      "failed" : 0,
+      "broken" : 0,
+      "skipped" : 0,
+      "passed" : 1,
+      "unknown" : 0,
+      "total" : 1
+    },
+    "items" : [ {
+      "uid" : "a7f4cefbb5f96a28",
+      "status" : "passed",
+      "time" : {
+        "start" : 1611727379836,
+        "stop" : 1611727380017,
+        "duration" : 181
+      }
+    } ]
+  },
+  "8174f8ecb1004db16679a852ff5f760a" : {
+    "statistic" : {
+      "failed" : 1,
+      "broken" : 0,
+      "skipped" : 0,
+      "passed" : 0,
+      "unknown" : 0,
+      "total" : 1
+    },
+    "items" : [ {
+      "uid" : "775201c98d5e3a30",
+      "status" : "failed",
+      "statusDetails" : "AssertionError: 断言失败 -|- 实际结果:None || 预期结果: 400",
+      "time" : {
+        "start" : 1611727379651,
+        "stop" : 1611727379762,
+        "duration" : 111
+      }
+    } ]
+  },
+  "0739167ffd7bddb403117cdf6fcb588f" : {
+    "statistic" : {
+      "failed" : 0,
+      "broken" : 0,
+      "skipped" : 0,
+      "passed" : 1,
+      "unknown" : 0,
+      "total" : 1
+    },
+    "items" : [ {
+      "uid" : "1115b273d1a7588e",
+      "status" : "passed",
+      "time" : {
+        "start" : 1611727380270,
+        "stop" : 1611727380469,
+        "duration" : 199
       }
     } ]
   }
