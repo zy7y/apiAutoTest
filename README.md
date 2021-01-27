@@ -140,6 +140,10 @@ https://www.bilibili.com/video/BV1EE411B7SU?p=10
 > 详细内容见代码注释`tools/data_clearing.py`
 > 如不需要使用该功能请做如下处理,如也不使用数据库对象，只需参考 https://gitee.com/zy7y/apiAutoTest/issues/I2BAQL 修改即可
 ![](https://gitee.com/zy7y/blog_images/raw/master/img/20210119184856.png)
+
+2021/01/27 添加eval语法糖，请求数据需要上个接口返回的id+1，实现基本的数学预算，使用形式具体查看excel用例文件及用例描述页，与报告对着看
+
+![](https://gitee.com/zy7y/blog_images/raw/master/img/20210127141257.png)
 #### 博客园首发
 https://www.cnblogs.com/zy7y/p/13426816.html
 

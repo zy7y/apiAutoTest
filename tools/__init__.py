@@ -40,6 +40,9 @@ def rep_expr(content: str, data: dict, expr: str = '&(.*?)&') -> str:
     """
     for ctt in re.findall(expr, content):
         content = content.replace(f'&{ctt}&', str(extractor(data, ctt)))
+    # 解决运算问题，实现+ -等常规数学运算， 用例书写格式{"uid":eval`&$.pid&+1`} 如果需要是字符串{"uid":eval`&$.pid&+1`}
+    for e in re.findall('eval`(.*)`', content):
+        content = content.replace(f'eval`{e}`', str(eval(e)))
     return content
 
 
