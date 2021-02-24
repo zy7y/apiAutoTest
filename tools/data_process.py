@@ -117,5 +117,5 @@ class DataProcess:
             try:
                 assert actual == v
             except AssertionError:
-                raise AssertionError(f'断言失败 -|- 实际结果:{actual} || 预期结果: {v}')
+                raise AssertionError(f'第{index}断言失败 -|- 实际结果:{actual} || 预期结果: {v}')
 
