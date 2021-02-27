@@ -15,6 +15,8 @@ import allure
 from jsonpath import jsonpath
 from loguru import logger
 
+from tools.hooks import *
+
 
 def extractor(obj: dict, expr: str = '.') -> object:
     """
@@ -40,9 +42,11 @@ def rep_expr(content: str, data: dict, expr: str = '&(.*?)&') -> str:
     """
     for ctt in re.findall(expr, content):
         content = content.replace(f'&{ctt}&', str(extractor(data, ctt)))
-    # 解决运算问题，实现+ -等常规数学运算， 用例书写格式{"uid":eval`&$.pid&+1`} 如果需要是字符串{"uid":eval`&$.pid&+1`}
-    for e in re.findall('eval`(.*)`', content):
-        content = content.replace(f'eval`{e}`', str(eval(e)))
+        
+    # 增加自定义函数得的调用，函数写在tools/hooks.py中
+    for func in re.findall('@(.*?)@', content):
+        content = content.replace(f'@{func}@', exec_func(func))
+
     return content
 
 
