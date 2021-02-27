@@ -67,9 +67,10 @@
 >> >data_clearing.py: 数据清洗方法封装，ssh2服务器连接，数据库备份/恢复 2021/01/19日更新 
 >> >
 >> >
+>> >hooks.py: 自定义方法，可用与测试 目前版本拥有 获取当前时间戳，两数相加的方法 2021/02/27 更新
+>> >
 >> >send_email.py ： 发送邮件
 >> >
->> >zip_file.py ： 压缩测试报告
 >>
 >> venv： python 虚拟环境
 >>
@@ -119,7 +120,7 @@ https://www.bilibili.com/video/BV1EE411B7SU?p=10
 
 ![本地运行测试后生成报告](./image/localhost_report.png)
 ![测试报告用例失败重跑](./image/用例失败重跑截图.png)
-#### 更新
+#### 更新记录
 2020/08/08 增加实际响应存储数据的方法，并在字典可以处理依赖见tools/svae_response.py
 
 2020/08/09 实现多文件上传，接口中Path参数依赖处理
@@ -141,9 +142,28 @@ https://www.bilibili.com/video/BV1EE411B7SU?p=10
 > 如不需要使用该功能请做如下处理,如也不使用数据库对象，只需参考 https://gitee.com/zy7y/apiAutoTest/issues/I2BAQL 修改即可
 ![](https://gitee.com/zy7y/blog_images/raw/master/img/20210119184856.png)
 
-2021/01/27 添加eval语法糖，请求数据需要上个接口返回的id+1，实现基本的数学预算，使用形式具体查看excel用例文件及用例描述页，与报告对着看
+~~2021/01/27 添加eval语法糖，请求数据需要上个接口返回的id+1，实现基本的数学预算，使用形式具体查看excel用例文件及用例描述页，与报告对着看~~
 
-![](https://gitee.com/zy7y/blog_images/raw/master/img/20210127141257.png)
+2021/02/27 添加hooks.py文件(可在此处自定义方法,并用于用例当中，注意请务必在定义的方法中使用return),移除上次更新的eval语法糖，增加用例处理前的日志
+```log
+2021-02-27 15:09:42.668 | DEBUG    | api.base_requests:send_request:34 - 用例进行处理前数据: 
+ 接口路径: users/@sum_data(&$.case_005.data.id&, 2)@/ 
+ 请求参数: {"username": "tery","password": @sum_data(&$.case_002.data.id&, 66)@} 
+ 后置sql:  
+ 预期结果: {"$.meta":{"msg": "设置状态成功", "status": 200}}
+2021-02-27 15:09:42.714 | INFO     | api.base_requests:send_api:81 - 
+最终请求地址:http://www.ysqorz.top:8888/api/private/v1/users/514/
+请求方法:put
+请求头:{'Accept-Encoding': 'gzip, deflate', 'Accept-Language': 'zh-CN,zh;q=0.9', 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjUwMCwicmlkIjowLCJpYXQiOjE2MTQ0MDk3ODEsImV4cCI6MTYxNDQ5NjE4MX0.EUoNREKUFCYitf4WBLBh3Bj5TWYPCU9hGPV6ng4-o-4'}
+请求参数:{'username': 'tery', 'password': 566}
+上传文件:None
+响应数据:{'data': None, 'meta': {'msg': '更新失败', 'status': 400}}
+2021-02-27 15:09:42.716 | INFO     | tools.data_process:save_response:27 - 添加key: case_019, 对应value: {'data': None, 'meta': {'msg': '更新失败', 'status': 400}}
+2021-02-27 15:09:42.717 | INFO     | tools.data_process:assert_result:115 - 第1个断言,实际结果:{'msg': '更新失败', 'status': 400} | 预期结果:{'msg': '设置状态成功', 'status': 200} 
+断言结果 False
+2021-02-27 15:09:45.050 | SUCCESS  | __main__:run:43 - 报告已生成
+```
+
 #### 博客园首发
 https://www.cnblogs.com/zy7y/p/13426816.html
 
