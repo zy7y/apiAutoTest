@@ -31,6 +31,7 @@ class BaseRequest(object):
         return: 响应结果， 预期结果
         """
         case_number, case_title, path, token, method, parametric_key, file_obj, data, sql, expect = case
+        logger.debug(f"用例进行处理前数据: \n 接口路径: {path} \n 请求参数: {data} \n 后置sql: {sql} \n 预期结果: {expect}")
         # allure报告 用例标题
         allure_title(case_title)
         # 处理url、header、data、file、的前置方法
@@ -79,8 +80,3 @@ class BaseRequest(object):
                 '可选关键字为params, json, data')
         logger.info(f'\n最终请求地址:{res.url}\n请求方法:{method}\n请求头:{header}\n请求参数:{data}\n上传文件:{file}\n响应数据:{res.json()}')
         return res
-
-
-
-
-
