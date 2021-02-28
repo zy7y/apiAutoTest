@@ -170,10 +170,8 @@ https://www.cnblogs.com/zy7y/p/13426816.html
 #### Jenkins集成
 
 https://www.cnblogs.com/zy7y/p/13448102.html
-#### 视频教程（主要给大家讲这个Demo实现的一些思路， 后续将考虑从0-1录一个但能力有限，别有太多期许，一是免费二是开源）
+#### 视频教程（该视频为2020年8月开源时录制，大致内容是简单讲个文件作用，其代码对应目前的version1.0分支）
 B站：https://www.bilibili.com/video/BV1pv411i7zK/
 #### 联系我
 
 QQ：396667207
-
-
