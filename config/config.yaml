@@ -30,8 +30,10 @@ email:
   host:  smtp.163.com
   contents:  解压apiAutoReport.zip(接口测试报告)后，请使用已安装Live Server 插件的VsCode，打开解压目录下的index.html查看报告
   # 收件人邮箱
-  addressees:  ["收件人邮箱1","收件人邮箱2","收件人邮箱3"]
+  addressees:  ["收件人邮箱1", "收件人邮箱2"]
   title:  接口自动化测试报告(见附件)
+  # 附件
+  enclosures: report.zip
 
 # 数据库校验- mysql
 database:
