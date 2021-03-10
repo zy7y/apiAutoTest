@@ -28,8 +28,8 @@ def extractor(obj: dict, expr: str = '.') -> object:
     try:
         result = jsonpath(obj, expr)[0]
     except Exception as e:
-        logger.error(f'提取不到内容，丢给你一个错误！{e}')
-        result = None
+        logger.error(f'{expr} - 提取不到内容，丢给你一个错误！{e}')
+        result = expr
     return result
 
 
