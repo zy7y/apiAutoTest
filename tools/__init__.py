@@ -45,8 +45,11 @@ def rep_expr(content: str, data: dict, expr: str = '&(.*?)&') -> str:
         
     # 增加自定义函数得的调用，函数写在tools/hooks.py中
     for func in re.findall('@(.*?)@', content):
-        content = content.replace(f'@{func}@', exec_func(func))
-
+        try:
+            content = content.replace(f'@{func}@', exec_func(func))
+        except Exception as e:
+            logger.error(e)
+            continue
     return content
 
 
