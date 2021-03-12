@@ -6,9 +6,6 @@ PyYAML==5.3.1
 requests==2.24.0
 xlrd==1.2.0
 yagmail==0.11.224
-uvicorn==0.12.2
-fastapi==0.61.2
-python-multipart==0.0.5
 PyMySQL==0.10.1
 pytest-rerunfailures==9.1.1
 paramiko==2.7.2
