@@ -30,8 +30,8 @@ class BaseRequest(object):
         :param env: 环境名称 默认使用config.yaml server下的 dev 后面的基准地址
         return: 响应结果， 预期结果
         """
-        case_number, case_title, path, token, method, parametric_key, file_obj, data, sql, expect = case
-        logger.debug(f"用例进行处理前数据: \n 接口路径: {path} \n 请求参数: {data} \n 后置sql: {sql} \n 预期结果: {expect}")
+        case_number, case_title, path, token, method, parametric_key, file_obj, data, sql, expect, is_save = case
+        logger.debug(f"用例进行处理前数据: \n 接口路径: {path} \n 请求参数: {data} \n 后置sql: {sql} \n 预期结果: {expect} \n 保存响应: {is_save}")
         # allure报告 用例标题
         allure_title(case_title)
         # 处理url、header、data、file、的前置方法
@@ -51,7 +51,9 @@ class BaseRequest(object):
         if token == '写':
             DataProcess.have_token['Authorization'] = extractor(res.json(), ReadFile.read_config('$.expr.token'))
             allure_step('请求头中添加Token', DataProcess.have_token)
-        DataProcess.save_response(case_number, res.json())
+        # 保存用例的实际响应
+        if is_save == "是":
+            DataProcess.save_response(case_number, res.json())
         allure_step('存储实际响应', DataProcess.response_dict)
         return res.json(), expect, sql
 
