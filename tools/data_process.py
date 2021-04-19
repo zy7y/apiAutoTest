@@ -112,10 +112,11 @@ class DataProcess:
             # 获取需要断言的实际结果部分
             actual = extractor(response, k)
             index += 1
-            logger.info(f'第{index}个断言,实际结果:{actual} | 预期结果:{v} \n断言结果 {actual == v}')
-            allure_step(f'第{index}个断言',  f'实际结果:{actual} = 预期结果:{v}')
+            logger.info(
+                f'第{index}个断言,实际结果:{actual} | 预期结果:{v} \n断言结果 {actual == v}')
+            allure_step(f'第{index}个断言', f'实际结果:{actual} = 预期结果:{v}')
             try:
                 assert actual == v
             except AssertionError:
-                raise AssertionError(f'第{index}个断言失败 -|- 实际结果:{actual} || 预期结果: {v}')
-
+                raise AssertionError(
+                    f'第{index}个断言失败 -|- 实际结果:{actual} || 预期结果: {v}')

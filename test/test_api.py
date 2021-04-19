@@ -10,7 +10,7 @@
 """
 from .conftest import pytest
 
-from api.base_requests import BaseRequest
+from api import BaseRequest
 from tools.data_process import DataProcess
 
 

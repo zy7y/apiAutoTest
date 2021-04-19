@@ -7,3 +7,4 @@
 @ide: PyCharm
 @time: 2020/7/31
 """
+from .base_requests import BaseRequest

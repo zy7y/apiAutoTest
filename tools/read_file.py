@@ -25,7 +25,8 @@ class ReadFile:
         if cls.config_dict is None:
             # 指定编码格式解决，win下跑代码抛出错误
             with open(config_path, 'r', encoding='utf-8') as file:
-                cls.config_dict = yaml.load(file.read(), Loader=yaml.FullLoader)
+                cls.config_dict = yaml.load(
+                    file.read(), Loader=yaml.FullLoader)
         return cls.config_dict
 
     @classmethod

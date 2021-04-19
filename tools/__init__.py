@@ -42,7 +42,7 @@ def rep_expr(content: str, data: dict, expr: str = '&(.*?)&') -> str:
     """
     for ctt in re.findall(expr, content):
         content = content.replace(f'&{ctt}&', str(extractor(data, ctt)))
-        
+
     # 增加自定义函数得的调用，函数写在tools/hooks.py中
     for func in re.findall('@(.*?)@', content):
         try:
@@ -89,4 +89,10 @@ def allure_step(step: str, var: str) -> None:
     :param var: 附件内容
     """
     with allure.step(step):
-        allure.attach(json.dumps(var, ensure_ascii=False, indent=4), step, allure.attachment_type.TEXT)
+        allure.attach(
+            json.dumps(
+                var,
+                ensure_ascii=False,
+                indent=4),
+            step,
+            allure.attachment_type.TEXT)

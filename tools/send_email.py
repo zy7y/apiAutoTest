@@ -30,7 +30,10 @@ class EmailServe:
             fpath = path.replace(file_path, '')
 
             for filename in filenames:
-                zip.write(os.path.join(path, filename), os.path.join(fpath, filename))
+                zip.write(
+                    os.path.join(
+                        path, filename), os.path.join(
+                        fpath, filename))
         zip.close()
 
     @staticmethod
@@ -47,10 +50,19 @@ class EmailServe:
         :param file_path: 需要压缩的文件夹
         :return:
         """
-        EmailServe.zip_report(file_path=file_path, out_path=setting['enclosures'])
-        yag = yagmail.SMTP(setting['user'], setting['password'], setting['host'])
+        EmailServe.zip_report(
+            file_path=file_path,
+            out_path=setting['enclosures'])
+        yag = yagmail.SMTP(
+            setting['user'],
+            setting['password'],
+            setting['host'])
         # 发送邮件
-        yag.send(setting['addressees'], setting['title'], setting['contents'], setting['enclosures'])
+        yag.send(
+            setting['addressees'],
+            setting['title'],
+            setting['contents'],
+            setting['enclosures'])
         # 关闭服务
         yag.close()
         logger.info("邮件发送成功！")
