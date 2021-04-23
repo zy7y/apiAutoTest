@@ -90,7 +90,7 @@ class DataProcess:
         if sql is not None:
             # 查后置sql
             result = db.fetch_one(sql)
-            allure_step('sql执行结果', {"sql_result": result})
+            allure_step('sql执行结果', result)
             logger.info(f'结果：{result}')
             if result is not None:
                 # 将查询结果添加到响应字典里面，作用在，接口响应的内容某个字段 直接和数据库某个字段比对，在预期结果中
