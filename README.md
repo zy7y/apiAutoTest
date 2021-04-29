@@ -125,6 +125,6 @@ https://www.cnblogs.com/zy7y/p/13448102.html
 B站：https://www.bilibili.com/video/BV1pv411i7zK/
 ## 联系我
 
-QQ：396667207（询问问题前请仔细确认参数等信息正常传递，issue中无问题答案，谢谢）
+QQ群：851163511（没技术大佬，本站上的个人项目问题都可以在这里咨询）
 
 
