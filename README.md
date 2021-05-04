@@ -117,7 +117,8 @@ https://www.bilibili.com/video/BV1EE411B7SU?p=10
 2021/05/04 用例增加Header栏，可使用自定义方法，以及提取参数如下，所以取消了 `token操作栏`
 ![](https://gitee.com/zy7y/blog_images/raw/master/img/20210504121842.png)
 ![](https://gitee.com/zy7y/blog_images/raw/master/img/20210504122609.png)
-
+![](https://gitee.com/zy7y/blog_images/raw/master/img/20210504234703.png)
+![](https://gitee.com/zy7y/blog_images/raw/master/img/20210504234820.png)
 
 ## 博客园首发
 https://www.cnblogs.com/zy7y/p/13426816.html
