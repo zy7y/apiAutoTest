@@ -14,7 +14,6 @@ from tools.read_file import ReadFile
 class DataProcess:
     response_dict = {}
     header = ReadFile.read_config('$.request_headers')
-    have_token = header.copy()
 
     @classmethod
     def save_response(cls, key: str, value: object) -> None:
@@ -37,15 +36,15 @@ class DataProcess:
         return rep_expr(path_str, cls.response_dict)
 
     @classmethod
-    def handle_header(cls, token: str) -> dict:
-        """处理header
-        :param token: 写： 写入token到header中， 读： 使用带token的header， 空：使用不带token的header
-        return
+    def handle_header(cls, header_str: str) -> dict:
+        """处理header， 将用例中的表达式处理后 追加到基础header中
+        :header_str: 用例栏中的header
+        return header:
         """
-        if token == '读':
-            return cls.have_token
-        else:
-            return cls.header
+        if header_str == '':
+            header_str = '{}'
+        cls.header.update(cls.handle_data(header_str))
+        return cls.header
 
     @classmethod
     def handler_files(cls, file_obj: str) -> object:

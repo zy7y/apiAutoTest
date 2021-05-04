@@ -30,7 +30,7 @@ class BaseRequest(object):
         :param env: 环境名称 默认使用config.yaml server下的 dev 后面的基准地址
         return: 响应结果， 预期结果
         """
-        case_number, case_title, path, token, method, parametric_key, file_obj, data, sql, expect, is_save = case
+        case_number, case_title, header, path, method, parametric_key, file_obj, data, sql, expect, is_save = case
         logger.debug(
             f"用例进行处理前数据: \n 接口路径: {path} \n 请求参数: {data} \n 后置sql: {sql} \n 预期结果: {expect} \n 保存响应: {is_save}")
         # allure报告 用例标题
@@ -39,7 +39,7 @@ class BaseRequest(object):
         url = ReadFile.read_config(
             f'$.server.{env}') + DataProcess.handle_path(path)
         allure_step('请求地址', url)
-        header = DataProcess.handle_header(token)
+        header = DataProcess.handle_header(header)
         allure_step('请求头', header)
         data = DataProcess.handle_data(data)
         allure_step('请求参数', data)
@@ -49,11 +49,6 @@ class BaseRequest(object):
         res = cls.send_api(url, method, parametric_key, header, data, file)
         allure_step('响应耗时(s)', res.elapsed.total_seconds())
         allure_step('响应内容', res.json())
-        # 响应后操作
-        if token == '写':
-            DataProcess.have_token['Authorization'] = extractor(
-                res.json(), ReadFile.read_config('$.expr.token'))
-            allure_step('请求头中添加Token', DataProcess.have_token)
         # 保存用例的实际响应
         if is_save == "是":
             DataProcess.save_response(case_number, res.json())
