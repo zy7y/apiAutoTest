@@ -120,6 +120,8 @@ https://www.bilibili.com/video/BV1EE411B7SU?p=10
 ![](https://gitee.com/zy7y/blog_images/raw/master/img/20210504234703.png)
 ![](https://gitee.com/zy7y/blog_images/raw/master/img/20210504234820.png)
 
+2021/05/17 解决执行sql时datetime时间无法被序列化问题，调试sql，理论上支持所有sql语句(select,delete,update,select...), select语句只能获取结果集第一条数据
+
 ## 博客园首发
 https://www.cnblogs.com/zy7y/p/13426816.html
 
