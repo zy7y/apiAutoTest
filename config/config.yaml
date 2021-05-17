@@ -36,7 +36,7 @@ database:
   user: root
   # 不用''会被解析成int类型数据
   password: '123456'
-  db_name:  test
+  db_name:  apiautotest
   charset:  utf8mb4
 
   # 数据库所在的服务器配置
