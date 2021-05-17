@@ -48,7 +48,7 @@ class ServerTools:
 
     def execute_cmd(self, cmd: str):
         """
-        :param cmd: 服务器下对应的命令, 可以是list，或者str
+        :param cmd: 服务器下对应的命令
         """
         stdin, stdout, stderr = self.ssh.exec_command(cmd)
         error = stderr.read().decode()

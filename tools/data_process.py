@@ -7,7 +7,8 @@
 @ide: PyCharm
 @time: 2020/11/18
 """
-from tools import logger, extractor, convert_json, rep_expr, allure_step
+from tools import logger, extractor, convert_json, rep_expr, allure_step, allure_step_no
+from tools.db import DB
 from tools.read_file import ReadFile
 
 
@@ -24,16 +25,21 @@ class DataProcess:
         """
         cls.response_dict[key] = value
         logger.info(f'添加key: {key}, 对应value: {value}')
+        allure_step('存储实际响应', cls.response_dict)
 
     @classmethod
-    def handle_path(cls, path_str: str) -> str:
+    def handle_path(cls, path_str: str, env: str) -> str:
         """路径参数处理
         :param path_str: 带提取表达式的字符串 /&$.case_005.data.id&/state/&$.case_005.data.create_time&
+        :param env: 环境名称， 对应的是环境基准地址
         上述内容表示，从响应字典中提取到case_005字典里data字典里id的值，假设是500，后面&$.case_005.data.create_time& 类似，最终提取结果
         return  /511/state/1605711095
         """
         # /&$.case.data.id&/state/&$.case_005.data.create_time&
-        return rep_expr(path_str, cls.response_dict)
+        url = ReadFile.read_config(
+            f'$.server.{env}') + rep_expr(path_str, cls.response_dict)
+        allure_step_no(f'请求地址: {url}')
+        return url
 
     @classmethod
     def handle_header(cls, header_str: str) -> dict:
@@ -44,6 +50,7 @@ class DataProcess:
         if header_str == '':
             header_str = '{}'
         cls.header.update(cls.handle_data(header_str))
+        allure_step('请求头', cls.header)
         return cls.header
 
     @classmethod
@@ -52,18 +59,18 @@ class DataProcess:
         :param file_obj: 上传文件使用，格式：接口中文件参数的名称:"文件路径地址"/["文件地址1", "文件地址2"]
         实例- 单个文件: &file&D:
         """
-        if file_obj == '':
-            return
-        for k, v in convert_json(file_obj).items():
-            # 多文件上传
-            if isinstance(v, list):
-                files = []
-                for path in v:
-                    files.append((k, (open(path, 'rb'))))
-            else:
-                # 单文件上传
-                files = {k: open(v, 'rb')}
-        return files
+        if file_obj != '':
+            for k, v in convert_json(file_obj).items():
+                # 多文件上传
+                if isinstance(v, list):
+                    files = []
+                    for path in v:
+                        files.append((k, (open(path, 'rb'))))
+                else:
+                    # 单文件上传
+                    files = {k: open(v, 'rb')}
+            allure_step('上传文件', file_obj)
+            return files
 
     @classmethod
     def handle_data(cls, variable: str) -> dict:
@@ -71,35 +78,35 @@ class DataProcess:
         :param variable: 请求数据，传入的是可转换字典/json的字符串,其中可以包含变量表达式
         return 处理之后的json/dict类型的字典数据
         """
-        if variable == '':
-            return
-        data = rep_expr(variable, cls.response_dict)
-        variable = convert_json(data)
-        return variable
+        if variable != '':
+            data = rep_expr(variable, cls.response_dict)
+            variable = convert_json(data)
+            return variable
 
     @classmethod
-    def handle_sql(cls, sql: str, db: object):
-        """处理sql，并将结果写到响应字典中"""
-        if sql not in ['no', '']:
-            sql = rep_expr(sql, DataProcess.response_dict)
-        else:
-            sql = None
-        allure_step('运行sql', sql)
-        logger.info(sql)
-        if sql is not None:
-            # 多条sql，在用例中填写方式如下select * from user; select * from goods 每条sql语句之间需要使用 ; 来分割
-            for sql in sql.split(";"):
-                sql = sql.strip()
-                if sql == '':
-                    continue
-                # 查后置sql
-                result = db.fetch_one(sql)
-                allure_step('sql执行结果', result)
-                logger.info(f'结果：{result}')
-                if result is not None:
-                    # 将查询结果添加到响应字典里面，作用在，接口响应的内容某个字段 直接和数据库某个字段比对，在预期结果中
-                    # 使用同样的语法提取即可
-                    DataProcess.response_dict.update(result)
+    def handle_sql(cls, sql: str, db: DB):
+        """
+        处理sql，如果sql执行的结果不会空，执行sql的结果和响应结果字典合并
+        :param sql: 支持单条或者多条sql，其中多条sql使用 ; 进行分割
+            多条sql,在用例中填写方式如下select * from user; select * from goods 每条sql语句之间需要使用 ; 来分割
+            单条sql,select * from user 或者 select * from user;
+        :param db: 数据库连接对象
+        :return:
+        """
+        sql = rep_expr(sql, DataProcess.response_dict)
+
+        for sql in sql.split(";"):
+            sql = sql.strip()
+            if sql == '':
+                continue
+            # 查后置sql
+            result = db.execute_sql(sql)
+            allure_step(f'执行sql: {sql}', result)
+            logger.info(f'执行sql: {sql} \n 结果: {result}')
+            if result is not None:
+                # 将查询结果添加到响应字典里面，作用在，接口响应的内容某个字段 直接和数据库某个字段比对，在预期结果中
+                # 使用同样的语法提取即可
+                DataProcess.response_dict.update(result)
 
     @classmethod
     def assert_result(cls, response: dict, expect_str: str):
