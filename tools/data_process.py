@@ -87,14 +87,19 @@ class DataProcess:
         allure_step('运行sql', sql)
         logger.info(sql)
         if sql is not None:
-            # 查后置sql
-            result = db.fetch_one(sql)
-            allure_step('sql执行结果', result)
-            logger.info(f'结果：{result}')
-            if result is not None:
-                # 将查询结果添加到响应字典里面，作用在，接口响应的内容某个字段 直接和数据库某个字段比对，在预期结果中
-                # 使用同样的语法提取即可
-                DataProcess.response_dict.update(result)
+            # 多条sql，在用例中填写方式如下select * from user; select * from goods 每条sql语句之间需要使用 ; 来分割
+            for sql in sql.split(";"):
+                sql = sql.strip()
+                if sql == '':
+                    continue
+                # 查后置sql
+                result = db.fetch_one(sql)
+                allure_step('sql执行结果', result)
+                logger.info(f'结果：{result}')
+                if result is not None:
+                    # 将查询结果添加到响应字典里面，作用在，接口响应的内容某个字段 直接和数据库某个字段比对，在预期结果中
+                    # 使用同样的语法提取即可
+                    DataProcess.response_dict.update(result)
 
     @classmethod
     def assert_result(cls, response: dict, expect_str: str):
