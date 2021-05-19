@@ -3,6 +3,8 @@
 # apiAutoTest[![GitHub license](https://img.shields.io/github/license/zy7y/apiAutoTest)](https://github.com/zy7y/apiAutoTest/blob/master/LICENSE)
 > 使用Python为语言工具 + Python第三方库 实现的接口自动化测试工具
 
+# 在线文档
+[apiAutoTest在线帮助文档](http://49.232.203.244:21519/)
 
 ## 实现功能
 - 测试数据隔离: 测试前后进行数据库备份/还原
