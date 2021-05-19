@@ -96,7 +96,6 @@ class DataProcess:
                 # 将查询结果添加到响应字典里面，作用在，接口响应的内容某个字段 直接和数据库某个字段比对，在预期结果中
                 # 使用同样的语法提取即可
                 cls.extra_pool.update(result)
-        allure_step("当前可用参数池", cls.extra_pool)
 
     @classmethod
     def handle_extra(cls, extra_str: str, response: dict):
@@ -119,6 +118,7 @@ class DataProcess:
         return None
         """
         # 后置sql变量转换
+        allure_step("当前可用参数池", cls.extra_pool)
         expect_str = rep_expr(expect_str, cls.extra_pool)
         expect_dict = convert_json(expect_str)
         index = 0
