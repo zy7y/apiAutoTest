@@ -122,6 +122,8 @@ https://www.bilibili.com/video/BV1EE411B7SU?p=10
 
 2021/05/17 解决执行sql时datetime时间无法被序列化问题，调试sql，理论上支持所有sql语句(select,delete,update,select...), select语句只能获取结果集第一条数据
 
+2021/05/19 统一使用`${}`来包裹变量名/方法 替代先前版本的`&&`,`@@`，新增提取参数栏，意为从当前接口响应中提取指定参数
+2021/05/19 移除保存响应，增加提取参数栏{参数名: jsonpath} jsonpath为当前用例响应结果中提取并把结果给参数名，其他用中`${参数名}`使用，`${方法名()}`,`${方法名(参数1)}`
 ## 博客园首发
 https://www.cnblogs.com/zy7y/p/13426816.html
 
@@ -130,7 +132,7 @@ https://www.cnblogs.com/zy7y/p/13426816.html
 https://www.cnblogs.com/zy7y/p/13448102.html
 ## 视频教程（该视频为2020年8月开源时录制，大致内容是简单讲个文件作用，其代码对应目前的version1.0分支）
 B站：https://www.bilibili.com/video/BV1pv411i7zK/
-## 联系我
+## 交流群
 
 QQ群：851163511（没技术大佬，本站上的个人项目问题都可以在这里咨询）
 

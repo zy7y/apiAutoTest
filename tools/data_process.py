@@ -13,31 +13,20 @@ from tools.read_file import ReadFile
 
 
 class DataProcess:
-    response_dict = {}
+    # 存放提取参数的池子
+    extra_pool = {}
     header = ReadFile.read_config('$.request_headers')
-
-    @classmethod
-    def save_response(cls, key: str, value: object) -> None:
-        """
-        保存实际响应
-        :param key: 保存字典中的key，一般使用用例编号
-        :param value: 保存字典中的value，使用json响应
-        """
-        cls.response_dict[key] = value
-        logger.info(f'添加key: {key}, 对应value: {value}')
-        allure_step('存储实际响应', cls.response_dict)
 
     @classmethod
     def handle_path(cls, path_str: str, env: str) -> str:
         """路径参数处理
-        :param path_str: 带提取表达式的字符串 /&$.case_005.data.id&/state/&$.case_005.data.create_time&
+        :param path_str: 带提取表达式的字符串 /${id}/state/${create_time}
         :param env: 环境名称， 对应的是环境基准地址
-        上述内容表示，从响应字典中提取到case_005字典里data字典里id的值，假设是500，后面&$.case_005.data.create_time& 类似，最终提取结果
+        上述内容表示，从extra_pool字典里取到key为id 对应的值，假设是500，后面${create_time} 类似， 假设其值为 1605711095 最终提取结果
         return  /511/state/1605711095
         """
-        # /&$.case.data.id&/state/&$.case_005.data.create_time&
         url = ReadFile.read_config(
-            f'$.server.{env}') + rep_expr(path_str, cls.response_dict)
+            f'$.server.{env}') + rep_expr(path_str, cls.extra_pool)
         allure_step_no(f'请求地址: {url}')
         return url
 
@@ -79,7 +68,7 @@ class DataProcess:
         return 处理之后的json/dict类型的字典数据
         """
         if variable != '':
-            data = rep_expr(variable, cls.response_dict)
+            data = rep_expr(variable, cls.extra_pool)
             variable = convert_json(data)
             return variable
 
@@ -93,7 +82,7 @@ class DataProcess:
         :param db: 数据库连接对象
         :return:
         """
-        sql = rep_expr(sql, DataProcess.response_dict)
+        sql = rep_expr(sql, cls.extra_pool)
 
         for sql in sql.split(";"):
             sql = sql.strip()
@@ -106,7 +95,21 @@ class DataProcess:
             if result is not None:
                 # 将查询结果添加到响应字典里面，作用在，接口响应的内容某个字段 直接和数据库某个字段比对，在预期结果中
                 # 使用同样的语法提取即可
-                DataProcess.response_dict.update(result)
+                DataProcess.extra_pool.update(result)
+
+    @classmethod
+    def handle_extra(cls, extra_str: str, response: dict):
+        """
+        处理提取参数栏
+        :param extra_str: excel中 提取参数栏内容，需要是 {"参数名": "jsonpath提取式"} 可以有多个
+        :param response: 当前用例的响应结果字典
+        """
+        if extra_str != '':
+            extra_dict = convert_json(extra_str)
+            for k, v in extra_dict.items():
+                cls.extra_pool[k] = extractor(response, v)
+                logger.info(f'加入依赖字典,key: {k}, 对应value: {v}')
+            allure_step("当前可用参数池", cls.extra_pool)
 
     @classmethod
     def assert_result(cls, response: dict, expect_str: str):
@@ -116,7 +119,7 @@ class DataProcess:
         return None
         """
         # 后置sql变量转换
-        expect_str = rep_expr(expect_str, DataProcess.response_dict)
+        expect_str = rep_expr(expect_str, cls.extra_pool)
         expect_dict = convert_json(expect_str)
         index = 0
         for k, v in expect_dict.items():

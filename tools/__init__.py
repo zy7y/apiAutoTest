@@ -9,6 +9,7 @@
 """
 import json
 import re
+from string import Template
 
 import allure
 
@@ -16,6 +17,17 @@ from jsonpath import jsonpath
 from loguru import logger
 
 from tools.hooks import *
+
+
+def exec_func(func: str) -> str:
+    """执行函数(exec可以执行Python代码)
+    :params func 字符的形式调用函数
+    : return 返回的将是个str类型的结果
+    """
+    # 得到一个局部的变量字典，来修正exec函数中的变量，在其他函数内部使用不到的问题
+    loc = locals()
+    exec(f"result = {func}")
+    return str(loc['result'])
 
 
 def extractor(obj: dict, expr: str = '.') -> object:
@@ -33,23 +45,18 @@ def extractor(obj: dict, expr: str = '.') -> object:
     return result
 
 
-def rep_expr(content: str, data: dict, expr: str = '&(.*?)&') -> str:
+def rep_expr(content: str, data: dict) -> str:
     """从请求参数的字符串中，使用正则的方法找出合适的字符串内容并进行替换
     :param content: 原始的字符串内容
-    :param data: 在该项目中一般为响应字典，从字典取值出来
-    :param expr: 查找用的正则表达式
+    :param data: 提取的参数变量池
     return content： 替换表达式后的字符串
     """
-    for ctt in re.findall(expr, content):
-        content = content.replace(f'&{ctt}&', str(extractor(data, ctt)))
-
-    # 增加自定义函数得的调用，函数写在tools/hooks.py中
-    for func in re.findall('@(.*?)@', content):
+    content = Template(content).safe_substitute(data)
+    for func in re.findall('\\${(.*?)}', content):
         try:
-            content = content.replace(f'@{func}@', exec_func(func))
+            content = content.replace('${%s}' % func, exec_func(func))
         except Exception as e:
             logger.error(e)
-            continue
     return content
 
 

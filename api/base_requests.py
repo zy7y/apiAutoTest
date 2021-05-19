@@ -33,9 +33,9 @@ class BaseRequest(object):
         :param env: 环境名称 默认使用config.yaml server下的 dev 后面的基准地址
         return: 响应结果， 预期结果
         """
-        case_number, case_title, header, path, method, parametric_key, file_obj, data, sql, expect, is_save = case
+        case_number, case_title, header, path, method, parametric_key, file_obj, data, extra, sql, expect = case
         logger.debug(
-            f"用例进行处理前数据: \n 接口路径: {path} \n 请求参数: {data} \n 后置sql: {sql} \n 预期结果: {expect} \n 保存响应: {is_save}")
+            f"用例进行处理前数据: \n 接口路径: {path} \n 请求参数: {data} \n  提取参数: {extra} \n 后置sql: {sql} \n 预期结果: {expect} \n ")
         # allure报告 用例标题
         allure_title(case_title)
         # 处理url、header、data、file、的前置方法
@@ -46,10 +46,8 @@ class BaseRequest(object):
         file = DataProcess.handler_files(file_obj)
         # 发送请求
         response = cls.send_api(url, method, parametric_key, header, data, file)
-
-        # 保存用例的实际响应
-        if is_save == "是":
-            DataProcess.save_response(case_number, response)
+        # 提取参数
+        DataProcess.handle_extra(extra, response)
         return response, expect, sql
 
     @classmethod
