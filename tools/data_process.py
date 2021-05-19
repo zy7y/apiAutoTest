@@ -96,6 +96,7 @@ class DataProcess:
                 # 将查询结果添加到响应字典里面，作用在，接口响应的内容某个字段 直接和数据库某个字段比对，在预期结果中
                 # 使用同样的语法提取即可
                 cls.extra_pool.update(result)
+        allure_step("当前可用参数池", cls.extra_pool)
 
     @classmethod
     def handle_extra(cls, extra_str: str, response: dict):
@@ -109,7 +110,6 @@ class DataProcess:
             for k, v in extra_dict.items():
                 cls.extra_pool[k] = extractor(response, v)
                 logger.info(f'加入依赖字典,key: {k}, 对应value: {v}')
-            allure_step("当前可用参数池", cls.extra_pool)
 
     @classmethod
     def assert_result(cls, response: dict, expect_str: str):
