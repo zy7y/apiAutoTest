@@ -75,7 +75,7 @@ class DataProcess:
     @classmethod
     def handle_sql(cls, sql: str, db: DB):
         """
-        处理sql，如果sql执行的结果不会空，执行sql的结果和响应结果字典合并
+        处理sql，如果sql执行的结果不会空，执行sql的结果和参数池合并
         :param sql: 支持单条或者多条sql，其中多条sql使用 ; 进行分割
             多条sql,在用例中填写方式如下select * from user; select * from goods 每条sql语句之间需要使用 ; 来分割
             单条sql,select * from user 或者 select * from user;
@@ -95,7 +95,7 @@ class DataProcess:
             if result is not None:
                 # 将查询结果添加到响应字典里面，作用在，接口响应的内容某个字段 直接和数据库某个字段比对，在预期结果中
                 # 使用同样的语法提取即可
-                DataProcess.extra_pool.update(result)
+                cls.extra_pool.update(result)
 
     @classmethod
     def handle_extra(cls, extra_str: str, response: dict):
