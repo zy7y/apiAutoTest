@@ -147,6 +147,6 @@ addons = [
 
 """
 
-mitmweb -stools\recording 启动
+mitmweb -s tools\recording.py 启动
 ctrl + C 停止 并生成完整用例
 """
