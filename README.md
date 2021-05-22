@@ -13,6 +13,7 @@
 - 动态多断言： 可（多个）动态提取实际预期结果与指定的预期结果进行比较断言操作
 - 自定义扩展方法： 在用例中使用自定义方法(如：获取当前时间戳...)的返回值 
 - 邮件发送：将allure报告压缩后已附件形式发送
+- 接口录制：录制指定包含url的接口,生成用例数据
 ## 依赖库
 ```
 allure-pytest==2.8.17		# allure报告
@@ -26,6 +27,8 @@ yagmail==0.11.224			# 发送邮件
 PyMySQL==0.10.1				# 连接mysql数据库
 pytest-rerunfailures==9.1.1	# 用例失败重跑
 paramiko==2.7.2				# SSH2 连接
+xlwt==1.3.0                 # 写excel 用例文件
+mitmproxy==6.0.2            # 抓包工具
 ```
 ## 目录结构
 ```shell
@@ -52,23 +55,12 @@ paramiko==2.7.2				# SSH2 连接
 │  ├─db.py				# 数据库连接对象
 │  ├─hooks.py			# 自定义扩展方法(可用于用例)文件 
 │  ├─read_file.py		# 用例、配置项读取
+│  ├─recording.py		# 接口录制,写入用例文件
 │  └─send_email.py		# 邮件发送、报告压缩
 ├─项目实战接口文档.md	   # 配套项目相关接口文档
 ├─requirements.txt		 # 项目依赖库文件
 └─run.py	# 主启动文件
 ```
-
-## 安装教程
-
-1.  git clone  https://gitee.com/zy7y/apiAutoTest.git  /  https://github.com/zy7y/apiAutoTest.git
-2.  安装Java与allure，https://www.cnblogs.com/zy7y/p/13403699.html
-3.  使用pycharm打开项目使用Terminal 输入 python3 -m venv venv 新建虚拟环境 （可选）
-4.  执行pip install -r requirements.txt 安装依赖库（若下载超时：pip install -i https://pypi.tuna.tsinghua.edu.cn/simple -r requirements.txt）
-5.  修改config.ymal文件中email文件配置邮箱，request_header配置初始请求头，database 配置数据库信息
-6. 运行 `run.py`文件
-## 用例说明文档
-![case_data.xlsx用例说明文档](https://gitee.com/zy7y/blog_images/raw/master/img/用例说明文档.png)
-
 ## 使用说明
 
 1.  本项目直接使用的requests.Session理论上实现了cookie请求的管理，不用单独提取cookie，支持前后端分离项目，兼容Restful接口规范。
@@ -126,6 +118,7 @@ https://www.bilibili.com/video/BV1EE411B7SU?p=10
 
 2021/05/19 统一使用`${}`来包裹变量名/方法 替代先前版本的`&&`,`@@`，新增提取参数栏，意为从当前接口响应中提取指定参数
 2021/05/19 移除保存响应，增加提取参数栏{参数名: jsonpath} jsonpath为当前用例响应结果中提取并把结果给参数名，其他用中`${参数名}`使用，`${方法名()}`,`${方法名(参数1)}`
+2021/05/22 新增接口录制功能，可生成用例文件, 具体操作见[apiAutoTest在线帮助文档](http://49.232.203.244:21519/), [视频演示](https://www.bilibili.com/video/BV1W64y1y7Lw)
 ## 博客园首发
 https://www.cnblogs.com/zy7y/p/13426816.html
 
