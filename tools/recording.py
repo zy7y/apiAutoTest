@@ -6,7 +6,7 @@
 @Author:zy7y
 @Date  :2021/5/21 22:07
 @Desc  : 录制接口，生成用例文件
-基于mitmproxy实现
+基于mitmproxy实现，会包含css/html/png等后缀链接
 参考资料：
 https://blog.wolfogre.com/posts/usage-of-mitmproxy/
 https://www.cnblogs.com/liuwanqiu/p/10697373.html
@@ -85,7 +85,7 @@ class Counter:
                     {".": json.loads(flow.response.text)}, ensure_ascii=False)
             except Exception as e:
                 ctx.log.error(e)
-                expect = ''
+                expect = '{}'
             # 日志
             ctx.log.info(url)
             ctx.log.info(header)
