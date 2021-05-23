@@ -80,9 +80,12 @@ class Counter:
                     data = url.split('?')[1]
             data = self.handle_form(data)
             # 预期结果
-            expect = json.dumps(
-                {".": json.loads(flow.response.text)}, ensure_ascii=False)
-
+            try:
+                expect = json.dumps(
+                    {".": json.loads(flow.response.text)}, ensure_ascii=False)
+            except Exception as e:
+                ctx.log.error(e)
+                expect = ''
             # 日志
             ctx.log.info(url)
             ctx.log.info(header)
