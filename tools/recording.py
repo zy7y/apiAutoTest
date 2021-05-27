@@ -48,11 +48,11 @@ class Counter:
 
     def response(self, flow: mitmproxy.http.HTTPFlow):
         """
-        mitmproxy抓包处理响应，在这里汇总需要数据
+        mitmproxy抓包处理响应，在这里汇总需要数据, 过滤 包含指定url，并且响应格式是 json的
         :param flow:
         :return:
         """
-        if self.url in flow.request.url:
+        if self.url in flow.request.url and 'json' in flow.response.headers["Content-Type"]:
             # 编号
             number = "C" + str(self.counter)
             # 标题

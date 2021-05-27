@@ -52,5 +52,5 @@ class ReadFile:
             if table.cell_value(norw, 4) != '否':  # 每行第4列等于否将不读取内容
                 value = table.row_values(norw)
                 value.pop(4)
-                data_list.append(list(value))
+                data_list.append(value)
         return data_list
