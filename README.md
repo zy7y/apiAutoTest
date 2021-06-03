@@ -129,8 +129,5 @@ https://www.cnblogs.com/zy7y/p/13426816.html
 https://www.cnblogs.com/zy7y/p/13448102.html
 ## 视频教程（该视频为2020年8月开源时录制，大致内容是简单讲个文件作用，其代码对应目前的version1.0分支）
 B站：https://www.bilibili.com/video/BV1pv411i7zK/
-## 交流群
-
-QQ群：851163511（没技术大佬，本站上的个人项目问题都可以在这里咨询）
 
 
