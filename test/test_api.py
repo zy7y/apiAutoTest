@@ -10,7 +10,7 @@
 """
 from .conftest import pytest
 
-from api import BaseRequest
+from api import client
 from tools.data_process import DataProcess
 
 
@@ -22,7 +22,7 @@ from tools.data_process import DataProcess
 #     # 此处的cases入参来自与 conftest.py  文件中 cases函数，与直接使用 @pytest.mark.parametrize
 #     # 有着差不多的效果
 #     # 发送请求
-#     response, expect, sql = BaseRequest.send_request(cases)
+#     response, expect, sql = client.action(cases)
 #     # 执行sql
 #     DataProcess.handle_sql(sql, get_db)
 #     # 断言操作
@@ -30,6 +30,6 @@ from tools.data_process import DataProcess
 
 def test_main(cases):   # 不使用数据库功能
     # 发送请求
-    response, expect, sql = BaseRequest.send_request(cases)
+    response, expect, sql = client.action(cases)
     # 断言操作
     DataProcess.assert_result(response, expect)

@@ -33,7 +33,7 @@ mitmproxy==6.0.2            # 抓包工具
 ## 目录结构
 ```shell
 ├─api
-│  └─base_requests.py	# 请求封装
+│  └─client.py	# 请求封装
 ├─backup_sqls  
 │  └─xxx.sql		# 数据库备份文件
 ├─config
@@ -121,6 +121,8 @@ https://www.bilibili.com/video/BV1EE411B7SU?p=10
 2021/05/19 移除保存响应，增加提取参数栏{参数名: jsonpath} jsonpath为当前用例响应结果中提取并把结果给参数名，其他用中`${参数名}`使用，`${方法名()}`,`${方法名(参数1)}`
 
 2021/05/22 新增接口录制功能，可生成用例文件, 具体操作见[apiAutoTest在线帮助文档](http://49.232.203.244:21519/), [视频演示](https://www.bilibili.com/video/BV1W64y1y7Lw)
+
+2021/09/05 优化下请求文件(`base_request.py` 更换为`cilent.py`), 优化请求文件代码
 ## 博客园首发
 https://www.cnblogs.com/zy7y/p/13426816.html
 
@@ -129,8 +131,5 @@ https://www.cnblogs.com/zy7y/p/13426816.html
 https://www.cnblogs.com/zy7y/p/13448102.html
 ## 视频教程（该视频为2020年8月开源时录制，大致内容是简单讲个文件作用，其代码对应目前的version1.0分支）
 B站：https://www.bilibili.com/video/BV1pv411i7zK/
-## 交流群
-
-QQ群：851163511（没技术大佬，本站上的个人项目问题都可以在这里咨询）
 
 
