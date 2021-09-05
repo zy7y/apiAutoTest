@@ -21,15 +21,6 @@ class Transmission:
 
 
 class Client(Session):
-    _instance = None
-
-    def __new__(cls, *args, **kwargs):
-        if cls._instance is None:
-            cls._instance = super(Client, cls).__new__(cls, *args, **kwargs)
-        return cls._instance
-
-    def __init__(self):
-        super(Client, self).__init__()
 
     def action(self, case: list, env: str = "dev") -> Any:
         """处理case数据，转换成可用数据发送请求
