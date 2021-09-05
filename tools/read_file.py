@@ -40,10 +40,9 @@ class ReadFile:
     @classmethod
     def read_testcase(cls):
         """
-        读取excel格式的测试用例
-        :return: data_list - pytest参数化可用的数据
+        读取excel格式的测试用例,返回一个生成器对象
+        :return 生成器
         """
-        data_list = []
         book = xlrd.open_workbook(cls.read_config('$.file_path.test_case'))
         # 读取第一个sheet页
         table = book.sheet_by_index(0)
@@ -52,5 +51,4 @@ class ReadFile:
             if table.cell_value(norw, 4) != '否':  # 每行第4列等于否将不读取内容
                 value = table.row_values(norw)
                 value.pop(4)
-                data_list.append(value)
-        return data_list
+                yield value
