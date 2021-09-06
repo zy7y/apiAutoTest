@@ -7,9 +7,9 @@
 @ide: PyCharm
 @time: 2020/7/31
 """
-import json
 import re
 from string import Template
+from typing import Any
 
 import allure
 
@@ -30,7 +30,7 @@ def exec_func(func: str) -> str:
     return str(loc['result'])
 
 
-def extractor(obj: dict, expr: str = '.') -> object:
+def extractor(obj: dict, expr: str = '.') -> Any:
     """
     根据表达式提取字典中的value，表达式, . 提取字典所有内容， $.case 提取一级字典case， $.case.data 提取case字典下的data
     :param obj :json/dict类型数据
