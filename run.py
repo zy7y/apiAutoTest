@@ -40,7 +40,7 @@ def run():
             'test/test_api.py',
             f'--alluredir={file_path["report"]}/data'])
     # 自动以服务形式打开报告
-    # os.system(f'allure serve {report}/data')
+    # oos.system(f'allure serve {file_path["report"]}/data')
 
     # 本地生成报告
     os.system(
