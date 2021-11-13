@@ -25,6 +25,9 @@ email = ReadFile.read_config('$.email')
 def run():
     if os.path.exists('report/'):
         shutil.rmtree(path='report/')
+
+    # 解决 issues 句柄无效
+    logger.remove()
     logger.add(file_path['log'], enqueue=True, encoding='utf-8')
     logger.info("""
                  _    _         _      _____         _
