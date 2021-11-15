@@ -7,7 +7,7 @@
 [![IsXMnO.png](https://z3.ax1x.com/2021/11/13/IsXMnO.png)](https://imgtu.com/i/IsXMnO)
 
 ## 配套资源(点击即可跳转)
-- [x] [使用手册](https://zy7y.github.io/apiAutoTest/])
+- [x] [使用手册](https://zy7y.github.io/apiAutoTest/)
 - [x] [视频解析](https://www.bilibili.com/video/BV1rr4y1r754)
 
 
