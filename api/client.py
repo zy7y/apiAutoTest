@@ -7,7 +7,7 @@
 @ide: PyCharm
 @time: 2021/9/4
 """
-from typing import Final, Any
+from typing import Any
 
 from requests import Session
 from tools import allure_step, allure_title, logger, allure_step_no
@@ -15,9 +15,9 @@ from tools.data_process import DataProcess
 
 
 class Transmission:
-    PARAMS: Final[str] = "params"
-    DATA: Final[str] = "data"
-    JSON: Final[str] = "json"
+    PARAMS: str = "params"
+    DATA: str = "data"
+    JSON: str = "json"
 
 
 class Client(Session):
