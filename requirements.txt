@@ -11,3 +11,4 @@ pytest-rerunfailures==9.1.1
 paramiko==2.7.2
 xlwt==1.3.0
 mitmproxy==6.0.2
+markupsafe==2.0.1
