@@ -1,7 +1,0 @@
-{
-    "data": null,
-    "meta": {
-        "msg": "无效token",
-        "status": 400
-    }
-}

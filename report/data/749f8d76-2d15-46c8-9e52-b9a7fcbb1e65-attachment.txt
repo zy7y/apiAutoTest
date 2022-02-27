@@ -1,5 +1,0 @@
-{
-    "pagenum": 1,
-    "pagesize": "12",
-    "msg": null
-}

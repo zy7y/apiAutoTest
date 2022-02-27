@@ -1,6 +1,0 @@
-{
-    "pagenum": 1,
-    "pagesize": "12",
-    "meta": null,
-    "userId": 500
-}
