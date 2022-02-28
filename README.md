@@ -1,8 +1,15 @@
-![](https://img.shields.io/github/license/zy7y/apiAutoTest)
-![](https://img.shields.io/github/stars/zy7y/apiAutoTest)
-![](https://img.shields.io/github/forks/zy7y/apiAutoTest)
+<center>
 
-**当前版本(v3.0)-2022.02.28 更新**
+[![](https://gitee.com/zy7y/apiAutoTest/badge/star.svg)](https://gitee.com/zy7y/apiAutoTest)
+[![](https://gitee.com/zy7y/apiAutoTest/badge/fork.svg)](https://gitee.com/zy7y/apiAutoTest)
+[![](https://img.shields.io/github/license/zy7y/apiAutoTest)](https://gitee.com/zy7y/apiAutoTest/blob/master/LICENSE)
+[![](https://img.shields.io/github/stars/zy7y/apiAutoTest)](https://github.com/zy7y/apiAutoTest)
+[![](https://img.shields.io/github/forks/zy7y/apiAutoTest)](https://github.com/zy7y/apiAutoTest)
+[![](https://img.shields.io/github/repo-size/zy7y/apiAutoTest?style=social)](https://github.com/zy7y/apiAutoTest)
+</center>
+
+
+**2022.02.28 更新(上方图标可点击)**
 > 使用Python语言 + Python第三方库 实现的接口自动化测试工具，使用该工具 Python版本 >= 3.8
 
 [![IsXMnO.png](https://z3.ax1x.com/2021/11/13/IsXMnO.png)](https://imgtu.com/i/IsXMnO)
