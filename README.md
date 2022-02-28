@@ -10,15 +10,18 @@
 ## 配套资源(点击即可跳转)
 - [x] [项目使用手册](https://zy7y.github.io/apiAutoTest/)
 - [x] [本地搭建被测项目](https://www.bilibili.com/video/BV153411j7su/)
-- [x] [示例项目接口文档](https://gitee.com/zy7y/apiAutoTest/blob/v1.0/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98%E6%8E%A5%E5%8F%A3%E6%96%87%E6%A1%A3.md)
+- [x] [示例项目接口文档](https://gitee.com/zy7y/apiAutoTest/tree/v1.0/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98%E6%8E%A5%E5%8F%A3%E6%96%87%E6%A1%A3.md)
 - [x] [Jenkins集成示例](https://www.cnblogs.com/zy7y/p/13448102.html)
-- [x] [apiAutoTest 2.0 源码](https://gitee.com/zy7y/apiAutoTest/tree/v2.0/)
-- [x] [视频解析 v2.0](https://www.bilibili.com/video/BV1rr4y1r754)
-- [x] [apiAutoTest 1.0 源码](https://gitee.com/zy7y/apiAutoTest.git)
-- [x] [视频解析 v1.0](https://www.bilibili.com/video/BV1pv411i7zK/)
 - [x] [Gitee 其他项目](https://gitee.com/zy7y/projects)
 - [x] [Github 其他项目](https://github.com/zy7y?tab=repositories)
 
+**2021.11 提交初始版本**
+- [x] [apiAutoTest 2.0 源码](https://gitee.com/zy7y/apiAutoTest/tree/v2.0/)
+- [x] [视频解析 v2.0](https://www.bilibili.com/video/BV1rr4y1r754)
+
+**2020.08 提交初始版本**
+- [x] [apiAutoTest 1.0 源码](https://gitee.com/zy7y/apiAutoTest.git)
+- [x] [视频解析 v1.0](https://www.bilibili.com/video/BV1pv411i7zK/)
 
 ## 实现功能
 - 测试数据隔离: 测试前后进行数据库备份/还原
@@ -49,8 +52,8 @@ mitmproxy==7.0.4            # 抓包工具
 - [x] 验证重构后的数据隔离是否可用
 
 ## 联系
-**[bilibili 个人中心](https://space.bilibili.com/438858333)**
-- 微信公众号
-![微信公众号](https://s4.ax1x.com/2022/02/28/bnvUr4.jpg)
-- QQ交流群
-![QQ交流群](https://s4.ax1x.com/2022/02/28/bnvaqJ.md.jpg)
+<img src=https://gitee.com/zy7y/blog_images/raw/master/img/qrcode_1645977600630.jpg alt="QQ交流群" width=33% />
+<a href=https://space.bilibili.com/438858333 ><img src=https://gitee.com/zy7y/blog_images/raw/master/img/96f4e1746746c95f57a006716985613.jpg width=33% alt="B站"/></a>
+<img src=https://gitee.com/zy7y/blog_images/raw/master/img/qrcode_for_gh_1be06e7fa598_430.jpg width=33% alt="微信公众号"/>
+
+
