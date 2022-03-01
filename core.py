@@ -33,7 +33,7 @@ class ReadFileClass:
 
     def __init__(self, path: str, case_expr: str = "$.file_path.test_case"):
         self.path = path
-        self.current: Dict[str, Any] = None
+        self.current: Optional[Union[Dict[str, Any], str]] = None
         self._config: Optional[Dict[str, Any]] = None
         self.case_expr = case_expr
 
@@ -132,7 +132,7 @@ class EmailServe:
     def zip(self):
         """压缩报告"""
         with ZipFile(self.zip_name, "w", ZIP_DEFLATED) as zp:
-            for path, dirnames, filenames in os.walk(self.zip_conf):
+            for path, _, filenames in os.walk(self.zip_conf):
                 # 去掉目标跟路径，只对目标文件夹下边的文件及文件夹进行压缩
                 fpath = path.replace(self.zip_conf, "")
 
@@ -188,7 +188,7 @@ class RemoteServe:
         stdin, stdout, stderr = self.ssh.exec_command(cmd)
         error = stderr.read().decode()
         logger.info(f"输入命令: {cmd} -> 输出结果: {stdout.read().decode()}")
-        logger.error(f"异常信息: {error}")
+        logger.warning(f"异常信息: {error}")
         return error
 
     def files_action(
@@ -200,6 +200,7 @@ class RemoteServe:
         :param remote_path: 服务器上的文件路径，默认在/root目录下
         """
         if post:  # 上传文件
+            self.execute_cmd("mkdir backup_sql")
             self.ftp_client.put(
                 localpath=local_path,
                 remotepath=f"{remote_path}{os.path.split(local_path)[1]}",
@@ -208,6 +209,8 @@ class RemoteServe:
                 f"文件上传成功: {local_path} -> {self.host}:{remote_path}{os.path.split(local_path)[1]}"
             )
         else:  # 下载文件
+            if not os.path.exists(local_path):
+                os.mkdir(local_path)
             file_path = local_path + os.path.split(remote_path)[1]
             self.ftp_client.get(remotepath=remote_path, localpath=file_path)
             logger.info(f"文件下载成功: {self.host}:{remote_path} -> {file_path}")
@@ -234,6 +237,9 @@ class DataClear:
         self.mysql_passwd = self.cfg.get("password")
         self.mysql_db = self.cfg.get("db")
 
+        self.local_backup = self.cfg.get("ssh_server").get("sql_data_file")
+        self.remote_backup = "/root/backup_sql/"
+
         # mysql 备份命令
         self.backup_cmd = f"mysqldump -h127.0.0.1 -u{self.mysql_user} -p{self.mysql_passwd} {self.mysql_db}"
         # mysql 还原
@@ -244,23 +250,25 @@ class DataClear:
         if self.c_name is None:
             cmd = f"{self.backup_cmd}  > {self.file_name}"
         else:
-            cmd = f"docker exec -i {self.c_name} {self.backup_cmd} > /root/backup_sql/{self.file_name}"
+            cmd = f"docker exec -i {self.c_name} {self.backup_cmd} > {self.remote_backup}{self.file_name}"
         self.server.execute_cmd(cmd)
-        local_backup = self.cfg.get("ssh_server").get("sql_data_file")
+
         self.server.files_action(
-            0, f"{local_backup}", f"/root/backup_sql/{self.file_name}"
+            0, f"{self.local_backup}", f"{self.remote_backup}{self.file_name}"
         )
+        logger.info("备份完成...")
 
     def recovery(self):
         """还原操作"""
-        result = self.server.execute_cmd(f"ls -l /root/backup_sql/{self.file_name}")
+        result = self.server.execute_cmd(f"ls -l {self.remote_backup}{self.file_name}")
         if "No such file or directory" in result:
             # 本地上传
             self.server.files_action(
-                1, f"../backup_sql/{self.file_name}", "/root/backup_sql/"
+                1, f"{self.local_backup}{self.file_name}", self.remote_backup
             )
-        cmd = f"docker exec -i {self.c_name} {self.recovery_cmd} < /root/backup_sql/{self.file_name}"
+        cmd = f"docker exec -i {self.c_name} {self.recovery_cmd} < {self.remote_backup}{self.file_name}"
         self.server.execute_cmd(cmd)
+        logger.success("成功还原...")
 
     def __enter__(self):
         # 深拷贝
@@ -373,7 +381,7 @@ class DataProcess:
         self._sql = DataProcess.rep_expr(value)
 
     @classmethod
-    def handle_data(cls, value: str) -> Dict[str, Any]:
+    def handle_data(cls, value: str) -> Optional[Dict[str, Any]]:
         """处理数据的方法"""
         if value == "":
             return
