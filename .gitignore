@@ -121,3 +121,4 @@ dmypy.json
 .pytest_cache
 logs/
 report/
+backup_sql
