@@ -1,4 +1,3 @@
-<center>
 
 [![](https://gitee.com/zy7y/apiAutoTest/badge/star.svg)](https://gitee.com/zy7y/apiAutoTest)
 [![](https://gitee.com/zy7y/apiAutoTest/badge/fork.svg)](https://gitee.com/zy7y/apiAutoTest)
@@ -6,7 +5,6 @@
 [![](https://img.shields.io/github/stars/zy7y/apiAutoTest)](https://github.com/zy7y/apiAutoTest)
 [![](https://img.shields.io/github/forks/zy7y/apiAutoTest)](https://github.com/zy7y/apiAutoTest)
 [![](https://img.shields.io/github/repo-size/zy7y/apiAutoTest?style=social)](https://github.com/zy7y/apiAutoTest)
-</center>
 
 
 **2022.02.28 更新(上方图标可点击)**
@@ -21,6 +19,9 @@
 - [x] [Jenkins集成示例](https://www.cnblogs.com/zy7y/p/13448102.html)
 - [x] [Gitee 其他项目](https://gitee.com/zy7y/projects)
 - [x] [Github 其他项目](https://github.com/zy7y?tab=repositories)
+
+**2020.02.28 版本**
+- [x] [版本介绍](https://www.bilibili.com/video/BV1ER4y1G7Vw/)
 
 **2021.11 提交初始版本**
 - [x] [apiAutoTest 2.0 源码](https://gitee.com/zy7y/apiAutoTest/tree/v2.0/)
@@ -55,12 +56,8 @@ paramiko==2.9.2				# SSH2 连接
 xlwt==1.3.0                 # 写excel 用例文件
 mitmproxy==7.0.4            # 抓包工具
 ```
-## 待办
-- [x] 验证重构后的数据隔离是否可用
 
 ## 联系
-<img src=https://gitee.com/zy7y/blog_images/raw/master/img/qrcode_1645977600630.jpg alt="QQ交流群" width=33% />
-<a href=https://space.bilibili.com/438858333 ><img src=https://gitee.com/zy7y/blog_images/raw/master/img/96f4e1746746c95f57a006716985613.jpg width=33% alt="B站"/></a>
-<img src=https://gitee.com/zy7y/blog_images/raw/master/img/qrcode_for_gh_1be06e7fa598_430.jpg width=33% alt="微信公众号"/>
+QQ群：**`930902996`**
 
 
