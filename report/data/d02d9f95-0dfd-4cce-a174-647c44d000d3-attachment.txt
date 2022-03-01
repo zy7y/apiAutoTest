@@ -1,7 +1,0 @@
-{
-    "data": null,
-    "meta": {
-        "msg": "更新失败",
-        "status": 400
-    }
-}
