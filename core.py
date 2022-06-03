@@ -401,9 +401,9 @@ class DataProcess:
         return content
 
     def handle_case(self, path, header, skip_expr, data, file):
+        self.skip = skip_expr
         self.path = path
         self.headers = header
-        self.skip = skip_expr
         self.body = data
         self.files = file
 
