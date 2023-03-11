@@ -1,17 +1,12 @@
 """插件类"""
-import json
 import os
 import re
 from copy import deepcopy
-from string import Template
-from zipfile import ZipFile
-from zipfile import ZIP_DEFLATED
 from datetime import datetime
-from typing import Optional
-from typing import Dict
-from typing import Any
-from typing import Union
 from decimal import Decimal
+from string import Template
+from typing import Any, Dict, Optional, Union
+from zipfile import ZIP_DEFLATED, ZipFile
 
 import allure
 import paramiko
@@ -19,11 +14,9 @@ import pymysql
 import xlrd
 import yagmail
 import yaml
+from _pytest.outcomes import Skipped
 from jsonpath import jsonpath
 from loguru import logger
-from requests import Session
-from requests import Response
-from _pytest.outcomes import Skipped
 
 from hooks import *
 
@@ -480,46 +473,56 @@ class DataProcess:
         return str(loc["result"])
 
 
-class HttpRequest(Session):
-    """请求类实现"""
+import json
+import os
+import subprocess
 
-    data_type_list = ["params", "data", "json"]
 
-    def __init__(self):
-        self._last_response = None
-        super().__init__()
+def go_client(cmd: str):
+    exe_path = f"{os.getcwd()}/lib/client"
+    result = subprocess.run(exe_path + cmd, capture_output=True, shell=True)
+    info = result.stdout.decode()
+    if info == "":
+        raise RuntimeError("💫出现异常，请检查请求内容")
+    else:
+        return json.load(info)
 
-    @property
-    def response(self) -> Response:
-        return self._last_response
 
-    @response.setter
-    def response(self, value):
-        self._last_response = value
+def send_request(data_type: str, method, url, header=None, data=None, file=None):
+    if data_type not in ["params", "data", "json"]:
+        raise ValueError("可选关键字为params, json, data")
 
-    def send_request(
-        self, data_type: str, method, url, header=None, data=None, file=None, **kwargs
-    ):
-        if data_type.lower() in HttpRequest.data_type_list:
-            extra_args = {data_type: data}
-        else:
-            raise ValueError("可选关键字为params, json, data")
-        self.response = self.request(
-            method=method, url=url, files=file, headers=header, **extra_args, **kwargs
-        )
-        req_info = {
-            "请求地址": url,
-            "请求方法": method,
-            "请求头": header,
-            "请求数据": data,
-            "上传文件": str(file),
-        }
-        ReportStyle.step("Request Info", req_info)
-        logger.info(req_info)
-        rep_info = {
-            "响应耗时(ms)": self.response.elapsed.total_seconds() * 1000,
-            "状态码": self.response.status_code,
-            "响应数据": self.response.json(),
-        }
-        logger.info(rep_info)
-        ReportStyle.step("Response Info", rep_info)
+    # 查询参数
+    if data_type == "params":
+        from urllib.parse import urlencode
+
+        url = url + "?" + urlencode(data)
+    cmd = f" -url {url} -method {method} -header {'' if header is None else json.dumps(header)} -file {'' if file is None else json.dumps(file)}"
+    # 表单
+    if data_type == "data":
+        cmd += f" -data {'' if data is None else json.dumps(data)}"
+
+    if data_type == "json":
+        cmd += f" -json {'' if data is None else json.dumps(data)}"
+
+    res = go_client(cmd)
+    response = res.get("response")
+
+    req_info = {
+        "请求地址": url,
+        "请求方法": method,
+        "请求头": header,
+        "请求数据": data,
+        "上传文件": str(file),
+    }
+    ReportStyle.step("Request Info", req_info)
+    logger.info(req_info)
+    rep_info = {
+        "请求耗时": response.get("track"),
+        "状态码": response.get("status"),
+        "响应数据": json.loads(response.get("body")),
+    }
+    logger.info(rep_info)
+    ReportStyle.step("Response Info", rep_info)
+    ReportStyle.step("完整内容", res)
+    return json.loads(response.get("body"))

@@ -1,4 +1,6 @@
 
+> <font size="3" color="red">这是一个待测试的分支、使用Golang打包的可执行程序作为实际请求客户端，可获得在请求各阶段耗时的信息, 目前仅有Mac/Linux可执行程序</font>
+
 [![](https://gitee.com/zy7y/apiAutoTest/badge/star.svg)](https://gitee.com/zy7y/apiAutoTest)
 [![](https://gitee.com/zy7y/apiAutoTest/badge/fork.svg)](https://gitee.com/zy7y/apiAutoTest)
 [![](https://img.shields.io/github/license/zy7y/apiAutoTest)](https://gitee.com/zy7y/apiAutoTest/blob/master/LICENSE)
@@ -7,7 +9,7 @@
 [![](https://img.shields.io/github/repo-size/zy7y/apiAutoTest?style=social)](https://github.com/zy7y/apiAutoTest)
 
 
-> 使用Python语言 + Python第三方库 实现的接口自动化测试工具，使用该工具 Python版本 >= 3.8
+> 使用Python语言 + Python第三方库 + Golang Req 接口请求 实现的接口自动化测试工具，使用该工具 Python版本 >= 3.8
 
 [![IsXMnO.png](https://z3.ax1x.com/2021/11/13/IsXMnO.png)](https://imgtu.com/i/IsXMnO)
 
@@ -33,7 +35,6 @@ jsonpath==0.82				# json解析库
 loguru==0.6.0				# 日志库
 pytest==7.0.1				# 参数化
 PyYAML==6.0				    # 读取ymal
-requests==2.27.1			# 请求HTTP/HTTPS
 xlrd==1.2.0					# 读取excel
 yagmail==0.11.224			# 发送邮件
 PyMySQL==0.10.1				# 连接mysql数据库

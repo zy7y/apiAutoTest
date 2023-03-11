@@ -10,10 +10,10 @@
 
 import os
 import shutil
+
 from loguru import logger
 
-from test_main import rfc
-from test_main import pytest
+from test_main import pytest, rfc
 
 
 def run(email: bool = False, web: bool = False):

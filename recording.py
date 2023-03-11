@@ -16,7 +16,6 @@ import json
 
 import mitmproxy.http
 import xlwt
-
 # 上传文件接口不能录入文件参数 , excel单元格限制： Exception: String longer than 32767 characters
 from mitmproxy import ctx
 

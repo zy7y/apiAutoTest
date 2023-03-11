@@ -1,13 +1,9 @@
 import pytest
 
-from core import DataBaseMysql
-from core import DataProcess
-from core import ReadFileClass
-from core import ReportStyle
-from core import HttpRequest
+from core import (DataBaseMysql, DataProcess, ReadFileClass, ReportStyle,
+                  send_request)
 
 rfc = ReadFileClass("config.yaml")
-http_client = HttpRequest()
 data_process = DataProcess(rfc)
 
 
@@ -56,10 +52,10 @@ def test_start(case):  # 不使用数据库操作
     # 前置处理
     title, skip, header, path, method, data_type, file, data, extra, sql, expect = case
     ReportStyle.title(title)
-    data_process.handle_case(path, header, skip, data, file)
+    data_process.handle_case(path, header, skip, data)
 
     # 发送请求
-    http_client.send_request(
+    res = send_request(
         data_type,
         method,
         data_process.path,
@@ -68,11 +64,11 @@ def test_start(case):  # 不使用数据库操作
         data_process.files,
     )
     # 后置处理
-    DataProcess.handle_extra(extra, http_client.response.json())
+    DataProcess.handle_extra(extra, res)
 
     data_process.sql = sql
     # data_process.handle_sql(get_db) # 使用数据库
     # data_process.handle_sql(clear_db) # 使用数据清洗及 数据库
 
     # 断言
-    DataProcess.assert_result(http_client.response.json(), expect)
+    DataProcess.assert_result(res, expect)
